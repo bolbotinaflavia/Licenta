@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Objects
   - Start
+  - Music
   layers:
   - Default
   - TransparentFX

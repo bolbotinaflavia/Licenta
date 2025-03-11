@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
@@ -43,7 +44,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     Animator animator;
     //weapons -> 5
     public List<Weapons> weapons=new List<Weapons>();
-
+    public List<Item> objects=new List<Item>();
     //public GameObject weaponPrefab;
     //public Transform weaponSpawnPoint;
 
@@ -128,14 +129,21 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
 
             Debug.Log("Magic object!!!");
-            Debug.Log($"Object is {other.gameObject.name}");
+          
             if (other.gameObject.name.Equals("Box"))
             {
+                Debug.Log($"Object is {other.gameObject.name}");
                 IsMoving = false;
                 Box.Instance.open_box();
                 IsMoving = true;
             }
-            
+
+            else{
+                
+                Debug.Log($"Object is {other.gameObject.name}");
+                add_item(other.gameObject.GetComponent<Item>());
+                
+            }
             //open box/something with the objects
 
         }
@@ -152,7 +160,31 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         }
     }
-    //Objects
+    //Items
+    public void add_item(Item i)
+    {
+        int index=objects.FindIndex(item => item.name.Equals(i.name));
+        Debug.Log("Index is " + index);
+        if (index==-1)
+        {
+            if (!i.finded)
+            {
+                Debug.Log("Adding" + i.name);
+                objects.Add(i);
+                i.find_first_item();
+                i.GetComponent<SpriteRenderer>().color = Color.clear;
+            }
+        }
+        else
+        {
+            if (!i.finded)
+            {
+                objects[index].find_item();
+                i.finded = true;
+                i.GetComponent<SpriteRenderer>().color = Color.clear;
+            }
+        }
+    }
 
 
     //Weapons
@@ -187,16 +219,6 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
 
     }
-
-  /*  private void SpawnWeapons()
-    {
-        foreach(Weapons weapon in weapons)
-        {
-            GameObject newWeapon = Instantiate(weaponPrefab,weaponSpawnPoint.position,Quaternion.identity);
-            newWeapon.GetComponent<SpriteRenderer>().sprite = weapon.GetDisplayImage();
-            newWeapon.GetComponent<Weapons_menu>().w = weapon;
-        }
-    }*/
 
     //Open Menu stuff
     public void OnPointerEnter(PointerEventData eventData)

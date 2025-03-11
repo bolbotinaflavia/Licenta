@@ -2,19 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
     public static Volume Instance;
-    public float v=100;
+    public AudioSource s;
+    //public float v;
     public Text counterText;
     // Start is called before the first frame update
     private void Awake()
     {
         if (Instance == null)
             Instance = this;
-        v = PlayerPrefs.GetFloat("Volume", 0);
+        s=GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
+        if (s == null)
+        {
+            counterText.text = "0";
+            
+        }
+        counterText.text = (s.volume*100).ToString();
     }
     void Start()
     {
@@ -27,14 +35,14 @@ public class Volume : MonoBehaviour
         if (counterText != null)
         {
             //v = PlayerPrefs.GetFloat("Volume", 0);
-            counterText.text = v.ToString();
+            counterText.text = (s.volume*100).ToString();
         }
     }
     public void Increase()
     {
-        if (v < 100)
+        if (s.volume*100 < 100)
         {
-            v += 1;
+            s.volume += 0.05f;
             Debug.Log(PlayerPrefs.GetFloat("Volume"));
            // PlayerPrefs.SetFloat("Volume", v);
            // PlayerPrefs.Save();
@@ -42,9 +50,9 @@ public class Volume : MonoBehaviour
     }
     public void Decrease()
     {
-        if (v > 0)
+        if (s.volume*100 > 0)
         {
-            v -= 1;
+            s.volume -= 0.05f;
            // PlayerPrefs.SetFloat("Volume", v);
            // PlayerPrefs.Save();
           //  Debug.Log(PlayerPrefs.GetFloat("Volume"));

@@ -11,6 +11,7 @@ public class Box : MonoBehaviour
     public bool opened;
     public GameObject player;
     //de vazut cu animatia;
+    //cometariii
 
     public void open_box()
     {

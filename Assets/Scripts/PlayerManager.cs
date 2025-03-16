@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using Vector2 = UnityEngine.Vector2;
 
 struct Weapon{
     
@@ -45,6 +46,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     //weapons -> 5
     public List<Weapons> weapons=new List<Weapons>();
     public List<Item> objects=new List<Item>();
+    public List<Spell> spells=new List<Spell>();
     //public GameObject weaponPrefab;
     //public Transform weaponSpawnPoint;
 
@@ -55,6 +57,30 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public Slider menu_open; // Assign in Inspector
     public bool IsMenu=false;
+    public bool _new_item = false;
+    public bool new_item
+    {
+        get
+        {
+            return _new_item;
+            
+        }
+        private set
+        {
+            
+            
+            if (animator != null)
+            {
+                animator.SetBool("new_item",value);
+                animator.SetBool("isMoving",!value);
+                
+            }
+            else
+            {
+                Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+            }
+            _new_item=value;
+        }}
     public bool _isFacingRight=true;
     public bool isFacingRight { get { 
                 return _isFacingRight;
@@ -116,12 +142,14 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         }
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Triggered with: " + other.gameObject.name);
         if (other.gameObject.CompareTag("Start"))
         {
             IsMoving = false;
+           // while_start_rb(other);
             //push player cand atinge ca nicodata sa nu treaca de start
 
         }
@@ -133,9 +161,14 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (other.gameObject.name.Equals("Box"))
             {
                 Debug.Log($"Object is {other.gameObject.name}");
-                IsMoving = false;
-                Box.Instance.open_box();
-                IsMoving = true;
+                //IsMoving = false;
+                if (Box.Instance.opened == false)
+                {
+                    //IsMoving = false;
+                    
+                    Box.Instance.open_box();
+                }
+
             }
 
             else{
@@ -147,6 +180,20 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             //open box/something with the objects
 
         }
+        if (other.gameObject.CompareTag("Magic"))
+        {
+            Debug.Log("Spell!!!");
+            if (MagicTree.Instance.discovered != true)
+            {
+                Debug.Log("Learning spell");
+                //animatie search tree
+                
+                new_item = true;
+                Invoke("finding_animation", 5f);
+                MagicTree.Instance.search_tree();
+                
+            }
+        }
         if (other.gameObject.CompareTag("Weapons"))
         {
 
@@ -155,12 +202,23 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (weapon != null)
             {
                 Debug.Log("Finding weapon");
+                IsMoving = false;
                 FindWeapon(weapon);
+               
             }
 
         }
+
+       
     }
     //Items
+    private void finding_animation()
+    {
+        Debug.Log("Animation started");
+        new_item = false;
+        //IsMoving = true;
+        
+    }
     public void add_item(Item i)
     {
         int index=objects.FindIndex(item => item.name.Equals(i.name));
@@ -170,6 +228,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             if (!i.finded)
             {
                 Debug.Log("Adding" + i.name);
+                //Invoke("finding_animation",2f);
                 objects.Add(i);
                 i.find_first_item();
                 i.GetComponent<SpriteRenderer>().color = Color.clear;
@@ -185,8 +244,17 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
     }
-
-
+    //spells
+    public void learn_spell(Spell spell)
+    {
+        if (spell != null)
+        {
+            //de facut la vraja
+            spell.discover();
+            spells.Add(spell);
+            Debug.Log("Learned spell: " + spell.name);
+        }
+    }
     //Weapons
     public void SelectWeapon(Weapons w)
     {
@@ -210,11 +278,15 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (w.IsDiscovered() == false)
         {
             Debug.Log("arma descoperita");
+            new_item = true;
+            Invoke("finding_animation",5f);
             w.Discover();
             weapons.Add(w);
             SelectWeapon(w);
             w.GetComponent<SpriteRenderer>().color = Color.clear;
             Debug.Log("Discovered weapon: " + w.name);
+           
+            
 
         }
 
@@ -246,36 +318,50 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         IsMoving = true;
 
     }
+
     public void Update()
     {
-        if (player == null ||isHover)
+        if (player == null || isHover)
         {
             return;
 
         }
-       
-            UnityEngine.Vector3 mousePos = Input.mousePosition;
 
-            mousePos.z = Camera.main.nearClipPlane;
-            UnityEngine.Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
-            //restrict moving only on the x axis: player.transform.position.y
+        UnityEngine.Vector3 mousePos = Input.mousePosition;
 
-            UnityEngine.Vector3 mouseNext = new UnityEngine.Vector3(worldMouse.x, player.transform.position.y, worldMouse.z);
+        mousePos.z = Camera.main.nearClipPlane;
+        UnityEngine.Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
+        //restrict moving only on the x axis: player.transform.position.y
+
+        UnityEngine.Vector3 mouseNext =
+            new UnityEngine.Vector3(worldMouse.x, player.transform.position.y, worldMouse.z);
         if (MenuManager.Instance.current_menu.activeSelf == false)
         {
-           
-                float distance = mouseNext.x - player.transform.position.x;
-                setFacingDirection(distance);
-                RaycastHit2D hit = Physics2D.Raycast(mousePos, UnityEngine.Vector2.zero);
-                if ((hit.collider != null && hit.collider.gameObject == player))
-                {
+
+            float distance = mouseNext.x - player.transform.position.x;
+            setFacingDirection(distance);
+            RaycastHit2D hit = Physics2D.Raycast(mousePos, UnityEngine.Vector2.zero);
+            if ((hit.collider != null && hit.collider.gameObject == player)||new_item==true)
+
+    {
                    IsMoving = false;
                     return;
                 }
                 else
                 {
-                    IsMoving = true;
-                    player.transform.position = UnityEngine.Vector3.MoveTowards(player.transform.position, mouseNext, Time.deltaTime * 50f);
+                    if (player.transform.position.x < 398)
+                    {
+                        //IsMoving = false;
+                        player.transform.position = UnityEngine.Vector3.MoveTowards(player.transform.position,
+                            new Vector2(400f, player.transform.position.y), Time.deltaTime * 50f);
+                    }
+                    else
+                    {
+
+                        IsMoving = true;
+                        player.transform.position =
+                            UnityEngine.Vector3.MoveTowards(player.transform.position, mouseNext, Time.deltaTime * 50f);
+                    }
                 }
             
         }

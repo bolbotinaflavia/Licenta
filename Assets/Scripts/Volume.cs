@@ -1,61 +1,105 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
     public static Volume Instance;
-    public AudioSource s;
-    //public float v;
-    public Text counterText;
-    // Start is called before the first frame update
+    public List<AudioSource> audioSource = new List<AudioSource>();
+    public UnityEngine.Rendering.Volume globalVolume;
+
     private void Awake()
     {
         if (Instance == null)
-            Instance = this;
-        s=GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
-        if (s == null)
         {
-            counterText.text = "0";
-            
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        counterText.text = (s.volume*100).ToString();
-    }
-    void Start()
-    {
-        
+
+        globalVolume = GetComponent<UnityEngine.Rendering.Volume>();
+        if (globalVolume == null)
+        {
+            Debug.LogError("globalVolume component is missing.");
+        }
+
+        try
+        {
+            audioSource = GameObject.FindObjectsOfType<AudioSource>().ToList();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error finding AudioSources: " + e);
+            throw;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (counterText != null)
+        if (globalVolume == null)
         {
-            //v = PlayerPrefs.GetFloat("Volume", 0);
-            counterText.text = (s.volume*100).ToString();
+            Debug.LogError("globalVolume is null in Update.");
+            return;
+        }
+
+        try
+        {
+            audioSource.RemoveAll(a => a == null);
+            audioSource = GameObject.FindObjectsOfType<AudioSource>().ToList();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error updating AudioSources: " + e);
+            throw;
+        }
+
+        try
+        {
+            if (audioSource.Count > 0)
+            {
+                foreach (var source in audioSource)
+                {
+                    if (source != null)
+                    {
+                        source.volume = globalVolume.weight;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error setting volume: " + e);
+            throw;
         }
     }
+
     public void Increase()
     {
-        if (s.volume*100 < 100)
+        if (globalVolume == null)
         {
-            s.volume += 0.05f;
-            Debug.Log(PlayerPrefs.GetFloat("Volume"));
-           // PlayerPrefs.SetFloat("Volume", v);
-           // PlayerPrefs.Save();
+            Debug.LogError("globalVolume is null in Increase.");
+            return;
+        }
+
+        if (globalVolume.weight * 100 < 100)
+        {
+            globalVolume.weight += 0.10f;
+            globalVolume.weight = Mathf.Round(globalVolume.weight * 100) / 100f;
         }
     }
+
     public void Decrease()
     {
-        if (s.volume*100 > 0)
+        if (globalVolume == null)
         {
-            s.volume -= 0.05f;
-           // PlayerPrefs.SetFloat("Volume", v);
-           // PlayerPrefs.Save();
-          //  Debug.Log(PlayerPrefs.GetFloat("Volume"));
+            Debug.LogError("globalVolume is null in Decrease.");
+            return;
+        }
+
+        if (globalVolume.weight * 100 > 0)
+        {
+            globalVolume.weight -= 0.10f;
+            globalVolume.weight = Mathf.Round(globalVolume.weight * 100) / 100f;
         }
     }
 }

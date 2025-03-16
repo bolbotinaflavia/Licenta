@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Box : MonoBehaviour
@@ -19,6 +20,7 @@ public class Box : MonoBehaviour
         {
             opened = true;
             this.GetComponent<SpriteRenderer>().sprite = sprite;
+            Update();
             if (inside_object.tag == "Weapons")
             {
                 Weapons weapon = inside_object.gameObject.GetComponent<Weapons>();
@@ -27,10 +29,13 @@ public class Box : MonoBehaviour
                     Debug.Log("Finding weapon");
                     inside_object.SetActive(true);
                     PlayerManager.Instance.FindWeapon(weapon);
+                    
                 }
             }
+            //pentru alte obiecte
         }
     }
+    
     private void Awake()
     {
         Instance=this;
@@ -44,9 +49,9 @@ public class Box : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
         if(inside_object.activeSelf)
         {
+            
             inside_object.GetComponent<SpriteRenderer>().color=Color.clear;
            // inside_object.SetActive(false);
         }
@@ -55,6 +60,10 @@ public class Box : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (opened == true)
+        {
+            inside_object.SetActive(true);
+            this.GetComponent<SpriteRenderer>().sprite =sprite;
+        }
     }
 }

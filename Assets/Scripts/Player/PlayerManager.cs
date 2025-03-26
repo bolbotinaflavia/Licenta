@@ -4,32 +4,51 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Movement;
+using Tobii.Research.Unity.Examples;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using Vector2 = UnityEngine.Vector2;
-
-struct Weapon{
-    
-};
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    
     public static PlayerManager Instance;
-    private GameObject player;
-    private Rigidbody2D rb;
 
-    //running variables
+    public PlayerMovement playerMovement;
+    //mouse, keyboard
+    //[SerializeField] public List<Control> controls;
+    //public InputAction mouse;
+    //public InputAction keyboard;
+    //public InputAction tobii;
+    public TobiiControl mTobiiControl;
+    
+    public Slider menu_open; // Assign in Inspector
+    public GameObject player;
+    public float HP;
+    private Rigidbody2D rb;
     public float speed=0.1f;
+    Animator animator;
+    //weapons, objects and spells
+    public List<Weapons> weapons=new List<Weapons>();
+    public List<Item> objects=new List<Item>();
+    public List<Spell> spells=new List<Spell>();
+    
+    //animation parameters, menu ...
+    
     public bool _isMoving=true;
-    public bool IsMoving { get 
+    public bool IsMoving { 
+        get 
         {
             return _isMoving;
         }
-        private set
+        set
         {
             _isMoving = value;
             if (animator != null)
@@ -42,21 +61,31 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
     }
-    Animator animator;
-    //weapons -> 5
-    public List<Weapons> weapons=new List<Weapons>();
-    public List<Item> objects=new List<Item>();
-    public List<Spell> spells=new List<Spell>();
-    //public GameObject weaponPrefab;
-    //public Transform weaponSpawnPoint;
-
-    //spells -> 5
-
-    private bool isHover = false;
-    private bool stop_start;
-
-    public Slider menu_open; // Assign in Inspector
+    public bool isHover = false;
     public bool IsMenu=false;
+    public bool _eating = false;
+    public bool eating
+    {
+        get
+        {
+            return _eating;
+        }
+        set
+        {
+            if (animator != null)
+            {
+                animator.SetBool("is_eating",value);
+                animator.SetBool("isMoving",!value);
+                
+            }
+            else
+            {
+                Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+            }
+            _eating=value;
+        }
+    }
+
     public bool _new_item = false;
     public bool new_item
     {
@@ -82,9 +111,11 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             _new_item=value;
         }}
     public bool _isFacingRight=true;
-    public bool isFacingRight { get { 
+    public bool isFacingRight { 
+        get { 
                 return _isFacingRight;
-        } private set {
+        } 
+        private set {
             if (_isFacingRight != value)
             {
                 if (animator != null)
@@ -103,13 +134,16 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void Awake()
     {
-        Instance = this;
-        
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+
         player = GameObject.Find("Player");
+        playerMovement=FindObjectOfType<PlayerMovement>();
         animator = GetComponent<Animator>();
         rb=GetComponent<Rigidbody2D>();
-        //LoadWeapons();
-        //SpawnWeapons();
 
         if (player == null)
         {
@@ -119,11 +153,6 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             Debug.Log("player found");
         }
-       /* if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-       */
         if (menu_open != null)
         {
             menu_open.gameObject.SetActive(false);
@@ -189,7 +218,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 //animatie search tree
                 
                 new_item = true;
-                Invoke("finding_animation", 5f);
+                Invoke("finding_animation", 2f);
                 MagicTree.Instance.search_tree();
                 
             }
@@ -215,6 +244,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private void finding_animation()
     {
         Debug.Log("Animation started");
+        
         new_item = false;
         //IsMoving = true;
         
@@ -279,7 +309,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             Debug.Log("arma descoperita");
             new_item = true;
-            Invoke("finding_animation",5f);
+            Invoke("finding_animation",2f);
             w.Discover();
             weapons.Add(w);
             SelectWeapon(w);
@@ -295,8 +325,28 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     //Open Menu stuff
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log(playerMovement.current_control.get_action().name);
+        if (!playerMovement.current_control.get_action().name.Equals("KeyboardMove")&&!eventData.pointerEnter.name.Equals("HP_bar"))
+        {
+            isHover = true;
+            menu_slider_open();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+       // Debug.Log("Slider is"+eventData.pointerEnter.name);
+        if (!playerMovement.current_control.get_action().name.Equals("KeyboardMove")&&!eventData.pointerEnter.name.Equals("HP_bar"))
+        {
+            isHover = false;
+            menu_slider_close();
+        }
+    }
+
+    public void menu_slider_open()
+    {
         IsMoving = false;
-        isHover = true;
+        //isHover = true;
         if (menu_open != null)
         {
             
@@ -305,9 +355,9 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }    
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public void menu_slider_close()
     {
-        isHover = false;
+        //isHover = false;
         if (menu_open != null)
         {
             
@@ -316,7 +366,6 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             
         }
         IsMoving = true;
-
     }
 
     public void Update()
@@ -326,58 +375,67 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             return;
 
         }
-
-        UnityEngine.Vector3 mousePos = Input.mousePosition;
-
-        mousePos.z = Camera.main.nearClipPlane;
-        UnityEngine.Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
-        //restrict moving only on the x axis: player.transform.position.y
-
-        UnityEngine.Vector3 mouseNext =
-            new UnityEngine.Vector3(worldMouse.x, player.transform.position.y, worldMouse.z);
-        if (MenuManager.Instance.current_menu.activeSelf == false)
-        {
-
-            float distance = mouseNext.x - player.transform.position.x;
-            setFacingDirection(distance);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, UnityEngine.Vector2.zero);
-            if ((hit.collider != null && hit.collider.gameObject == player)||new_item==true)
-
-    {
-                   IsMoving = false;
-                    return;
-                }
-                else
-                {
-                    if (player.transform.position.x < 398)
-                    {
-                        //IsMoving = false;
-                        player.transform.position = UnityEngine.Vector3.MoveTowards(player.transform.position,
-                            new Vector2(400f, player.transform.position.y), Time.deltaTime * 50f);
-                    }
-                    else
-                    {
-
-                        IsMoving = true;
-                        player.transform.position =
-                            UnityEngine.Vector3.MoveTowards(player.transform.position, mouseNext, Time.deltaTime * 50f);
-                    }
-                }
-            
-        }
-
-            
-        else
-          {
-            IsMoving = false;
-            return;
-                //rb.velocity = UnityEngine.Vector3.zero;
-          }
         
-        //CheckIfPlayerArrived();
+        if (playerMovement != null)
+        {
+           // Debug.Log(playerMovement.current_control);
+            playerMovement.current_control.Move(this);
+        }
+        else
+        {
+            Debug.Log("not moving, playermovement is null");
+        }
+    //     UnityEngine.Vector3 mousePos = Input.mousePosition;
+    //
+    //     mousePos.z = Camera.main.nearClipPlane;
+    //     UnityEngine.Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
+    //     //restrict moving only on the x axis: player.transform.position.y
+    //
+    //     UnityEngine.Vector3 mouseNext =
+    //         new UnityEngine.Vector3(worldMouse.x, player.transform.position.y, worldMouse.z);
+    //     if (MenuManager.Instance.current_menu.activeSelf == false)
+    //     {
+    //
+    //         float distance = mouseNext.x - player.transform.position.x;
+    //         setFacingDirection(distance);
+    //         RaycastHit2D hit = Physics2D.Raycast(mousePos, UnityEngine.Vector2.zero);
+    //         if ((hit.collider != null && hit.collider.gameObject == player)||new_item==true)
+    //
+    // {
+    //                IsMoving = false;
+    //                 return;
+    //             }
+    //             else
+    //             {
+    //                 if (player.transform.position.x < 398)
+    //                 {
+    //                     //IsMoving = false;
+    //                     player.transform.position = UnityEngine.Vector3.MoveTowards(player.transform.position,
+    //                         new Vector2(400f, player.transform.position.y), Time.deltaTime * 50f);
+    //                 }
+    //                 else
+    //                 {
+    //
+    //                     IsMoving = true;
+    //                     player.transform.position =
+    //                         UnityEngine.Vector3.MoveTowards(player.transform.position, mouseNext, Time.deltaTime * 50f);
+    //                 }
+    //             }
+    //         
+    //     }
+    //
+    //         
+    //     else
+    //       {
+    //         IsMoving = false;
+    //         return;
+    //             //rb.velocity = UnityEngine.Vector3.zero;
+    //       }
+    //     
+    //     //CheckIfPlayerArrived();
     }
 
-    private void setFacingDirection(float distance)
+    public void setFacingDirection(float distance)
     {
         if (distance >0&&!isFacingRight)
         {

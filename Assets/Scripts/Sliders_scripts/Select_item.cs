@@ -17,6 +17,15 @@ public class Select_item : Menu_countdown
         if (i != null)
         {
             i.consume();
+            if (PlayerManager.Instance.HP + i.hp < 100f)
+            {
+                PlayerManager.Instance.HP += i.hp;
+            }
+            else
+            {
+                Debug.Log("HP is already full->100");
+            }
+            
         }
 
         Debug.Log("Item selected");

@@ -18,6 +18,12 @@ public class Spell : MonoBehaviour
     {
         return discovered;
     }
+    private void learning_spell()
+    {
+        Debug.Log("Animation started");
+        //de facut animatie
+        
+    }
     void Start()
     {
         

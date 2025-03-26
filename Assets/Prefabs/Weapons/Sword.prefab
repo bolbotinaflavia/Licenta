@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 2994278899462166479}
+  rb: {fileID: 700234036343089441}
   InUse: 0
   Discovered: 0
   image: {fileID: 8394032999893924559, guid: c07dcdc73c610c24fb49b34bfdb753b2, type: 3}

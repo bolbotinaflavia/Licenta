@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.U2D.Aseprite;
-using UnityEditor.VersionControl;
+
 using UnityEngine;
-using UnityEngine.UI;
 public class Weapons : MonoBehaviour
 {
     public GameObject weapon;
     public static Weapons Instance;
+    public Rigidbody2D rb;
         private string description;
         public bool InUse;
         public bool Discovered;
@@ -22,6 +18,7 @@ public class Weapons : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            
            // DontDestroyOnLoad(gameObject);
         }
         else
@@ -29,7 +26,7 @@ public class Weapons : MonoBehaviour
             //Destroy(gameObject);
             return;
         }
-       
+        rb=GetComponent<Rigidbody2D>();  
     }
 
     /* public Weapon(string name, string description, bool inUse, bool discovered, float damage, Sprite image)

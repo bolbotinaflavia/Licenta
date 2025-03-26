@@ -4,9 +4,10 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Find_new_item_anim : StateMachineBehaviour
+public class Anim_Sound_Manager : StateMachineBehaviour
 {
     private Animator animator;
+    public string name;
 
     public AudioSource audio;
 
@@ -15,7 +16,7 @@ public class Find_new_item_anim : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         audio_idle=GameObject.Find("idle_song").GetComponent<AudioSource>();
-        audio=GameObject.Find("find_new_item_song").GetComponent<AudioSource>();
+        audio=GameObject.Find(name).GetComponent<AudioSource>();
         audio_idle.Stop();
         audio.Play();
     }

@@ -62,7 +62,7 @@ public class Weapons_menu : Menu_countdown
             {
                 if (s.IsActive())
                 {
-                    if (!s.name.Equals("Back"))
+                    if (!s.name.Equals("Back")&&!s.name.Equals("HP"))
                        s.fillRect.GetComponent<Image>().color = c;
                 }
             }

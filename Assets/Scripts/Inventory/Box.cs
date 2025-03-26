@@ -28,6 +28,7 @@ public class Box : MonoBehaviour
                 {
                     Debug.Log("Finding weapon");
                     inside_object.SetActive(true);
+                    inside_object.GetComponent<SpriteRenderer>().color=Color.white;
                     PlayerManager.Instance.FindWeapon(weapon);
                     
                 }

@@ -50,6 +50,8 @@ MonoBehaviour:
   name: Mushroom_1
   number: 0
   image: {fileID: -1299242858519024429, guid: d9d3064bbfc511e479e9094d1f853f35, type: 3}
+  finded: 0
+  hp: 5
 --- !u!50 &2267378388867871090
 Rigidbody2D:
   serializedVersion: 4

@@ -11,6 +11,7 @@ TagManager:
   - Music
   - Magic
   - Spells
+  - HP
   layers:
   - Default
   - TransparentFX

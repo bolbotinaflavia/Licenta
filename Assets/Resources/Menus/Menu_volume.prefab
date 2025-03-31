@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 5621848470047019998}
   timer: 0.5
 --- !u!1 &1757031034887365594
@@ -469,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d0ff167cb8c8b47a29123c36e39ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 918485333935091953}
   timer: 0.5
   inc_dec: -1
@@ -977,7 +979,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 24, y: 371}
+  m_AnchoredPosition: {x: 0.000087738, y: 0.000061035}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6409342478447582303
@@ -1015,7 +1017,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 100
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -1342,6 +1344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24d0ff167cb8c8b47a29123c36e39ff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 2315751249240581544}
   timer: 0.5
   inc_dec: 1

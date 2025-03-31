@@ -1,7 +1,9 @@
-﻿using Tobii.Research.Unity;
+﻿using Tobii.Research;
+using Tobii.Research.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.Windows.WebCam;
 using UnityEngine.XR;
 
 namespace Movement
@@ -10,8 +12,8 @@ namespace Movement
     {
         public EyeTrack instance;
         private InputAction move;
-
-        public Eyes eyes;
+        public EyeTracker eye_track;
+        public GazeTrail trail;
        // public string name;
        
         public EyeTrack(InputAction moveAction)
@@ -22,6 +24,24 @@ namespace Movement
         public void Enable()
         {
             move.Enable();
+            if (eye_track == null)
+            {
+                eye_track = GameObject.FindObjectOfType<EyeTracker>();
+                if (eye_track != null)
+                {
+                    eye_track.enabled = true;
+                    trail = GameObject.FindObjectOfType<GazeTrail>();
+                    Debug.Log("Connected to Eye Track:" + eye_track.name);
+                }
+                else
+                {
+                    Debug.Log("No Eye Track Found");
+                }
+            }
+            else
+            {
+                Debug.Log("Already connected to Eye Track");
+            }
         }
 
         public void Disable()
@@ -48,6 +68,7 @@ namespace Movement
         {
             
             Vector2 inputPos = move.ReadValue<Vector2>();
+            //Debug.Log(inputPos);
             Vector3 worldMouse =
                 Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
             Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);

@@ -960,8 +960,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 1096432725123575601}
-  timer: 1
+  timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1151,8 +1152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 3349720954718145412}
-  timer: 1
+  timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1492,6 +1494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 4591015509297129696}
   timer: 0.5
 --- !u!1 &7848309128766165311
@@ -1901,8 +1904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 6060915480968806863}
-  timer: 1
+  timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input

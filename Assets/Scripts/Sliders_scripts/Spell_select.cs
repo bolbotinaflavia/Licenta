@@ -48,7 +48,15 @@ public class Spell_select : Menu_countdown
                 menu_option.fillRect.GetComponent<Image>().color = Color.gray;
             else
             {
-                menu_option.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);;
+                menu_option.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                if (!SceneManager.GetActiveScene().name.Equals("Fight"))
+                {
+                    menu_option.interactable = false;
+                }
+                else
+                {
+                    menu_option.interactable = true;
+                }
             }
         }
     }

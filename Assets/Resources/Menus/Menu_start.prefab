@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80efc356f0713044f8227c60f9fd5b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 3560460492872245136}
   timer: 1
   next_menu: Menu_basic
@@ -879,6 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f565f08171aca284ca5612d7e555d41a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 8063808342680750055}
   timer: 1
 --- !u!1 &6272714591082115295
@@ -1379,8 +1381,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 8915212256034393326}
-  timer: 1
+  timer: 0.75
   next_menu: Menu_settings
 --- !u!1 &8835913386353812181
 GameObject:

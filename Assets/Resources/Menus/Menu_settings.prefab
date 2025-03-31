@@ -237,8 +237,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 6941712113760133278}
-  timer: 1
+  timer: 0.75
   next_menu: Menu_controls
 --- !u!1 &826691165092925273
 GameObject:
@@ -729,8 +730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 4690909497551879064}
-  timer: 1
+  timer: 0.75
   next_menu: Menu_volume
 --- !u!1 &3996396309325971749
 GameObject:
@@ -1305,6 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 5386855989328839205}
   timer: 0.5
 --- !u!1 &8327914422973635319

@@ -180,8 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 3866166920124640434}
-  timer: 1
+  timer: 0.75
   name: 
   t: {fileID: 364679186057597625}
 --- !u!1 &661055148844889832
@@ -553,8 +554,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 4679891689518619011}
-  timer: 1
+  timer: 0.75
   name: Health
   t: {fileID: 8173816949247836574}
 --- !u!1 &2326075467858925790
@@ -661,8 +663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 981415811302798526}
-  timer: 1
+  timer: 0.75
   name: Mushroom_2
   t: {fileID: 8073878453956674203}
 --- !u!1 &2482751153436279729
@@ -1114,6 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 6594521010745141464}
   timer: 0.5
 --- !u!1 &3511293559283420359
@@ -1486,8 +1490,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 8196583824982917298}
-  timer: 1
+  timer: 0.75
   name: 
   t: {fileID: 2724797723334890969}
 --- !u!1 &4530988861115929055
@@ -2198,8 +2203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  instance: {fileID: 0}
   menu_option: {fileID: 2458345561467471731}
-  timer: 1
+  timer: 0.75
   name: Mushroom_1
   t: {fileID: 1161301846686690621}
 --- !u!1 &6342442657606500168

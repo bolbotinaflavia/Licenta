@@ -1,53 +1,105 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using TMPro;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Volume : MonoBehaviour
 {
     public static Volume Instance;
-    public float v=100;
-    public Text counterText;
-    // Start is called before the first frame update
+    public List<AudioSource> audioSource = new List<AudioSource>();
+    public UnityEngine.Rendering.Volume globalVolume;
+
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        v = PlayerPrefs.GetFloat("Volume", 0);
-    }
-    void Start()
-    {
-        
+            DontDestroyOnLoad(gameObject);
+        }
+
+        globalVolume = GetComponent<UnityEngine.Rendering.Volume>();
+        if (globalVolume == null)
+        {
+            Debug.LogError("globalVolume component is missing.");
+        }
+
+        try
+        {
+            audioSource = GameObject.FindObjectsOfType<AudioSource>().ToList();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error finding AudioSources: " + e);
+            throw;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (counterText != null)
+        if (globalVolume == null)
         {
-            //v = PlayerPrefs.GetFloat("Volume", 0);
-            counterText.text = v.ToString();
+            Debug.LogError("globalVolume is null in Update.");
+            return;
+        }
+
+        try
+        {
+            audioSource.RemoveAll(a => a == null);
+            audioSource = GameObject.FindObjectsOfType<AudioSource>().ToList();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error updating AudioSources: " + e);
+            throw;
+        }
+
+        try
+        {
+            if (audioSource.Count > 0)
+            {
+                foreach (var source in audioSource)
+                {
+                    if (source != null)
+                    {
+                        source.volume = globalVolume.weight;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error setting volume: " + e);
+            throw;
         }
     }
+
     public void Increase()
     {
-        if (v < 100)
+        if (globalVolume == null)
         {
-            v += 1;
-            Debug.Log(PlayerPrefs.GetFloat("Volume"));
-           // PlayerPrefs.SetFloat("Volume", v);
-           // PlayerPrefs.Save();
+            Debug.LogError("globalVolume is null in Increase.");
+            return;
+        }
+
+        if (globalVolume.weight * 100 < 100)
+        {
+            globalVolume.weight += 0.10f;
+            globalVolume.weight = Mathf.Round(globalVolume.weight * 100) / 100f;
         }
     }
+
     public void Decrease()
     {
-        if (v > 0)
+        if (globalVolume == null)
         {
-            v -= 1;
-           // PlayerPrefs.SetFloat("Volume", v);
-           // PlayerPrefs.Save();
-          //  Debug.Log(PlayerPrefs.GetFloat("Volume"));
+            Debug.LogError("globalVolume is null in Decrease.");
+            return;
+        }
+
+        if (globalVolume.weight * 100 > 0)
+        {
+            globalVolume.weight -= 0.10f;
+            globalVolume.weight = Mathf.Round(globalVolume.weight * 100) / 100f;
         }
     }
 }

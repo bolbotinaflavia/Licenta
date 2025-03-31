@@ -6,7 +6,7 @@ public class Save_button : Menu_countdown
 {
     protected override void OnTimerComplete()
     {
-        PlayerPrefs.SetFloat("Volume", Volume.Instance.v);
+        //PlayerPrefs.SetFloat("Volume", Volume.Instance.s.volume);
         PlayerPrefs.Save();
         menu_option.value = 1;
         MenuManager.Instance.BackToPrevious();

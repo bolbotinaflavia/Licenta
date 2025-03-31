@@ -16,7 +16,7 @@ public class Weapons_menu : Menu_countdown
 
     protected override void OnTimerComplete()
     {
-        if (weapon != null)
+        if (weapon != null&&weapon.IsDiscovered())
         {
             SelectWeapon();
             UpdateUI();
@@ -49,7 +49,9 @@ public class Weapons_menu : Menu_countdown
     {
         if (weapon.InUse == false)
         {
-            Color c = new Color(0.69f, 0.67f, 0.39f);
+            
+            Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+            Color c_back = new Color(0.4901961F,0.4392157F,0.4431373F);
 
             foreach (var w in PlayerManager.Instance.weapons)
             {
@@ -60,12 +62,12 @@ public class Weapons_menu : Menu_countdown
             {
                 if (s.IsActive())
                 {
-                    if (!s.name.Equals("Back"))
+                    if (!s.name.Equals("Back")&&!s.name.Equals("HP"))
                        s.fillRect.GetComponent<Image>().color = c;
                 }
             }
             //weapon.InUse = true;
-            menu_option.fillRect.GetComponent<Image>().color = Color.gray;
+            menu_option.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
             weapon.SetInhUse(true);
         }
         else
@@ -85,7 +87,7 @@ public class Weapons_menu : Menu_countdown
                 img.sprite = weapon.GetDisplayImage();
             }
             if(weapon.InUse==true)
-                menu_option.fillRect.GetComponent<Image>().color = Color.gray;
+                menu_option.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
         }
     }
 }

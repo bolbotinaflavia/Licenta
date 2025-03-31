@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - Objects
   - Start
+  - Music
+  - Magic
+  - Spells
+  - HP
   layers:
   - Default
   - TransparentFX

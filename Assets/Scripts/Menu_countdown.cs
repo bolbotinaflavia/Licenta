@@ -1,6 +1,8 @@
+using System;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using Unity.VisualScripting;
 using UnityEditor.Overlays;
 using UnityEngine;
@@ -12,11 +14,16 @@ using UnityEngine.UIElements;
 
 public abstract class Menu_countdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-   
+    public Menu_countdown instance;
     public UnityEngine.UI.Slider menu_option;
     public float timer = 5f;
     private Coroutine unfill_coroutine;
-    
+
+    private void Awake()
+    {
+        if(instance == null)
+            instance = this;
+    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {

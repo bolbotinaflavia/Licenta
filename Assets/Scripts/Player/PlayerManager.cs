@@ -22,6 +22,11 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public static PlayerManager Instance;
 
     public PlayerMovement playerMovement;
+    //Base stats
+    public float HP;
+    public int defense;
+    public int attack_speed;
+    
     //mouse, keyboard
     //[SerializeField] public List<Control> controls;
     //public InputAction mouse;
@@ -31,7 +36,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     
     public Slider menu_open; // Assign in Inspector
     public GameObject player;
-    public float HP;
+   
     private Rigidbody2D rb;
     public float speed=0.1f;
     Animator animator;

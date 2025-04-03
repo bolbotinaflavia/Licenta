@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4415181438853106945}
   - component: {fileID: 686545872786194450}
   m_Layer: 0
-  m_Name: Spell3
+  m_Name: Holy_Blaze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db22929dfc5c524eb5135d660be7de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  discovered: 0
-  spell_name: Amnesia
+  _spellBase: {fileID: 11400000, guid: bfa8545725170d74a8d7780c5b1d71e1, type: 2}
+  spell_name: Holy_Blaze

@@ -386,14 +386,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
+  HP: 80
+  defense: 0
+  attack_speed: 0
+  learn_spell_skill: 1
   mTobiiControl: {fileID: 0}
   menu_open: {fileID: 7100074073203274395}
   player: {fileID: 0}
-  HP: 65
   speed: 0.1
   weapons: []
   objects: []
   spells: []
+  _spells: []
+  _isFight: 0
   _isMoving: 1
   isHover: 0
   IsMenu: 0

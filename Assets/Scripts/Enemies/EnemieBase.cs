@@ -23,6 +23,7 @@ public class EnemieBase : ScriptableObject
     [SerializeField] private Spell_weakness w2;
     
     //Base stats
+    
     [SerializeField] private int hp_max;
     [SerializeField] private int attack;
     [SerializeField] private int defense;
@@ -70,4 +71,6 @@ public enum Spell_weakness
     Brisingr,//fire spell
     Jierda,//cracking bones
     Slytha, //sleep spell
+    Holy_Blaze,//blinding light
+    
 }

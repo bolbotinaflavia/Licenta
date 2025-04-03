@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4415181438853106945}
-  - component: {fileID: 686545872786194450}
+  - component: {fileID: 7383509772528254271}
   m_Layer: 0
-  m_Name: Spell2
+  m_Name: Brisingr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &686545872786194450
+--- !u!114 &7383509772528254271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,5 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db22929dfc5c524eb5135d660be7de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  discovered: 0
-  spell_name: Asleep
+  spell_name: Brisingr
+  magicLevel: 0
+  description2: wdqwdqwd
+  description3: cvvvvvv

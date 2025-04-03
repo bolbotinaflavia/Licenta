@@ -1,4 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Spells;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,9 +10,12 @@ using UnityEngine.SceneManagement;
 
 public class Spell_select : Menu_countdown
 {
-    public String name;
-    private Spell s;
+    public Spell s;
+    public string name;
     private Scene scene;
+    public TextMeshProUGUI text;
+    public TextMeshProUGUI description;
+    public GameObject canvas_description;
     protected override void OnTimerComplete()
     {
         if (s != null)
@@ -19,7 +26,8 @@ public class Spell_select : Menu_countdown
             }
             else
             {
-                Debug.Log("Is not a Fight!!");
+                open_description();
+                UpdateUI();
             }
             
         }
@@ -28,6 +36,12 @@ public class Spell_select : Menu_countdown
             Debug.Log("Spell is not available yet");
         }
         
+    }
+
+    public void open_description()
+    {
+        canvas_description.GameObject().SetActive(true);
+        description.GameObject().SetActive(true);
     }
     public void FindSpellsInGame()
     {
@@ -44,18 +58,38 @@ public class Spell_select : Menu_countdown
         Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
         if (s != null)
         {
-            if(s.isDiscovered()==false)
+            if (s.get_magic_level()==0)
+            {
                 menu_option.fillRect.GetComponent<Image>().color = Color.gray;
+                text.text = "-1@3~%%$@";
+                description.text="No information available";
+            }
             else
             {
                 menu_option.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                if (!SceneManager.GetActiveScene().name.Equals("Fight"))
+              
+                if (s.get_magic_level().Equals(0))
                 {
-                    menu_option.interactable = false;
+                    text.text = s.name;
                 }
-                else
+
+                if (s.get_magic_level().Equals(1))
                 {
-                    menu_option.interactable = true;
+                    text.text = name;
+                    description.text="No information available";
+                }
+
+                if (s.get_magic_level().Equals(2))
+                {
+                    text.text = name;
+                    description.text = s.Description2;
+                    Debug.Log(description.text);
+                }
+
+                if (s.get_magic_level().Equals(3))
+                {
+                    text.text = name;
+                    description.text = s.Description2+"/n"+s.Description3;
                 }
             }
         }
@@ -64,13 +98,20 @@ public class Spell_select : Menu_countdown
     void Start()
     {
         FindSpellsInGame();
+        // canvas_description.GetComponent<Sprite>();
+        // text = GetComponent<TextMeshProUGUI>();
+        // description = GetComponent<TextMeshProUGUI>();
+        if(canvas_description!=null)
+            canvas_description.SetActive(false);
+        if(description!=null)
+             description.GameObject().SetActive(false);
         scene=SceneManager.GetActiveScene();
         UpdateUI();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateUI();
     }
 }

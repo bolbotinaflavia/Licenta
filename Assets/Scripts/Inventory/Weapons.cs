@@ -11,6 +11,7 @@ public class Weapons : MonoBehaviour
         private float damage;
         public Sprite image;
 
+        public float Damage{get{return damage;}set{damage=value;}}
        //public static Sprite defaultImage;
    
     private void Awake()

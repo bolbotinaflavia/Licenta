@@ -5,6 +5,8 @@ using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
 using Movement;
+using Player;
+using Spells;
 using Tobii.Research.Unity.Examples;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -22,10 +24,13 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public static PlayerManager Instance;
 
     public PlayerMovement playerMovement;
+    public event Action OnEncountered;
     //Base stats
     public float HP;
     public int defense;
     public int attack_speed;
+    //skills
+    public bool learn_spell_skill = false;//after finding a magic book you can learn spells
     
     //mouse, keyboard
     //[SerializeField] public List<Control> controls;
@@ -45,8 +50,15 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public List<Item> objects=new List<Item>();
     public List<Spell> spells=new List<Spell>();
     
+    public List<Spell> _spells=new List<Spell>();
     //animation parameters, menu ...
-    
+    public bool _isFight = false;
+
+    public bool IsFight
+    {
+        get { return _isFight; }
+        set { _isFight = value; }
+    }
     public bool _isMoving=true;
     public bool IsMoving { 
         get 
@@ -216,12 +228,10 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
         if (other.gameObject.CompareTag("Magic"))
         {
-            Debug.Log("Spell!!!");
             if (MagicTree.Instance.discovered != true)
             {
                 Debug.Log("Learning spell");
                 //animatie search tree
-                
                 new_item = true;
                 Invoke("finding_animation", 2f);
                 MagicTree.Instance.search_tree();
@@ -242,8 +252,21 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
 
         }
+            //declansare battle
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            OnEncountered();
+        }
 
        
+    }
+    //start battle
+    public void start_battle()
+    {
+        if (_isFight == true)
+        {
+            
+        }
     }
     //Items
     private void finding_animation()
@@ -253,6 +276,15 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         new_item = false;
         //IsMoving = true;
         
+    }
+    //spells
+    public void learn_spell(Spell s)
+    {
+        if (s != null)
+        {
+            this._spells.Add(s.GetComponent<Spell>()); 
+            s.level_up(this);
+        }
     }
     public void add_item(Item i)
     {
@@ -279,18 +311,18 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             }
         }
     }
-    //spells
-    public void learn_spell(Spell spell)
-    {
-        if (spell != null)
-        {
-            //de facut la vraja
-            spell.discover();
-            spells.Add(spell);
-            Debug.Log("Learned spell: " + spell.name);
-        }
-    }
+    
     //Weapons
+    public float attack()
+    {
+        foreach (var w in weapons)
+        {
+            if (w.IsInUse())
+                return w.Damage;
+        }
+
+        return 0;
+    }
     public void SelectWeapon(Weapons w)
     {
         foreach (var weapon in weapons)
@@ -373,7 +405,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         IsMoving = true;
     }
 
-    public void Update()
+    public void HandleUpdate()
     {
         if (player == null || isHover)
         {

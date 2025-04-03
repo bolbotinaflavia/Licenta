@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4415181438853106945}
   - component: {fileID: 686545872786194450}
   m_Layer: 0
-  m_Name: Spell4
+  m_Name: Jierda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db22929dfc5c524eb5135d660be7de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  discovered: 0
-  spell_name: Block
+  _spellBase: {fileID: 11400000, guid: 5d343fedc38506e46813b0b57f36c7b2, type: 2}
+  spell_name: Jierda
+  magicLevel: 0

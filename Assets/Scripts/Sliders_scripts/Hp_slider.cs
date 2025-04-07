@@ -14,6 +14,7 @@ public class Hp_slider : MonoBehaviour
     {
         if(Instance==null)
             Instance = this;
+       // animator = GetComponent<Animator>();
     }
     void Hp_Slider_zero()
     {
@@ -41,9 +42,10 @@ public class Hp_slider : MonoBehaviour
         
     }
 
+    
     public void UpdateUI()
     {
-
+        
         Color healty = new Color(0.2235294f, 0.4823529f, 0.2666667f);
         Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
         Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);

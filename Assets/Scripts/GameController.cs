@@ -32,9 +32,11 @@ namespace DefaultNamespace
             state = GameState.Battle;
             player_camera.gameObject.SetActive(false);
             player_camera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
+            Hp_slider.Instance.UpdateUI();
             
             battleSystem.gameObject.SetActive(true);
             battle_camera.gameObject.SetActive(true);
+            
             
         }
 
@@ -48,6 +50,7 @@ namespace DefaultNamespace
             player_camera.gameObject.SetActive(true);
             player_camera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = true;
             MenuManager.Instance.current_menu.gameObject.SetActive(false);
+            Hp_slider.Instance.UpdateUI();
 
             
         }

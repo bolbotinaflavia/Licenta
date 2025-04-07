@@ -8,7 +8,7 @@ public class Weapons : MonoBehaviour
         private string description;
         public bool InUse;
         public bool Discovered;
-        private float damage;
+        public float damage;
         public Sprite image;
 
         public float Damage{get{return damage;}set{damage=value;}}

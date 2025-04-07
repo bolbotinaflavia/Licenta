@@ -641,7 +641,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6082961793121530543
 MonoBehaviour:
@@ -1170,6 +1170,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menu_option: {fileID: 3974348292954588421}
   timer: 0.5
+  isFight: 0
 --- !u!1 &3782859941940916736
 GameObject:
   m_ObjectHideFlags: 0

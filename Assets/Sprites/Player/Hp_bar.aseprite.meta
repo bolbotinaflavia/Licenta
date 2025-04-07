@@ -127,7 +127,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
+      y: 38
       width: 29
       height: 7
     spriteID: da4a6e552134bbb47a426fe48ad6639e
@@ -138,7 +138,107 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
+    uvTransform: {x: 4, y: 38}
+  - name: Hp_bar_Frame_1
+    originalName: 
+    pivot: {x: 0.51724136, y: -1.8571429}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 53
+      width: 29
+      height: 7
+    spriteID: 2fb3481ae223d8a41b8926821fc47c04
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 53}
+  - name: Hp_bar_Frame_2
+    originalName: 
+    pivot: {x: 0.51724136, y: -2}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 68
+      width: 29
+      height: 7
+    spriteID: af556715ad01dc142b82db5ac78812f0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 68}
+  - name: Hp_bar_Frame_3
+    originalName: 
+    pivot: {x: 0.53333336, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 30
+      height: 9
+    spriteID: 2fa2e304e1e2fe04f9d73e0010ff2293
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Hp_bar_Frame_4
+    originalName: 
+    pivot: {x: 0.51724136, y: -1.8571429}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 83
+      width: 29
+      height: 7
+    spriteID: 7585c0de7b3a666499328a0bc97aa09f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 83}
+  - name: Hp_bar_Frame_5
+    originalName: 
+    pivot: {x: 0.53333336, y: -1.3333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 21
+      width: 30
+      height: 9
+    spriteID: d04ab91db1e83c64fa6d9501d4cfea06
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 21}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -148,7 +248,7 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Hp_bar
+    - name: Hp_bar_Frame_0
       frameIndex: 0
       cellRect:
         x: 1
@@ -156,6 +256,46 @@ ScriptedImporter:
         width: 29
         height: 7
       spriteId: da4a6e552134bbb47a426fe48ad6639e
+    - name: Hp_bar_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 1
+        y: 13
+        width: 29
+        height: 7
+      spriteId: 2fb3481ae223d8a41b8926821fc47c04
+    - name: Hp_bar_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 1
+        y: 14
+        width: 29
+        height: 7
+      spriteId: af556715ad01dc142b82db5ac78812f0
+    - name: Hp_bar_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 0
+        y: 12
+        width: 30
+        height: 9
+      spriteId: 2fa2e304e1e2fe04f9d73e0010ff2293
+    - name: Hp_bar_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 1
+        y: 13
+        width: 29
+        height: 7
+      spriteId: 7585c0de7b3a666499328a0bc97aa09f
+    - name: Hp_bar_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 0
+        y: 12
+        width: 30
+        height: 9
+      spriteId: d04ab91db1e83c64fa6d9501d4cfea06
     linkedCells: []
     parentIndex: -1
   platformSettings: []

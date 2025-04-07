@@ -51,6 +51,7 @@ MonoBehaviour:
   rb: {fileID: 700234036343089441}
   InUse: 0
   Discovered: 0
+  damage: 15
   image: {fileID: 8394032999893924559, guid: c07dcdc73c610c24fb49b34bfdb753b2, type: 3}
 --- !u!50 &700234036343089441
 Rigidbody2D:

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Battle;
 using Movement;
 using Player;
 using Spells;
@@ -24,6 +25,7 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public static PlayerManager Instance;
 
     public PlayerMovement playerMovement;
+
     public event Action OnEncountered;
     //Base stats
     public float HP;
@@ -45,11 +47,10 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     private Rigidbody2D rb;
     public float speed=0.1f;
     Animator animator;
+    [SerializeField] Hp_Bar_Animation HP_player_a;
     //weapons, objects and spells
     public List<Weapons> weapons=new List<Weapons>();
     public List<Item> objects=new List<Item>();
-    public List<Spell> spells=new List<Spell>();
-    
     public List<Spell> _spells=new List<Spell>();
     //animation parameters, menu ...
     public bool _isFight = false;
@@ -57,7 +58,11 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public bool IsFight
     {
         get { return _isFight; }
-        set { _isFight = value; }
+        set
+        {
+            _isFight = value;
+            _isMoving=false;
+        }
     }
     public bool _isMoving=true;
     public bool IsMoving { 
@@ -255,18 +260,18 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             //declansare battle
         if (other.gameObject.CompareTag("Enemy"))
         {
-            OnEncountered();
+            IsMoving = false;
+            start_battle(other.gameObject);
         }
 
        
     }
     //start battle
-    public void start_battle()
+    public void start_battle(GameObject enemy)
     {
-        if (_isFight == true)
-        {
-            
-        }
+        Destroy(enemy);
+        OnEncountered();
+      
     }
     //Items
     private void finding_animation()
@@ -313,15 +318,33 @@ public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
     
     //Weapons
-    public float attack()
+    public Weapons attack()
     {
-        foreach (var w in weapons)
+        if (weapons.Count == 0)
         {
-            if (w.IsInUse())
-                return w.Damage;
+            return null;
+        }
+        else
+        {
+            foreach (var w in weapons)
+            {
+                if (w.IsInUse())
+                {
+                    Debug.Log("weapon is " + w.name + " damage is " + w.Damage);
+                    return w;
+                }
+            }
+
         }
 
-        return 0;
+        return null;
+    }
+    //to update the HP
+
+    public void defense_battle(int enemy_attack)
+    {
+        HP -= enemy_attack + (int)(defense * 0.1);
+        HP_player_a.damaging_animation();
     }
     public void SelectWeapon(Weapons w)
     {

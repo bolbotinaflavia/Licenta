@@ -51,6 +51,7 @@ MonoBehaviour:
   rb: {fileID: 1079808387706707343}
   InUse: 0
   Discovered: 0
+  damage: 5
   image: {fileID: -3097485213116477912, guid: 92a178c4dcf70a143abf1dd22081accd, type: 3}
 --- !u!212 &1972632943254556742
 SpriteRenderer:

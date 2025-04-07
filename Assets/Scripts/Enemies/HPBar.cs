@@ -8,7 +8,10 @@ namespace Enemies
     {
         public static HPBar Instance;
         public UnityEngine.UI.Slider hp_slider;
-        public BattleUnit enemy;
+        [SerializeField] BattleUnit enemy;
+
+        
+        
         
             void Awake()
             {
@@ -16,29 +19,24 @@ namespace Enemies
                     Instance = this;
                 
             }
-            void Start()
-            {
-               
-                if (hp_slider != null)
-                {
-                    hp_slider.value = enemy.hp;
-                    UpdateUI();
-                }
-                else
-                {
-                    Debug.Log("slider is null");
-                }
-            }
+            
+            
 
             public void Setup(BattleUnit e)
             {
                 hp_slider = this.GetComponent<UnityEngine.UI.Slider>();
-                enemy = e;
+              
                 if (hp_slider != null)
                 {
-                    hp_slider.value = e.hp;
-                    Debug.Log("hp is " + hp_slider.value);
-                    UpdateUI();
+                    
+                    if (e != null)
+                    {
+                        this.enemy = e;       
+                        hp_slider.maxValue = enemy.Hp;
+                        hp_slider.value = enemy.Hp;
+                      //  Debug.Log(" max value of slider " + hp_slider.maxValue+ " with hp: " + hp_slider.value);
+                        UpdateUI_Enemy();
+                    }
                 }
                 else
                 {
@@ -47,16 +45,18 @@ namespace Enemies
             }
             void Hp_Slider_zero()
             {
-                Debug.Log("HP is zero, you are DEAD!!");
+                Debug.Log("HP is zero, the enemy is dead!!");
+                
             }
             
-            public void UpdateUI()
+            public void UpdateUI_Enemy()
             {
-        
+                
                 Color healty = new Color(0.2235294f, 0.4823529f, 0.2666667f);
                 Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
                 Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
-                hp_slider.value = PlayerManager.Instance.HP;
+                if(enemy != null)
+                    hp_slider.value = enemy.Hp;
                 if (hp_slider.value == 0f)
                     Hp_Slider_zero();
                 else
@@ -75,11 +75,6 @@ namespace Enemies
                         }
                     }
                 }
-            }
-
-            void Update()
-            {
-               
             }
     }
 }

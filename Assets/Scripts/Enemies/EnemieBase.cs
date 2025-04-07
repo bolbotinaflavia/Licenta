@@ -24,9 +24,9 @@ public class EnemieBase : ScriptableObject
     
     //Base stats
     
-    [SerializeField] private int hp_max;
+    [SerializeField] private float hp_max;
     [SerializeField] private int attack;
-    [SerializeField] private int defense;
+    [SerializeField] private float defense;
     [SerializeField] private int speed;
 
     public List<string> get_all_enemies_entities()
@@ -36,14 +36,14 @@ public class EnemieBase : ScriptableObject
         return all_enemies;
     }
 
-    public int Hp_max { get => hp_max; set => hp_max = value; }
+    public float Hp_max { get => hp_max; set => hp_max = value; }
 
     public int Attack
     {
         get { return attack; }
     }
 
-    public int Defense
+    public float Defense
     {
         get { return defense; }
     }
@@ -52,6 +52,8 @@ public class EnemieBase : ScriptableObject
     {
         get { return speed; }
     }
+    public Weapon_weakness W1 { get => w1; set => w1 = value; }
+    public Spell_weakness W2 { get => w2; set => w2 = value; }
 }
 
 public enum Weapon_weakness

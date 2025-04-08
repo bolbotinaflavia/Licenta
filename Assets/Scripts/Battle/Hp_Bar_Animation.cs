@@ -1,25 +1,24 @@
-﻿using System;
-using System.Threading;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Battle
 {
-    public class Hp_Bar_Animation: MonoBehaviour
+    public class HpBarAnimation: MonoBehaviour
     {
+        private static readonly int Damaged = Animator.StringToHash("isDamaged");
+        private static readonly int Healing = Animator.StringToHash("isHealing");
         public Animator animator;
         private bool _isDamaged;
 
         
         public bool IsDamaged
         {
-            get { return _isDamaged; }
+            get => _isDamaged;
             set
             {
                 _isDamaged = value;
                 if (animator != null)
                 {
-                    animator.SetBool("isDamaged", value);
+                    animator.SetBool(Damaged, value);
               
                 }
                 else
@@ -33,13 +32,13 @@ namespace Battle
 
         public bool IsHealing
         {
-            get { return _isHealing; }
+            get => _isHealing;
             set
             {
                 _isHealing = value;
                 if (animator != null)
                 {
-                    animator.SetBool("isHealing", value);
+                    animator.SetBool(Healing, value);
                 
                 }
                 else
@@ -59,7 +58,7 @@ namespace Battle
             Debug.Log("Healing anaimation started");
           //  animator.PlayInFixedTime(animator.GetCurrentAnimatorStateInfo(0).fullPathHash,0,4);
            // new WaitForSeconds(4);
-           Invoke("end_animation", 2f);
+           Invoke(nameof(end_animation), 2f);
             //IsMoving = true;
         
         }
@@ -70,7 +69,7 @@ namespace Battle
           // animator.PlayInFixedTime(animator.GetCurrentAnimatorStateInfo(0).fullPathHash,0,4);
           // new WaitForSeconds(4);
           //  Debug.Log("damage animation started");
-          Invoke("end_animation", 5f);
+          Invoke(nameof(end_animation), 5f);
      
         }
 

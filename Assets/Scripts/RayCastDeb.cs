@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class RaycastDebugger : MonoBehaviour
 {
-    void Update()
+    private void Update()
     {
         if (EventSystem.current.IsPointerOverGameObject())
         {

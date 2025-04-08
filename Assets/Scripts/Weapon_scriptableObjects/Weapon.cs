@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Weapon_scriptableObjects
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapon/Create new weapon")]
     public class Weapon:ScriptableObject
     {
-        [SerializeField] private string name;
+        [FormerlySerializedAs("name")] [SerializeField] private string weaponName;
         [SerializeField] private Sprite icon;
         [SerializeField] private int damage;
-        [SerializeField] private bool InUse;
-        [SerializeField] private bool Discovered;
-        [SerializeField] private Special_Attack _specialAttack;
+        [FormerlySerializedAs("InUse")] [SerializeField] private bool inUse;
+        [FormerlySerializedAs("Discovered")] [SerializeField] private bool discovered;
+        [FormerlySerializedAs("_specialAttack")] [SerializeField] private SpecialAttack specialAttack;
     }
     
 }
 
-public enum Special_Attack
+public enum SpecialAttack
 {
-    none,
+    None,
     Skeleton,
     Ghost,
     Zombie,

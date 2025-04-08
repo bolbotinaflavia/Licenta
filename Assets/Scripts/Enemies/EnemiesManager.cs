@@ -1,26 +1,19 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Enemies
 {
     public class EnemiesManager:MonoBehaviour
     {
-        public static EnemiesManager Instance;
-        public int nr_Enemies;
-        [SerializeField] List<EnemieBase> enemies = new List<EnemieBase>();
+        private static EnemiesManager _instance;
+        [FormerlySerializedAs("nr_Enemies")] public int nrEnemies;
+        //[SerializeField] private List<EnemieBase> enemies_s = new List<EnemieBase>();
 
-        void Start()
+        private void Awake()
         {
-            
-        }
-
-        void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(this);
-            }
+            if (_instance != null) return;
+            _instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 }

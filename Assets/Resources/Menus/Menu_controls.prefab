@@ -960,8 +960,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 1096432725123575601}
+  instance: {fileID: 9002404513248474173}
+  menuOption: {fileID: 1096432725123575601}
   timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
@@ -973,7 +973,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  name: MouseMove
+  nameControl: MouseMove
 --- !u!1 &5521841178166522363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,8 +1152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 3349720954718145412}
+  instance: {fileID: 2226815314421713739}
+  menuOption: {fileID: 3349720954718145412}
   timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
@@ -1165,7 +1165,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  name: KeyboardMove
+  nameControl: KeyboardMove
 --- !u!1 &6142798727738610772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,9 +1494,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 4591015509297129696}
+  instance: {fileID: 2577643409732496513}
+  menuOption: {fileID: 4591015509297129696}
   timer: 0.5
+  isFight: 0
 --- !u!1 &7848309128766165311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1904,8 +1905,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a708de0b91ec4bd094d540381a0056b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 6060915480968806863}
+  instance: {fileID: 2934304510415651880}
+  menuOption: {fileID: 6060915480968806863}
   timer: 0.75
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
@@ -1917,4 +1918,4 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  name: EyeMove
+  nameControl: EyeMove

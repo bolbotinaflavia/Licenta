@@ -1,11 +1,6 @@
-﻿using Cinemachine;
-using DefaultNamespace;
-using Unity.VisualScripting;
-using UnityEngine;
-
-namespace Sliders_scripts
+﻿namespace Sliders_scripts
 {
-    public class run:Menu_countdown
+    public class Run:MenuCountdown
     {
         protected override void OnTimerComplete()
         { 

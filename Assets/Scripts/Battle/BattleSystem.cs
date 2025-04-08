@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using DefaultNamespace;
 using Enemies;
-using Unity.VisualScripting;
+using Player;
+using Sliders_scripts;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Battle
 {
@@ -19,16 +18,16 @@ namespace Battle
     }
     public class BattleSystem : MonoBehaviour
     {
-        public static BattleSystem instance;
-        [SerializeField] PlayerManager player;
-        [SerializeField] Hp_slider hpBar_player;
-        [SerializeField] BattleUnit enemyUnit;
-        [SerializeField] HPBar hpBar;
-        private BattleState state;
-        
-        public BattleState State{get{return state;}set{state = value;}}
+        public static BattleSystem Instance;
+        [SerializeField] private PlayerManager player;
+        [FormerlySerializedAs("hpBar_player")] [SerializeField]
+        private HpSlider hpBarPlayer;
+        [SerializeField] private BattleUnit enemyUnit;
+        [SerializeField] private HpBar hpBar;
 
-        void Start()
+        public BattleState State { get; private set; }
+
+        private void Start()
         {
             // enemyUnit=this.GetComponent<BattleUnit>();
             // hpBar_player = this.GetComponent<Hp_slider>();
@@ -47,44 +46,41 @@ namespace Battle
        
             hpBar.Setup(enemyUnit);
             hpBar.UpdateUI_Enemy();
-            hpBar_player.UpdateUI();
+            hpBarPlayer.UpdateUI();
             
             yield return new WaitForSeconds(1f);
 
             PlayerActions();
         }
 
-        void PlayerActions()
+        private void PlayerActions()
         {
-            state = BattleState.PlayerAction;
-        }
-
-        void Update()
-        {
-            
+            State = BattleState.PlayerAction;
         }
 
         // ReSharper disable Unity.PerformanceAnalysis
-        public void HandleActionSelector(String name)
+        public void HandleActionSelector(String actionName)
         {
-            if (name == "attack")
+            switch (actionName)
             {
-                Weapons attack_damage = player.attack();
-                enemyUnit.Attacked(attack_damage);
-                //nu merge animatia la hpbar
+                case "attack":
+                {
+                    var attackDamage = player.Attack();
+                    enemyUnit.Attacked(attackDamage);
+                    //nu merge animatia la hpbar
             
-             //  Debug.Log("player attack is "+player.attack());
-               // enemyUnit.Hp = enemyUnit.Hp - player.attack().ConvertTo<int>();
-                hpBar.UpdateUI_Enemy();
-                hpBar_player.UpdateUI();
-            }
-
-            if (name == "defense")
-            {
-                player.defense_battle(enemyUnit.attack());
-               // player.HP-=player.HP-(enemyUnit.attack()+(int)(player.defense*0.1));
-                hpBar_player.UpdateUI();
-                hpBar.UpdateUI_Enemy();
+                    //  Debug.Log("player attack is "+player.attack());
+                    // enemyUnit.Hp = enemyUnit.Hp - player.attack().ConvertTo<int>();
+                    hpBar.UpdateUI_Enemy();
+                    hpBarPlayer.UpdateUI();
+                    break;
+                }
+                case "defense":
+                    player.defense_battle(enemyUnit.Attack());
+                    // player.HP-=player.HP-(enemyUnit.attack()+(int)(player.defense*0.1));
+                    hpBarPlayer.UpdateUI();
+                    hpBar.UpdateUI_Enemy();
+                    break;
             }
         }
         
@@ -104,8 +100,8 @@ namespace Battle
 
         private void Awake()
         {
-            if(instance == null)
-                instance = this;
+            if(Instance == null)
+                Instance = this;
            
         }
 

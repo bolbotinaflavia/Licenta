@@ -1,55 +1,52 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using Inventory;
+using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Select_item : Menu_countdown
+namespace Sliders_scripts
 {
-   // public static Select_item Instance;
-    public string name;
-    private Item i;
-    public Text t;
-    protected override void OnTimerComplete()
+    public class SelectItem : MenuCountdown
     {
-       
-        if (i != null)
+        // public static Select_item Instance;
+        [FormerlySerializedAs("name")] public string itemName;
+        private ItemObject _i;
+        public Text t;
+        protected override void OnTimerComplete()
         {
-            i.consume();
-            if (PlayerManager.Instance.HP + i.hp < 100f)
+       
+            if (_i != null)
             {
-                PlayerManager.Instance.HP += i.hp;
-            }
-            else
-            {
-                Debug.Log("HP is already full->100");
-            }
+                _i.Consume();
+                if (PlayerManager.Instance.hp + _i.hp < 100f)
+                {
+                    PlayerManager.Instance.hp += _i.hp;
+                }
+                else
+                {
+                    Debug.Log("HP is already full->100");
+                }
             
-        }
+            }
 
-        Debug.Log("Item selected");
-    }
+            Debug.Log("Item selected");
+        }
     
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        i=PlayerManager.Instance.objects.Find(item => item.name.Equals(name));
-        if(i!=null)
-            t.text = i.number.ToString();
-        else
+        // Start is called before the first frame update
+        private void Start()
         {
-            t.text = "0";
+            _i=PlayerManager.Instance.objects.Find(item => item.name.Equals(itemName));
+            t.text = _i!=null ? _i.number.ToString() : "0";
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (i != null)
+        // Update is called once per frame
+        private void Update()
         {
-            t.text = i.number.ToString();
+            if (_i != null)
+            {
+                t.text = _i.number.ToString();
+            }
         }
     }
 }

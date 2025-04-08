@@ -1,25 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.Serialization;
 
-public class Next_menu : Menu_countdown
+namespace Sliders_scripts
 {
-    public string next_menu;
-    protected override void OnTimerComplete()
+    public class NextMenu : MenuCountdown
     {
-        menu_option.value = 1;
-        MenuManager.Instance.LoadMenu(next_menu);
-    }
+        [FormerlySerializedAs("next_menu")] public string nextMenu;
+        protected override void OnTimerComplete()
+        {
+            menuOption.value = 1;
+            MenuManager.Instance.LoadMenu(nextMenu);
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
     }
 }

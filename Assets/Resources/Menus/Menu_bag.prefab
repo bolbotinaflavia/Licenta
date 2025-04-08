@@ -237,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 8693671338504382326}
+  instance: {fileID: 2610205626303275196}
+  menuOption: {fileID: 8693671338504382326}
   timer: 0.5
   isFight: 0
 --- !u!1 &2296608390480046834
@@ -1139,10 +1139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 7873348627552590098}
+  instance: {fileID: 6669591097260057449}
+  menuOption: {fileID: 7873348627552590098}
   timer: 0.75
-  next_menu: Menu_items
+  nextMenu: Menu_items
 --- !u!1 &6883889623343807917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1321,10 +1321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 7097864999250772637}
+  instance: {fileID: 5475964360576293759}
+  menuOption: {fileID: 7097864999250772637}
   timer: 0.75
-  next_menu: Menu_weapons
+  nextMenu: Menu_weapons
 --- !u!1 &7890297026097838078
 GameObject:
   m_ObjectHideFlags: 0

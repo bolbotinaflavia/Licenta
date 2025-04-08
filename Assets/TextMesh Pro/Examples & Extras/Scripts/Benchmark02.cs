@@ -1,32 +1,38 @@
+using TMPro;
+using TMPro.Examples;
 using UnityEngine;
-using System.Collections;
+using UnityEngine.Serialization;
 
-
-namespace TMPro.Examples
+namespace TextMesh_Pro.Examples___Extras.Scripts
 {
 
     public class Benchmark02 : MonoBehaviour
     {
 
-        public int SpawnType = 0;
-        public int NumberOfNPC = 12;
+        [FormerlySerializedAs("SpawnType")] public int spawnType;
+        [FormerlySerializedAs("NumberOfNPC")] public int numberOfNpc = 12;
 
-        public bool IsTextObjectScaleStatic;
-        private TextMeshProFloatingText floatingText_Script;
+        [FormerlySerializedAs("IsTextObjectScaleStatic")] public bool isTextObjectScaleStatic;
+        private TextMeshProFloatingText _floatingTextScript;
 
 
-        void Start()
+        private void Start()
         {
 
-            for (int i = 0; i < NumberOfNPC; i++)
+            for (int i = 0; i < numberOfNpc; i++)
             {
 
 
-                if (SpawnType == 0)
+                if (spawnType == 0)
                 {
                     // TextMesh Pro Implementation
-                    GameObject go = new GameObject();
-                    go.transform.position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f));
+                    GameObject go = new GameObject
+                    {
+                        transform =
+                        {
+                            position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f))
+                        }
+                    };
 
                     TextMeshPro textMeshPro = go.AddComponent<TextMeshPro>();
 
@@ -39,18 +45,23 @@ namespace TMPro.Examples
 
                     textMeshPro.color = new Color32(255, 255, 0, 255);
                     textMeshPro.text = "!";
-                    textMeshPro.isTextObjectScaleStatic = IsTextObjectScaleStatic;
+                    textMeshPro.isTextObjectScaleStatic = isTextObjectScaleStatic;
 
                     // Spawn Floating Text
-                    floatingText_Script = go.AddComponent<TextMeshProFloatingText>();
-                    floatingText_Script.SpawnType = 0;
-                    floatingText_Script.IsTextObjectScaleStatic = IsTextObjectScaleStatic;
+                    _floatingTextScript = go.AddComponent<TextMeshProFloatingText>();
+                    _floatingTextScript.spawnType = 0;
+                    _floatingTextScript.isTextObjectScaleStatic = isTextObjectScaleStatic;
                 }
-                else if (SpawnType == 1)
+                else if (spawnType == 1)
                 {
                     // TextMesh Implementation
-                    GameObject go = new GameObject();
-                    go.transform.position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f));
+                    GameObject go = new GameObject
+                    {
+                        transform =
+                        {
+                            position = new Vector3(Random.Range(-95f, 95f), 0.25f, Random.Range(-95f, 95f))
+                        }
+                    };
 
                     TextMesh textMesh = go.AddComponent<TextMesh>();
                     textMesh.font = Resources.Load<Font>("Fonts/ARIAL");
@@ -63,10 +74,10 @@ namespace TMPro.Examples
                     textMesh.text = "!";
 
                     // Spawn Floating Text
-                    floatingText_Script = go.AddComponent<TextMeshProFloatingText>();
-                    floatingText_Script.SpawnType = 1;
+                    _floatingTextScript = go.AddComponent<TextMeshProFloatingText>();
+                    _floatingTextScript.spawnType = 1;
                 }
-                else if (SpawnType == 2)
+                else if (spawnType == 2)
                 {
                     // Canvas WorldSpace Camera
                     GameObject go = new GameObject();
@@ -85,8 +96,8 @@ namespace TMPro.Examples
                     textObject.text = "!";
 
                     // Spawn Floating Text
-                    floatingText_Script = go.AddComponent<TextMeshProFloatingText>();
-                    floatingText_Script.SpawnType = 0;
+                    _floatingTextScript = go.AddComponent<TextMeshProFloatingText>();
+                    _floatingTextScript.spawnType = 0;
                 }
 
 

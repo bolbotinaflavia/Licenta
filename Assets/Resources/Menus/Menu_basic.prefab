@@ -1712,10 +1712,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41aeefa54d5f624fb0db96b97f2c2b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 4622426294511284234}
+  instance: {fileID: 4057159240926244686}
+  menuOption: {fileID: 4622426294511284234}
   timer: 1
-  next_menu: Menu_start
+  nextMenu: Menu_start
 --- !u!1 &7522525801076766659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,8 +1819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9477fe72330f99479f6df216422b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 5218109981986594688}
+  instance: {fileID: 528064050826574534}
+  menuOption: {fileID: 5218109981986594688}
   timer: 0.5
 --- !u!1 &7628799379168121826
 GameObject:
@@ -2111,10 +2111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 2826996103682715329}
+  instance: {fileID: 1227481676565918384}
+  menuOption: {fileID: 2826996103682715329}
   timer: 0.75
-  next_menu: Menu_settings
+  nextMenu: Menu_settings
 --- !u!1 &8128493204471318290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,10 +2218,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 1892972364941143067}
+  instance: {fileID: 8955550562285496898}
+  menuOption: {fileID: 1892972364941143067}
   timer: 0.75
-  next_menu: Menu_spells
+  nextMenu: Menu_spells
 --- !u!1 &8913536368491572356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,7 +2325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 1320250004200252832}
+  instance: {fileID: 5199460257184991428}
+  menuOption: {fileID: 1320250004200252832}
   timer: 0.75
-  next_menu: Menu_bag
+  nextMenu: Menu_bag

@@ -1,71 +1,69 @@
-﻿using System;
-using Battle;
+﻿using Battle;
 using Cinemachine;
-using Unity.VisualScripting;
+using Player;
+using Sliders_scripts;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace DefaultNamespace
+public enum GameState
 {
-    public enum GameState
+    FreeRoam,
+    Battle
+}
+public class GameController:MonoBehaviour
+{
+    public static GameController Instance;
+    public GameState state;
+    [FormerlySerializedAs("player_movement")] [SerializeField] private PlayerManager playerMovement;
+    [SerializeField] private BattleSystem battleSystem;
+    [FormerlySerializedAs("battle_camera")] [SerializeField] private Camera battleCamera;
+    [FormerlySerializedAs("player_camera")] [SerializeField] private CinemachineVirtualCamera playerCamera;
+
+    private void Start()
     {
-        FreeRoam,
-        Battle
+        if(Instance == null)
+            Instance = this;
+        playerMovement.OnEncountered += StartBattle;
     }
-    public class GameController:MonoBehaviour
+
+    private void StartBattle()
     {
-        public static GameController Instance;
-        public GameState state;
-        [SerializeField] PlayerManager player_movement;
-        [SerializeField] BattleSystem battleSystem;
-        [SerializeField] private Camera battle_camera;
-        [SerializeField] private CinemachineVirtualCamera player_camera;
+        state = GameState.Battle;
+        playerCamera.gameObject.SetActive(false);
+        playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
+        HpSlider.Instance.UpdateUI();
+            
+        battleSystem.gameObject.SetActive(true);
+        battleCamera.gameObject.SetActive(true);
+            
+            
+    }
 
-        private void Start()
+    public void StopBattle()
+    {
+        Debug.Log("StopBattle");
+        state = GameState.FreeRoam;
+        battleSystem.gameObject.SetActive(false);
+        battleCamera.gameObject.SetActive(false);
+            
+        playerCamera.gameObject.SetActive(true);
+        playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = true;
+        MenuManager.Instance.currentMenu.gameObject.SetActive(false);
+        HpSlider.Instance.UpdateUI();
+
+            
+    }
+    private void Update()
+    {
+        if (state == GameState.FreeRoam)
         {
-            if(Instance == null)
-                Instance = this;
-            player_movement.OnEncountered += StartBattle;
+            playerMovement.HandleUpdate();
         }
-
-        void StartBattle()
+        else
         {
-            state = GameState.Battle;
-            player_camera.gameObject.SetActive(false);
-            player_camera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
-            Hp_slider.Instance.UpdateUI();
-            
-            battleSystem.gameObject.SetActive(true);
-            battle_camera.gameObject.SetActive(true);
-            
-            
-        }
-
-        public void StopBattle()
-        {
-            Debug.Log("StopBattle");
-            state = GameState.FreeRoam;
-            battleSystem.gameObject.SetActive(false);
-            battle_camera.gameObject.SetActive(false);
-            
-            player_camera.gameObject.SetActive(true);
-            player_camera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = true;
-            MenuManager.Instance.current_menu.gameObject.SetActive(false);
-            Hp_slider.Instance.UpdateUI();
-
-            
-        }
-        private void Update()
-        {
-            if (state == GameState.FreeRoam)
+            if (state == GameState.Battle)
             {
-                player_movement.HandleUpdate();
-            }
-            else
-            {
-                if (state == GameState.Battle)
-                {
-                    battleSystem.HandleUpdate();
-                }
+                battleSystem.HandleUpdate();
             }
         }
     }

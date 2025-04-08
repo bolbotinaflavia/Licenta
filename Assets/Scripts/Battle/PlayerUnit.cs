@@ -1,36 +1,37 @@
-﻿using Unity.VisualScripting;
+﻿using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Battle
 {
     public class PlayerUnit:MonoBehaviour
     {
-        [SerializeField] private PlayerManager _playerUnit;
-        [SerializeField] float hp;
+        [FormerlySerializedAs("_playerUnit")] [SerializeField] private PlayerManager playerUnit;
+        [SerializeField] private float hp;
         [SerializeField] public int defense;
         [SerializeField] public int attackSpeed;
-        [SerializeField] Hp_Bar_Animation HP_anim;
+        [FormerlySerializedAs("HP_anim")] [SerializeField] private HpBarAnimation hpAnim;
         
         public float Hp
         {
-            get { return hp; }
-            set { hp = value; }
+            get => hp;
+            set => hp = value;
         }
 
         public int Defense
         {
-            get { return defense; }
-            set { defense = value; }
+            get => defense;
+            set => defense = value;
         }
 
         public int AttackSpeed
         {
-            get { return attackSpeed;}
-            set{attackSpeed=value;}
+            get => attackSpeed;
+            set => attackSpeed=value;
         }
         public void Setup()
         {
-            _playerUnit = GetComponent<PlayerManager>();
+            playerUnit = GetComponent<PlayerManager>();
         }
 
         public void current_weapon()
@@ -42,10 +43,10 @@ namespace Battle
         // {
         //    
         // }
-        public void defense_battle(int enemy_attack)
+        public void defense_battle(int enemyAttack)
         {
-            Hp -= enemy_attack + (int)(defense * 0.1);
-            HP_anim.damaging_animation();
+            Hp -= enemyAttack + (int)(defense * 0.1);
+            hpAnim.damaging_animation();
         }
     }
 }

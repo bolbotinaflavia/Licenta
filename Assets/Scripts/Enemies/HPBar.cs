@@ -1,19 +1,18 @@
 ﻿using Battle;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Enemies
 {
-    public class HPBar:MonoBehaviour
+    public class HpBar:MonoBehaviour
     {
-        public static HPBar Instance;
-        public UnityEngine.UI.Slider hp_slider;
-        [SerializeField] BattleUnit enemy;
+        public static HpBar Instance;
+        [FormerlySerializedAs("hp_slider")] public Slider hpSlider;
+        [SerializeField] private BattleUnit enemy;
 
-        
-        
-        
-            void Awake()
+
+        private void Awake()
             {
                 if(Instance==null)
                     Instance = this;
@@ -24,16 +23,16 @@ namespace Enemies
 
             public void Setup(BattleUnit e)
             {
-                hp_slider = this.GetComponent<UnityEngine.UI.Slider>();
+                hpSlider = this.GetComponent<Slider>();
               
-                if (hp_slider != null)
+                if (hpSlider != null)
                 {
                     
                     if (e != null)
                     {
                         this.enemy = e;       
-                        hp_slider.maxValue = enemy.Hp;
-                        hp_slider.value = enemy.Hp;
+                        hpSlider.maxValue = enemy.Hp;
+                        hpSlider.value = enemy.Hp;
                       //  Debug.Log(" max value of slider " + hp_slider.maxValue+ " with hp: " + hp_slider.value);
                         UpdateUI_Enemy();
                     }
@@ -43,7 +42,8 @@ namespace Enemies
                     Debug.Log("slider is null");
                 }
             }
-            void Hp_Slider_zero()
+
+            private void Hp_Slider_zero()
             {
                 Debug.Log("HP is zero, the enemy is dead!!");
                 
@@ -56,23 +56,18 @@ namespace Enemies
                 Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
                 Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
                 if(enemy != null)
-                    hp_slider.value = enemy.Hp;
-                if (hp_slider.value == 0f)
+                    hpSlider.value = enemy.Hp;
+                if (hpSlider.value == 0f)
                     Hp_Slider_zero();
                 else
                 {
-                    if (hp_slider.value >= 70)
+                    if (hpSlider.value >= 70)
                     {
-                        hp_slider.fillRect.GetComponent<Image>().color = healty;
+                        hpSlider.fillRect.GetComponent<Image>().color = healty;
                     }
                     else
                     {
-                        if (hp_slider.value > 40)
-                           hp_slider.fillRect.GetComponent<Image>().color = middle;
-                        else
-                        {
-                            hp_slider.fillRect.GetComponent<Image>().color = dying;
-                        }
+                        hpSlider.fillRect.GetComponent<Image>().color = hpSlider.value > 40 ? middle : dying;
                     }
                 }
             }

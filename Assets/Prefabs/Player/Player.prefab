@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 7100074073203274395}
+  menuOption: {fileID: 7100074073203274395}
   timer: 1
 --- !u!1 &4889586322009145369
 GameObject:
@@ -247,25 +247,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 0}
-  HP: 80
+  hp: 80
   defense: 5
-  attack_speed: 0
-  learn_spell_skill: 1
+  attackSpeed: 0
+  learnSpellSkill: 1
   mTobiiControl: {fileID: 0}
-  menu_open: {fileID: 7100074073203274395}
-  player: {fileID: 0}
+  menuOpen: {fileID: 7100074073203274395}
+  player: {fileID: 4889586322009145369}
   speed: 0.1
-  HP_player_a: {fileID: 0}
-  weapons: []
+  hpPlayerA: {fileID: 8284330988613367849}
   objects: []
-  _spells: []
-  _isFight: 1
-  _isMoving: 1
+  spells: []
+  isFight: 1
+  isMoving: 1
   isHover: 0
-  IsMenu: 0
-  _eating: 0
-  _new_item: 0
-  _isFacingRight: 1
+  isMenu: 0
+  eatingAnim: 0
+  newItem: 0
+  isFacingRightAnim: 1
 --- !u!61 &9213853950022019108
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -735,3 +734,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8261950590061468829, guid: f6f083235015c054bb771b4d571e766c, type: 3}
   m_PrefabInstance: {fileID: 2137474893907496667}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8284330988613367849 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8024866098809894642, guid: f6f083235015c054bb771b4d571e766c, type: 3}
+  m_PrefabInstance: {fileID: 2137474893907496667}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b508bc225e4f8ba9ef17397073a992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

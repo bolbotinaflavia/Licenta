@@ -1,15 +1,14 @@
 ﻿using Battle;
-using UnityEngine;
 
 namespace Sliders_scripts
 {
-    public class defense:Menu_countdown
+    public class Defense:MenuCountdown
     {
         protected override void OnTimerComplete()
         {
-            if (BattleSystem.instance.State == BattleState.PlayerAction)
+            if (BattleSystem.Instance.State == BattleState.PlayerAction)
             {
-                BattleSystem.instance.HandleActionSelector("defense");
+                BattleSystem.Instance.HandleActionSelector("defense");
             }
         }
     }

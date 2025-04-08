@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48fcbf6fad5341b1abb25eb36cada1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp_slider: {fileID: 1104989}
+  hpSlider: {fileID: 0}
   enemy: {fileID: 1496472962}
 --- !u!114 &1104989
 MonoBehaviour:
@@ -341,8 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07df83edbee48d7b0568347491933dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 24536302}
+  instance: {fileID: 24536301}
+  menuOption: {fileID: 24536302}
   timer: 1
 --- !u!114 &24536302
 MonoBehaviour:
@@ -1116,10 +1116,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 365880277}
+  instance: {fileID: 365880276}
+  menuOption: {fileID: 365880277}
   timer: 1
-  next_menu: Menu_spells
+  nextMenu: Menu_spells
 --- !u!114 &365880277
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1224679713}
-  hpBar_player: {fileID: 1554196306}
+  hpBarPlayer: {fileID: 1554196306}
   enemyUnit: {fileID: 1496472962}
   hpBar: {fileID: 1104988}
 --- !u!1 &522688719
@@ -1423,8 +1423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4cc95713a74e12854cedf94faec31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 549997603}
+  instance: {fileID: 549997602}
+  menuOption: {fileID: 549997603}
   timer: 1
 --- !u!114 &549997603
 MonoBehaviour:
@@ -2324,10 +2324,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  player_movement: {fileID: 1224679713}
+  playerMovement: {fileID: 1224679713}
   battleSystem: {fileID: 493260426}
-  battle_camera: {fileID: 1716247103}
-  player_camera: {fileID: 126723284}
+  battleCamera: {fileID: 1716247103}
+  playerCamera: {fileID: 126723284}
 --- !u!4 &1035231145
 Transform:
   m_ObjectHideFlags: 0
@@ -2537,6 +2537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5133020396854978588, guid: fd3db9fcf9e46b440bb6ccee6c6e3d08, type: 3}
+      propertyPath: hpPlayerA
+      value: 
+      objectReference: {fileID: 899107117}
     - target: {fileID: 5133020396854978588, guid: fd3db9fcf9e46b440bb6ccee6c6e3d08, type: 3}
       propertyPath: HP_player_a
       value: 
@@ -2972,8 +2976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76abe0665eeb45bdba7ef6a4d56723ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy_base: {fileID: 11400000, guid: 10d676ec10b44f542afee69877fcda79, type: 2}
-  HP_enemy_a: {fileID: 1719654928}
+  enemyBase: {fileID: 11400000, guid: 10d676ec10b44f542afee69877fcda79, type: 2}
+  hpEnemyA: {fileID: 1719654928}
   hp: 0
 --- !u!114 &1496472963
 MonoBehaviour:
@@ -3140,8 +3144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94ac8c31e2ee42e289aa7aef014f4413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 1501976713}
+  instance: {fileID: 1501976712}
+  menuOption: {fileID: 1501976713}
   timer: 1
 --- !u!114 &1501976713
 MonoBehaviour:
@@ -3340,11 +3344,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cfc09d7ab84b478bd97646d2e16199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerUnit: {fileID: 1224679713}
+  playerUnit: {fileID: 1224679713}
   hp: 0
   defense: 0
   attackSpeed: 0
-  HP_anim: {fileID: 0}
+  hpAnim: {fileID: 899107117}
 --- !u!1 &1554196303
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,7 +3451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4a5c99713f98d449d6fc7d5e069bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp_slider: {fileID: 1554196305}
+  hpSlider: {fileID: 1554196305}
 --- !u!1 &1562030087
 GameObject:
   m_ObjectHideFlags: 0
@@ -3500,10 +3504,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 1562030090}
+  instance: {fileID: 1562030089}
+  menuOption: {fileID: 1562030090}
   timer: 1
-  next_menu: Menu_bag
+  nextMenu: Menu_bag
 --- !u!114 &1562030090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6244,6 +6248,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2418056249977785006, guid: 6ed2db6df2de94345ba5961953711bfb, type: 3}
+      propertyPath: insideSpell
+      value: 
+      objectReference: {fileID: 1777886192}
     - target: {fileID: 2418056249977785006, guid: 6ed2db6df2de94345ba5961953711bfb, type: 3}
       propertyPath: inside_spell
       value: 

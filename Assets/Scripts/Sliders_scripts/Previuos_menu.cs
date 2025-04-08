@@ -1,36 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using Battle;
-using DefaultNamespace;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-public class Previuos_menu : Menu_countdown
+namespace Sliders_scripts
 {
-    public bool isFight;
-    protected override void OnTimerComplete()
+    public class PreviuosMenu : MenuCountdown
     {
-        menu_option.value = 1;
-        if (GameController.Instance.state == GameState.Battle)
+        public bool isFight;
+        protected override void OnTimerComplete()
         {
-            MenuManager.Instance.current_menu.SetActive(false);
+            menuOption.value = 1;
+            if (GameController.Instance.state == GameState.Battle)
+            {
+                MenuManager.Instance.currentMenu.SetActive(false);
             
-        }
-        else
-        {
-            MenuManager.Instance.BackToPrevious();
-        }
+            }
+            else
+            {
+                MenuManager.Instance.BackToPrevious();
+            }
         
-    }
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
+       
     }
 }

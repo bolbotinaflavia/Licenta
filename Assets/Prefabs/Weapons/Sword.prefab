@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6916920983191157898}
-  - component: {fileID: 6431540594127050064}
   - component: {fileID: 700234036343089441}
   - component: {fileID: 2430534897234384726}
   - component: {fileID: 4576356077775870571}
+  - component: {fileID: 8274608944415415517}
   m_Layer: 5
   m_Name: Sword
   m_TagString: Weapons
@@ -35,24 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6431540594127050064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2994278899462166479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5fd2d76c19a7604099117285d3c3426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 2994278899462166479}
-  rb: {fileID: 700234036343089441}
-  InUse: 0
-  Discovered: 0
-  damage: 15
-  image: {fileID: 8394032999893924559, guid: c07dcdc73c610c24fb49b34bfdb753b2, type: 3}
 --- !u!50 &700234036343089441
 Rigidbody2D:
   serializedVersion: 4
@@ -177,3 +159,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8274608944415415517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994278899462166479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e65744967a243aa93111460b199dda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapon: {fileID: 2994278899462166479}
+  Rb: {fileID: 700234036343089441}
+  WeaponName: Sword
+  InUse: 0
+  Discovered: 0
+  Damage: 15
+  Image: {fileID: 8394032999893924559, guid: c07dcdc73c610c24fb49b34bfdb753b2, type: 3}

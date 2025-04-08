@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1972632943254556742}
   - component: {fileID: 1079808387706707343}
   - component: {fileID: 3903551488259232077}
+  - component: {fileID: 1823330570213555479}
   m_Layer: 5
   m_Name: Crossbow
   m_TagString: Weapons
@@ -47,12 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fd2d76c19a7604099117285d3c3426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 5947344392422770057}
-  rb: {fileID: 1079808387706707343}
-  InUse: 0
-  Discovered: 0
-  damage: 5
-  image: {fileID: -3097485213116477912, guid: 92a178c4dcf70a143abf1dd22081accd, type: 3}
+  Weapon: {fileID: 0}
 --- !u!212 &1972632943254556742
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -177,3 +173,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25624323, y: 0.21737301}
   m_EdgeRadius: 0
+--- !u!114 &1823330570213555479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5947344392422770057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e65744967a243aa93111460b199dda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapon: {fileID: 5947344392422770057}
+  Rb: {fileID: 1079808387706707343}
+  WeaponName: Crossbow
+  InUse: 0
+  Discovered: 0
+  Damage: 5
+  Image: {fileID: -3097485213116477912, guid: 92a178c4dcf70a143abf1dd22081accd, type: 3}

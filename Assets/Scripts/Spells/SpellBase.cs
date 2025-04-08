@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Spells
 {
     [CreateAssetMenu(fileName = "Spell", menuName = "Spells/ New Spell")]
     public class SpellBase : ScriptableObject
     {
-        [SerializeField] private string name; // basic, found just the name of the spell=>Apprentice
+        [FormerlySerializedAs("name")] [SerializeField] private string spellName; // basic, found just the name of the spell=>Apprentice
         [SerializeField] private int power;
         [SerializeField] private int accuracy;
         [SerializeField] private string description2; //more information about the spell, what does=>Initiate
@@ -18,33 +17,18 @@ namespace Spells
         // Start is called before the first frame update
         
 
-        public int Power
-        {
-            get => power;
-        }
+        public int Power => power;
 
-        public int Accuracy
-        {
-            get => accuracy;
-        }
+        public int Accuracy => accuracy;
 
-        public string Description2
-        {
-            get => description2;
-        }
+        public string Description2 => description2;
 
-        public string Description3
-        {
-            get => description3;
-        }
-        
-
-        
+        public string Description3 => description3;
     }
 
     public enum SpellLevel
     {
-        none,
+        None,
         Apprentice, //
         Initiate,
         Disciple

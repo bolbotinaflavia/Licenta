@@ -1,4 +1,4 @@
-﻿#-------------------------------------------------------------------------------#
+#-------------------------------------------------------------------------------#
 #               Qodana analysis is configured by qodana.yaml file               #
 #             https://www.jetbrains.com/help/qodana/qodana-yaml.html            #
 #-------------------------------------------------------------------------------#
@@ -10,6 +10,61 @@ ide: QDNET
 #Specify inspection profile for code analysis
 profile:
   name: qodana.starter
+include:
+  - name: Unity.PerformanceCriticalCodeCameraMain
+  - name: ConvertIfStatementToConditionalTernaryExpression
+  - name: ConvertIfStatementToNullCoalescingAssignment
+  - name: ArrangeThisQualifier
+  - name: ArrangeStaticMemberQualifier
+  - name: ArrangeModifiersOrder
+  - name: RedundantArrayCreationExpression
+  - name: CppAssignedValueIsNeverUsed
+  - name: ConvertIfToOrExpression
+  - name: ConvertIfStatementToSwitchStatement
+  - name: ConvertToConstant.Local
+  - name: ConvertToAutoPropertyWhenPossible
+  - name: CppDeclaratorNeverUsed
+  - name: Unity.PerformanceCriticalCodeInvocation
+  - name: Unity.PerformanceCriticalCodeNullComparison
+  - name: ExtractCommonBranchingCode
+  - name: FieldCanBeMadeReadOnly.Local
+  - name: CppInconsistentNaming
+  - name: BadControlBracesIndent
+  - name: InlineOutVariableDeclaration
+  - name: InvertIf
+  - name: JoinDeclarationAndInitializer
+  - name: TooWideLocalVariableScope
+  - name: MemberCanBePrivate.Global
+  - name: MemberCanBeMadeStatic.Global
+  - name: MemberCanBeMadeStatic.Local
+  - name: MergeIntoPattern
+  - name: MergeIntoLogicalPattern
+  - name: NotAccessedField.Global
+  - name: ForeachCanBePartlyConvertedToQueryUsingAnotherGetEnumerator
+  - name: CppUnusedIncludeDirective
+  - name: RedundantIfElseBlock
+  - name: RedundantToStringCallForValueType
+  - name: CppRedundantParentheses
+  - name: RedundantDeclarationSemicolon
+  - name: ArrangeRedundantParentheses
+  - name: BuiltInTypeReferenceStyle
+  - name: UseNullPropagation
+  - name: SimplifyConditionalTernaryExpression
+  - name: SwitchStatementMissingSomeEnumCasesNoDefault
+  - name: SwitchStatementHandlesSomeKnownEnumValuesWithDefault
+  - name: UnusedMember.Global
+  - name: UnusedParameter.Global
+  - name: UseArrayEmptyMethod
+  - name: UseNameofExpression
+  - name: ConvertToCompoundAssignment
+  - name: ArrangeTypeMemberModifiers
+  - name: UseObjectOrCollectionInitializer
+  - name: SuggestVarOrType_Elsewhere
+  - name: SuggestVarOrType_BuiltInTypes
+  - name: SuggestVarOrType_SimpleTypes
+  - name: ArrangeAccessorOwnerBody
+  - name: ArrangeTrailingCommaInMultilineLists
+  - name: ArrangeObjectCreationWhenTypeEvident
 
 #Enable inspections
 #include:

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4208664816496878770}
   - component: {fileID: 7375213521482139182}
   - component: {fileID: 8205782576299676350}
+  - component: {fileID: 977626572279175455}
   m_Layer: 5
   m_Name: Shovel
   m_TagString: Weapons
@@ -176,5 +177,20 @@ MonoBehaviour:
   WeaponName: Shovel
   InUse: 0
   Discovered: 0
-  Damage: 5
+  Damage: 20
   Image: {fileID: 210801867209499050, guid: 546b64c17b600144298e00c62bbd5552, type: 3}
+--- !u!114 &977626572279175455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109521212070203626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a719155a1f04d01a942d8df78fd7e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponB: {fileID: 11400000, guid: 4b8613d1e1fffbf4e827119da1bdcc59, type: 2}
+  w: {fileID: 109521212070203626}
+  Rb: {fileID: 7375213521482139182}

@@ -14,6 +14,8 @@ namespace Enemies
         [SerializeField] private string description;
 
         [SerializeField] private Sprite sprite1;
+        [SerializeField] private Type type;
+        public Sprite Sprite1 => sprite1;
         //aici ar trebui animatii
         [FormerlySerializedAs("attack_s")] [SerializeField] private Sprite attackS;
         [FormerlySerializedAs("defense_s")] [SerializeField] private Sprite defenseS;
@@ -26,7 +28,7 @@ namespace Enemies
         [SerializeField] private int attack;
         [SerializeField] private float defense;
         [SerializeField] private int speed;
-
+        [SerializeField] private List<LearnableMoves> moves;
         public List<string> get_all_enemies_entities()
         {
             var allEnemies = GameObject.FindObjectsOfType<EnemieBase>().ToList().ConvertAll(x => x.enemyName);
@@ -42,8 +44,22 @@ namespace Enemies
         public int Speed => speed;
         public WeaponWeakness W1 { get => w1; set => w1 = value; }
         public SpellWeakness W2 { get => w2; set => w2 = value; }
+        public List<LearnableMoves> Moves { get => moves; set => moves = value; }
+      
+    }
+[System.Serializable]
+    public class LearnableMoves
+    {
+        [SerializeField] private Moves move;
+        public Moves Move { get => move; set => move = value; }
     }
 
+    public enum Type
+    {
+        Basic,
+        Hard,
+        Magician
+    }
     public enum WeaponWeakness
     {
         //all specials are +5 damage depending on the type

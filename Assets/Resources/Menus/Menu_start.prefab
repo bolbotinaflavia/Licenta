@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -774,9 +774,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 3560460492872245136}
+  menuOption: {fileID: 3560460492872245136}
   timer: 1
-  next_menu: Menu_basic
+  nextMenu: Menu_basic
 --- !u!1 &5208931795137536172
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 8063808342680750055}
+  menuOption: {fileID: 8063808342680750055}
   timer: 1
 --- !u!1 &6272714591082115295
 GameObject:
@@ -1382,9 +1382,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 8915212256034393326}
+  menuOption: {fileID: 8915212256034393326}
   timer: 0.75
-  next_menu: Menu_settings
+  nextMenu: Menu_settings
 --- !u!1 &8835913386353812181
 GameObject:
   m_ObjectHideFlags: 0

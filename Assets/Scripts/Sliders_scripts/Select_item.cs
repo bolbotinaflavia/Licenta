@@ -1,4 +1,5 @@
 using Inventory;
+using Items;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,42 +11,45 @@ namespace Sliders_scripts
     {
         // public static Select_item Instance;
         [FormerlySerializedAs("name")] public string itemName;
-        private ItemObject _i;
+        [SerializeField]private FoodBase _f;
+        private Sprite img;
         public Text t;
         protected override void OnTimerComplete()
         {
        
-            if (_i != null)
-            {
-                _i.Consume();
-                if (PlayerManager.Instance.hp + _i.hp < 100f)
+           
+                if (_f != null)
                 {
-                    PlayerManager.Instance.hp += _i.hp;
+                    InventoryManager.Instance.Consume(_f);
+                    if (PlayerManager.Instance.hp + _f.Hp < 100f)
+                    {
+                        PlayerManager.Instance.hp += _f.Hp;
+                    }
+                    else
+                    {
+                        Debug.Log("HP is already full->100");
+                    }
                 }
-                else
-                {
-                    Debug.Log("HP is already full->100");
-                }
-            
-            }
-
-            Debug.Log("Item selected");
         }
     
 
         // Start is called before the first frame update
         private void Start()
         {
-            _i=PlayerManager.Instance.objects.Find(item => item.name.Equals(itemName));
-            t.text = _i!=null ? _i.number.ToString() : "0";
+            img = GetComponent<Sprite>();
+           
+            var food=Resources.Load<FoodBase>($"Food/{_f.FoodName}");
+            _f=food;
+            img = food.Img;
+            t.text = _f!=null ? InventoryManager.Instance.get_number_of_food_item(food.FoodName).ToString() : "0";
         }
 
         // Update is called once per frame
         private void Update()
         {
-            if (_i != null)
+            if (_f != null)
             {
-                t.text = _i.number.ToString();
+                t.text = InventoryManager.Instance.get_number_of_food_item(_f.FoodName).ToString();
             }
         }
     }

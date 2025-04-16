@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4415181438853106945}
   - component: {fileID: 686545872786194450}
+  - component: {fileID: 357151629312676154}
   m_Layer: 0
   m_Name: Slytha
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107748446681385903}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.037912, y: 0.30867, z: 0.3788273}
   m_LocalScale: {x: 0.018905807, y: 0.018905807, z: 3.7811618}
   m_ConstrainProportionsScale: 0
@@ -44,5 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db22929dfc5c524eb5135d660be7de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spellBase: {fileID: 11400000, guid: 0c5427f563dc787488991f1a4cc3a8c7, type: 2}
-  spell_name: Slytha
+  spellName: Slytha
+  magicLevel: 0
+  description2: Used to put an opponent  to sleep.
+  description3: 
+  power: 0
+  accuracy: 0
+--- !u!114 &357151629312676154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107748446681385903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc1377ab9e546729038a8cf5602378c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellBase: {fileID: 11400000, guid: 0c5427f563dc787488991f1a4cc3a8c7, type: 2}
+  magicLevel: 0

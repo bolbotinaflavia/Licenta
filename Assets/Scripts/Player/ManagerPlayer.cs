@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Battle;
+using Enemies;
 using Inventory;
+using TMPro;
 using Tobii.Research.Unity.Examples;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,14 +16,16 @@ namespace Player
     public class PlayerManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public static PlayerManager Instance;
+        //pentru notifications
+        [SerializeField]private TextMeshProUGUI notification;
         private static readonly int Moving = Animator.StringToHash("isMoving");
-        private static readonly int IsEating = Animator.StringToHash("is_eating");
+        private static readonly int Eating = Animator.StringToHash("is_eating");
         private static readonly int Item = Animator.StringToHash("new_item");
         private static readonly int FacingRight = Animator.StringToHash("isFacingRight");
 
         public PlayerMovement playerMovement;
 
-        public event Action OnEncountered;
+        public event Action<Enemy> OnEncountered;
         //Base stats
         [FormerlySerializedAs("HP")] public float hp;
         public int defense;
@@ -42,10 +47,14 @@ namespace Player
         private Animator _animator;
         [FormerlySerializedAs("HP_player_a")] [SerializeField]
         private HpBarAnimation hpPlayerA;
+
+        public HpBarAnimation HpPlayerA
+        {
+            get => hpPlayerA;
+            set => hpPlayerA = value;
+        }
         //weapons, objects and spells
-        public List<WeaponBase> Weapons=new List<WeaponBase>();
-        [FormerlySerializedAs("Objects")] public List<ItemObject> objects=new List<ItemObject>();
-        [FormerlySerializedAs("_spells")] public List<Spell> spells=new List<Spell>();
+        [SerializeField]private InventoryManager inventory;
         //animation parameters, menu ...
         [FormerlySerializedAs("_isFight")] public bool isFight;
 
@@ -76,15 +85,15 @@ namespace Player
         }
         public bool isHover;
         [FormerlySerializedAs("IsMenu")] public bool isMenu;
-        [FormerlySerializedAs("_eating")] public bool isEating;
-        public bool EatingAnim
+        [FormerlySerializedAs("_eating")] private bool isEating;
+        public bool IsEating
         {
             get => isEating;
             set
             {
                 if (_animator != null)
                 {
-                    _animator.SetBool(IsEating,value);
+                    _animator.SetBool(Eating,value);
                     _animator.SetBool(Moving,!value);
                 
                 }
@@ -100,7 +109,7 @@ namespace Player
         public bool NewItem
         {
             get => newItem;
-            private set
+            set
             {
             
             
@@ -146,6 +155,7 @@ namespace Player
             }
 
             player = GameObject.Find("Player");
+           // notification = GetComponent<TextMeshProUGUI>();
             playerMovement=FindObjectOfType<PlayerMovement>();
             _animator = GetComponent<Animator>();
             GetComponent<Rigidbody2D>();
@@ -189,27 +199,27 @@ namespace Player
             }
             if (other.gameObject.CompareTag("Objects"))
             {
-
-                Debug.Log("Magic object!!!");
           
                 if (other.gameObject.name.Equals("Box"))
                 {
-                    Debug.Log($"Object is {other.gameObject.name}");
+                    Debug.Log($"Object is {other.gameObject.name}\n");
                     //IsMoving = false;
                     if (Box.Instance.opened == false)
                     {
                         //IsMoving = false;
-                    
-                        Box.Instance.open_box();
+                        notification.text = "";
+                        StartCoroutine(notification_show("Opening Treasure Chest\n"));
+                        IsMoving = false;
+                        var b =other.GetComponent<Box>();
+                        b.open_box();
+                        //Box.Instance.open_box();
                     }
 
                 }
 
                 else{
-                
-                    Debug.Log($"Object is {other.gameObject.name}");
-                    add_item(other.gameObject.GetComponent<ItemObject>());
-                
+                   // Debug.Log($"Object is {other.gameObject.name}");
+                    inventory.add_food(other.gameObject);
                 }
                 //open box/something with the objects
 
@@ -218,24 +228,27 @@ namespace Player
             {
                 if (MagicTree.Instance.discovered != true)
                 {
-                    Debug.Log("Learning spell");
+                    notification.text = "";
+                    StartCoroutine(notification_show("You found a magic tree...\n"));
+                   // Debug.Log("Learning spell");
                     //animatie search tree
                     NewItem = true;
                     Invoke(nameof(finding_animation), 2f);
-                    MagicTree.Instance.search_tree();
+                    var m_tree = other.GetComponent<MagicTree>();
+                    m_tree.search_tree();
                 
                 }
             }
             if (other.gameObject.CompareTag("Weapons"))
             {
-
-                Debug.Log("Weapon!!!");
+               
+               // Debug.Log("Weapon!!!");
                 WeaponBase weaponItem = other.gameObject.GetComponent<WeaponBase>();
                 if (weaponItem != null)
                 {
-                    Debug.Log("Finding weapon");
+                    //Debug.Log("Finding weapon");
                     IsMoving = false;
-                    FindWeapon(weaponItem);
+                    InventoryManager.Instance.FindWeapon(other.gameObject);
                
                 }
 
@@ -249,114 +262,47 @@ namespace Player
 
        
         }
+        public IEnumerator notification_show(string final_text)
+        {
+            notification.text = "";
+            foreach (var letter in final_text.ToCharArray())
+            {
+                if (letter.Equals('\n'))
+                {
+                    yield return new WaitForSeconds(1f/20);
+                }
+                notification.text += letter;
+                yield return new WaitForSeconds(1f/30);
+            }
+            
+            // new WaitForSeconds(2f);
+            Invoke(nameof(notification_delete),1f);
+
+
+        }
+        
+
+        private void notification_delete()
+        {
+            notification.text = "";
+        }
+        
         //start battle
         private void start_battle(GameObject enemy)
         {
+            StartCoroutine(
+                notification_show($"You encountered an enemy \n {enemy.GetComponent<Enemy>().EnemieBase.name}"));
+            OnEncountered?.Invoke(enemy.GetComponent<Enemy>());
             Destroy(enemy);
-            OnEncountered?.Invoke();
         }
         //Items
-        private void finding_animation()
+        public void finding_animation()
         {
             Debug.Log("Animation started");
         
             NewItem = false;
             //IsMoving = true;
         
-        }
-        //spells
-        public void learn_spell(Spell s)
-        {
-            if (s != null)
-            {
-                this.spells.Add(s.GetComponent<Spell>()); 
-                s.level_up(this);
-            }
-        }
-
-        private void add_item(ItemObject i)
-        {
-            int index=objects.FindIndex(item => item.itemName.Equals(i.itemName));
-            Debug.Log("Index is " + index);
-            if (index==-1)
-            {
-                if (!i.found)
-                {
-                    Debug.Log("Adding" + i.itemName);
-                    //Invoke("finding_animation",2f);
-                    objects.Add(i);
-                    i.find_first_item();
-                    i.GetComponent<SpriteRenderer>().color = Color.clear;
-                }
-            }
-            else
-            {
-                if (!i.found)
-                {
-                    objects[index].find_item();
-                    i.found = true;
-                    i.GetComponent<SpriteRenderer>().color = Color.clear;
-                }
-            }
-        }
-    
-        //Weapons
-        public WeaponBase Attack()
-        {
-            if (Weapons.Count == 0)
-            {
-                return null;
-            }
-            else
-            {
-                foreach (var w in Weapons)
-                {
-                    if (w.IsInUse())
-                    {
-                        Debug.Log("weapon is " + w.WeaponName + " damage is " + w.Damage);
-                        return w;
-                    }
-                }
-
-            }
-
-            return null;
-        }
-        //to update the HP
-
-        public void defense_battle(int enemyAttack)
-        {
-            hp -= enemyAttack + (int)(defense * 0.1);
-            hpPlayerA.damaging_animation();
-        }
-
-        private void SelectWeapon(WeaponBase w)
-        {
-            foreach (var weapon in Weapons)
-            {
-                weapon.SetInhUse(false);
-            }
-            w.SetInhUse(true);
-        }
-
-        public void FindWeapon(WeaponBase w)
-        {
-            //de implementat cand collide cu o arma
-            if (w.IsDiscovered() == false)
-            {
-                Debug.Log("arma descoperita");
-                NewItem = true;
-                Invoke(nameof(finding_animation),2f);
-                w.Discover();
-                Weapons.Add(w);
-                SelectWeapon(w);
-                w.Weapon.GetComponent<SpriteRenderer>().color = Color.clear;
-                Debug.Log("Discovered weapon: " + w.WeaponName);
-           
-            
-
-            }
-
         }
 
         //Open Menu stuff
@@ -422,54 +368,7 @@ namespace Player
             {
                 Debug.Log("not moving, player movement is null");
             }
-            //     UnityEngine.Vector3 mousePos = Input.mousePosition;
-            //
-            //     mousePos.z = Camera.main.nearClipPlane;
-            //     UnityEngine.Vector3 worldMouse = Camera.main.ScreenToWorldPoint(mousePos);
-            //     //restrict moving only on the x axis: player.transform.position.y
-            //
-            //     UnityEngine.Vector3 mouseNext =
-            //         new UnityEngine.Vector3(worldMouse.x, player.transform.position.y, worldMouse.z);
-            //     if (MenuManager.Instance.current_menu.activeSelf == false)
-            //     {
-            //
-            //         float distance = mouseNext.x - player.transform.position.x;
-            //         setFacingDirection(distance);
-            //         RaycastHit2D hit = Physics2D.Raycast(mousePos, UnityEngine.Vector2.zero);
-            //         if ((hit.collider != null && hit.collider.gameObject == player)||new_item==true)
-            //
-            // {
-            //                IsMoving = false;
-            //                 return;
-            //             }
-            //             else
-            //             {
-            //                 if (player.transform.position.x < 398)
-            //                 {
-            //                     //IsMoving = false;
-            //                     player.transform.position = UnityEngine.Vector3.MoveTowards(player.transform.position,
-            //                         new Vector2(400f, player.transform.position.y), Time.deltaTime * 50f);
-            //                 }
-            //                 else
-            //                 {
-            //
-            //                     IsMoving = true;
-            //                     player.transform.position =
-            //                         UnityEngine.Vector3.MoveTowards(player.transform.position, mouseNext, Time.deltaTime * 50f);
-            //                 }
-            //             }
-            //         
-            //     }
-            //
-            //         
-            //     else
-            //       {
-            //         IsMoving = false;
-            //         return;
-            //             //rb.velocity = UnityEngine.Vector3.zero;
-            //       }
-            //     
-            //     //CheckIfPlayerArrived();
+           
         }
 
         public void SetFacingDirection(float distance)
@@ -487,29 +386,5 @@ namespace Player
 
             }
         }
-        /*private void CheckIfPlayerArrived()
-{
-
-   Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, player.transform.position.z - Camera.main.transform.position.z));
-   float playerWidth = player.GetComponent<Renderer>().bounds.extents.x; // Get half-width of player
-
-   // If mouse is within the player's width, trigger OnPointerEnter manually
-   if (Mathf.Abs(mouseWorldPos.x - player.transform.position.x) < playerWidth)
-   {
-       if (!isHover) // If not already hovering, call OnPointerEnter
-       {
-           PointerEventData pointerData = new PointerEventData(EventSystem.current);
-           OnPointerEnter(pointerData);
-       }
-   }
-   else
-   {
-       if (isHover) // If hovering and now outside, call OnPointerExit
-       {
-           PointerEventData pointerData = new PointerEventData(EventSystem.current);
-           OnPointerExit(pointerData);
-       }
-   }
-}*/
     }
 }

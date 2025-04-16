@@ -1,15 +1,17 @@
-﻿using Player;
+﻿using Inventory;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Weapons;
 
 namespace Battle
 {
     public class PlayerUnit:MonoBehaviour
     {
-        [FormerlySerializedAs("_playerUnit")] [SerializeField] private PlayerManager playerUnit;
+        [FormerlySerializedAs("_playerUnit")] [SerializeField] public  PlayerManager player;
         [SerializeField] private float hp;
         [SerializeField] public int defense;
-        [SerializeField] public int attackSpeed;
+        [SerializeField] public int attack;
         [FormerlySerializedAs("HP_anim")] [SerializeField] private HpBarAnimation hpAnim;
         
         public float Hp
@@ -26,12 +28,20 @@ namespace Battle
 
         public int AttackSpeed
         {
-            get => attackSpeed;
-            set => attackSpeed=value;
+            get => attack;
+            set => attack=value;
+        }
+
+        public HpBarAnimation HpAnim
+        {
+            get => hpAnim;
+            set => hpAnim = value;
         }
         public void Setup()
         {
-            playerUnit = GetComponent<PlayerManager>();
+            player = GetComponent<PlayerManager>();
+            attack = player.attackSpeed;
+            defense = player.defense;
         }
 
         public void current_weapon()
@@ -43,9 +53,13 @@ namespace Battle
         // {
         //    
         // }
-        public void defense_battle(int enemyAttack)
+        public WeaponB AttackBattle()
         {
-            Hp -= enemyAttack + (int)(defense * 0.1);
+            return InventoryManager.Instance.Attack();
+        }
+        public void DefenseBattle(int enemyAttack)
+        {
+            player.hp -= enemyAttack + (int)(defense * 0.1);
             hpAnim.damaging_animation();
         }
     }

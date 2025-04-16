@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 5621848470047019998}
+  menuOption: {fileID: 5621848470047019998}
   timer: 0.5
   isFight: 0
 --- !u!1 &1757031034887365594
@@ -472,9 +472,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 918485333935091953}
+  menuOption: {fileID: 918485333935091953}
   timer: 0.5
-  inc_dec: -1
+  incDec: -1
   counterText: {fileID: 2421026098305722455}
 --- !u!1 &3445631452266609616
 GameObject:
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1346,9 +1346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 2315751249240581544}
+  menuOption: {fileID: 2315751249240581544}
   timer: 0.5
-  inc_dec: 1
+  incDec: 1
   counterText: {fileID: 2421026098305722455}
 --- !u!1 &8805226796344481686
 GameObject:

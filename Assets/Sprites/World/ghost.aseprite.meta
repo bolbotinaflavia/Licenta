@@ -121,15 +121,15 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: ghost_Frame_0
     originalName: 
-    pivot: {x: 0.6086957, y: -0.44117647}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 23
-      height: 34
+      width: 20
+      height: 40
     spriteID: a3f0039c00223914c9fccd7d7ee245b0
     spriteBone: []
     spriteOutline: []
@@ -141,15 +141,15 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: ghost_Frame_1
     originalName: 
-    pivot: {x: 0.5217391, y: -0.44117647}
+    pivot: {x: 0.7, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 46
-      width: 23
-      height: 34
+      y: 52
+      width: 20
+      height: 40
     spriteID: 48548d2d091b28c4b9e25c42272ca856
     spriteBone: []
     spriteOutline: []
@@ -158,18 +158,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 46}
+    uvTransform: {x: 4, y: 52}
   - name: ghost_Frame_2
     originalName: 
-    pivot: {x: 0.826087, y: -0.44117647}
+    pivot: {x: 0.55, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 88
-      width: 23
-      height: 34
+      x: 32
+      y: 4
+      width: 20
+      height: 40
     spriteID: 63d0a7249fd30b8449a8d28665b1209b
     spriteBone: []
     spriteOutline: []
@@ -178,7 +178,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 88}
+    uvTransform: {x: 32, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -191,26 +191,26 @@ ScriptedImporter:
     - name: ghost_Frame_0
       frameIndex: 0
       cellRect:
-        x: 18
-        y: 15
-        width: 23
-        height: 34
+        x: 21
+        y: 0
+        width: 20
+        height: 40
       spriteId: a3f0039c00223914c9fccd7d7ee245b0
     - name: ghost_Frame_1
       frameIndex: 1
       cellRect:
-        x: 20
-        y: 15
-        width: 23
-        height: 34
+        x: 18
+        y: 0
+        width: 20
+        height: 40
       spriteId: 48548d2d091b28c4b9e25c42272ca856
     - name: ghost_Frame_2
       frameIndex: 2
       cellRect:
-        x: 13
-        y: 15
-        width: 23
-        height: 34
+        x: 21
+        y: 0
+        width: 20
+        height: 40
       spriteId: 63d0a7249fd30b8449a8d28665b1209b
     linkedCells: []
     parentIndex: -1

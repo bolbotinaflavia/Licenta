@@ -50,6 +50,24 @@ public class MenuManager : MonoBehaviour
         
     }
 
+    public void battlePreviousMenu()
+    {
+        if (!currentMenu.gameObject.name.Equals("Menu_basic(Clone)"))
+        {
+            Destroy(currentMenu);
+            GameObject previousMenu = _menuHistory.Pop();
+            if (previousMenu.gameObject.name.Equals("Menu_basic(Clone)"))
+            {
+                currentMenu = previousMenu;
+            }
+            else
+            {
+                previousMenu.SetActive(true);
+                currentMenu = previousMenu;
+            }
+        }
+    }
+
     public void BackToPrevious()
     {
         if (_menuHistory.Count > 0)

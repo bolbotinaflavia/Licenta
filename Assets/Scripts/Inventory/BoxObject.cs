@@ -20,18 +20,30 @@ namespace Inventory
             if (opened == false)
             {
                 opened = true;
-                this.GetComponent<SpriteRenderer>().sprite = sprite;
+               // this.GetComponent<SpriteRenderer>().sprite = sprite;
                 Update();
+                insideObject.SetActive(true);
+                insideObject.GetComponent<SpriteRenderer>().color = Color.white;
+               // Invoke(nameof(check_object),2f);
+               
+                //pentru alte obiecte
+            }
+        }
+
+        private void check_object()
+        {
+            if (insideObject != null)
+            {
                 if (insideObject.CompareTag("Weapons"))
                 {
                     var weapon = insideObject.gameObject.GetComponent<WeaponBase>();
                     if (weapon == null) return;
                     Debug.Log("Finding weapon");
-                    insideObject.SetActive(true);
-                    insideObject.GetComponent<SpriteRenderer>().color = Color.white;
-                    PlayerManager.Instance.FindWeapon(weapon);
+                    insideObject.SetActive(false);
+                    insideObject.GetComponent<SpriteRenderer>().color = Color.clear;
+                    PlayerManager.Instance.isMoving = true;
+                    InventoryManager.Instance.FindWeapon(insideObject);
                 }
-                //pentru alte obiecte
             }
         }
 
@@ -43,14 +55,18 @@ namespace Inventory
                 insideObject.SetActive(true);
                 this.GetComponent<SpriteRenderer>().sprite = sprite;
             }
+            else
+            {
+                insideObject.SetActive(false);
+            }
         }
 
         // Start is called before the first frame update
         private void Start()
         {
+            insideObject.SetActive(false);
             if (insideObject.activeSelf)
             {
-
                 insideObject.GetComponent<SpriteRenderer>().color = Color.clear;
                 // inside_object.SetActive(false);
             }
@@ -61,7 +77,8 @@ namespace Inventory
         {
             if (opened)
             {
-                insideObject.SetActive(true);
+                if(insideObject!=null)
+                    insideObject.SetActive(true);
                 this.GetComponent<SpriteRenderer>().sprite = sprite;
             }
         }

@@ -1,3 +1,6 @@
+using System.Dynamic;
+using UnityEditor;
+
 namespace Sliders_scripts
 {
     public class PreviuosMenu : MenuCountdown
@@ -6,16 +9,22 @@ namespace Sliders_scripts
         protected override void OnTimerComplete()
         {
             menuOption.value = 1;
-            if (GameController.Instance.state == GameState.Battle)
+            if (GameController.Instance != null)
             {
-                MenuManager.Instance.currentMenu.SetActive(false);
-            
+                if (GameController.Instance.state == GameState.Battle)
+                {
+                    MenuManager.Instance.battlePreviousMenu();
+                }
+                else
+                {
+                    MenuManager.Instance.BackToPrevious();
+                }
             }
             else
             {
                 MenuManager.Instance.BackToPrevious();
             }
-        
+
         }
 
         // Start is called before the first frame update

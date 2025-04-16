@@ -55,7 +55,8 @@ namespace Battle
 
         public void healing_animation()
         {
-            Debug.Log("Healing anaimation started");
+            IsHealing = true;
+            Debug.Log("Healing animation started");
           //  animator.PlayInFixedTime(animator.GetCurrentAnimatorStateInfo(0).fullPathHash,0,4);
            // new WaitForSeconds(4);
            Invoke(nameof(end_animation), 2f);
@@ -69,7 +70,7 @@ namespace Battle
           // animator.PlayInFixedTime(animator.GetCurrentAnimatorStateInfo(0).fullPathHash,0,4);
           // new WaitForSeconds(4);
           //  Debug.Log("damage animation started");
-          Invoke(nameof(end_animation), 5f);
+          Invoke(nameof(end_animation), 2f);
      
         }
 

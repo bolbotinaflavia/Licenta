@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84d79d8f9e71498aa3c72d5cc4fb63ac, type: 3}
   m_Name: Mushroom
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  hp: 0
-  defense: 0
-  icon: {fileID: 0}
+  foodName: Mushroom
+  hp: 5
+  icon: {fileID: -1299242858519024429, guid: d9d3064bbfc511e479e9094d1f853f35, type: 3}

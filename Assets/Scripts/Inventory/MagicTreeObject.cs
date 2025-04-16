@@ -8,6 +8,7 @@ namespace Inventory
     {
         public static MagicTree Instance;
         [FormerlySerializedAs("inside_spell")] [SerializeField] private Spell  insideSpell;
+        [SerializeField]private Spells.Spell insideSpell2;
         public bool discovered;
     
         public void search_tree()
@@ -21,7 +22,7 @@ namespace Inventory
                 {
                     //Debug.Log("Learning spell");
                     //spell.SetActive(true);
-                    PlayerManager.Instance.learn_spell(insideSpell);
+                    InventoryManager.Instance.learn_spell(insideSpell2);
                 }
                 //pentru alte obiecte
             }

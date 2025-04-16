@@ -7,9 +7,10 @@ namespace Items
     public class FoodBase:ScriptableObject
     {
         [FormerlySerializedAs("name")] [SerializeField] private string foodName;
-        [SerializeField] private string description;
-        [SerializeField] private int hp; //creste hp
-        [SerializeField] private int defense; //creste defense ul
-        [SerializeField] private Sprite icon;
+        [SerializeField] private int hp;
+        [SerializeField] private Sprite img;
+        public string FoodName { get => foodName; set => foodName = value; }
+        public int Hp { get => hp; set => hp = value; }
+        public Sprite Img { get => img; set => img= value; }
     }
 }

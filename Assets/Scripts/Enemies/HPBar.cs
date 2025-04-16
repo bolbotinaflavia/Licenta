@@ -1,4 +1,5 @@
 ﻿using Battle;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -55,19 +56,22 @@ namespace Enemies
                 Color healty = new Color(0.2235294f, 0.4823529f, 0.2666667f);
                 Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
                 Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
-                if(enemy != null)
+                if(enemy != null){
                     hpSlider.value = enemy.Hp;
+                    if(hpSlider.value == 0)
+                        GameController.Instance.StopBattle();
+                }
                 if (hpSlider.value == 0f)
                     Hp_Slider_zero();
                 else
                 {
-                    if (hpSlider.value >= 70)
+                    if (hpSlider.value >= 2*hpSlider.maxValue/3)
                     {
                         hpSlider.fillRect.GetComponent<Image>().color = healty;
                     }
                     else
                     {
-                        hpSlider.fillRect.GetComponent<Image>().color = hpSlider.value > 40 ? middle : dying;
+                        hpSlider.fillRect.GetComponent<Image>().color = hpSlider.value > hpSlider.maxValue/3 ? middle : dying;
                     }
                 }
             }

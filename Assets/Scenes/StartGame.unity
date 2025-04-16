@@ -220,8 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620454c4cb26c7648b05a7c776ea4973, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game_started: 0
-  current_menu: {fileID: 0}
+  gameStarted: 0
+  currentMenu: {fileID: 0}
 --- !u!4 &693638411
 Transform:
   m_ObjectHideFlags: 0

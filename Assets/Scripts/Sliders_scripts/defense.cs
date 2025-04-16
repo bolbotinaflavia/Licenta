@@ -1,4 +1,5 @@
 ﻿using Battle;
+using Player;
 
 namespace Sliders_scripts
 {
@@ -8,7 +9,11 @@ namespace Sliders_scripts
         {
             if (BattleSystem.Instance.State == BattleState.PlayerAction)
             {
-                BattleSystem.Instance.HandleActionSelector("defense");
+                StartCoroutine(BattleSystem.Instance.PlayerActionMove("defense"));
+            }
+            else
+            {
+                StartCoroutine(PlayerManager.Instance.notification_show("It's not your turn!"));
             }
         }
     }

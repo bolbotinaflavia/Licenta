@@ -1,6 +1,9 @@
+using Battle;
 using Inventory;
+using Player;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -10,7 +13,7 @@ namespace Sliders_scripts
 {
     public class SpellSelect : MenuCountdown
     {
-        [FormerlySerializedAs("S")] public Spell s;
+        [FormerlySerializedAs("S")] public Spells.Spell s;
         [FormerlySerializedAs("name")] public string spellName;
         private Scene _scene;
         public TextMeshProUGUI text;
@@ -20,9 +23,12 @@ namespace Sliders_scripts
         {
             if (s != null)
             {
-                if (_scene.name.Equals("Fight"))
+                if (GameController.Instance.state == GameState.Battle)
                 {
-                    use_spell();
+
+                    MenuManager.Instance.battlePreviousMenu();
+                    StartCoroutine( BattleSystem.Instance.PlayerActionMove(s.SpellBase.SpellName));
+               
                 }
                 else
                 {
@@ -38,15 +44,19 @@ namespace Sliders_scripts
         
         }
 
-        public void open_description()
+        private void open_description()
         {
             canvasDescription.GameObject().SetActive(true);
             description.GameObject().SetActive(true);
         }
-        public void FindSpellsInGame()
+
+        private void FindSpellsInInventory()
         {
-            s= GameObject.Find(spellName).ConvertTo<Spell>();
-        
+            if (InventoryManager.Instance != null)
+            {
+                s = InventoryManager.Instance.getSpell(spellName);
+            }
+
         }
         public void use_spell()
         {
@@ -81,22 +91,28 @@ namespace Sliders_scripts
                     if (s.get_magic_level().Equals(2))
                     {
                         text.text = spellName;
-                        description.text = s.Description2;
+                        description.text = s.SpellBase.Description2;
                         Debug.Log(description.text);
                     }
 
                     if (s.get_magic_level().Equals(3))
                     {
                         text.text = spellName;
-                        description.text = s.Description2+"/n"+s.Description3;
+                        description.text = s.SpellBase.Description2+"\n"+s.SpellBase.Description3;
                     }
                 }
+            }
+            else
+            {
+                menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                text.text = "-1@3~%%$@";
+                description.text="No information available";
             }
         }
         // Start is called before the first frame update
         private void Start()
         {
-            FindSpellsInGame();
+            FindSpellsInInventory();
             // canvas_description.GetComponent<Sprite>();
             // text = GetComponent<TextMeshProUGUI>();
             // description = GetComponent<TextMeshProUGUI>();

@@ -48,15 +48,18 @@ namespace Inventory
         public void Consume()
         {
             if (number <= 0) return;
-            PlayerManager.Instance.isEating = true;
+            PlayerManager.Instance.IsEating = true;
             HpSlider.Instance.UpdateUI(); 
             number -= 1;
+            PlayerManager.Instance.HpPlayerA.healing_animation();
             Invoke(nameof(eating_animation),2f);
         }
         private void eating_animation()
         {
             Debug.Log("Animation started");
-            PlayerManager.Instance.isEating = false;
+           
+            new WaitForSeconds(3f);
+            PlayerManager.Instance.IsEating = false;
             //IsMoving = true;
         
         }

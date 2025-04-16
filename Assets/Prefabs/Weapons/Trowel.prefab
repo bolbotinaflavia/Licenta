@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3161990635394578926}
   - component: {fileID: 1384431467968610624}
   - component: {fileID: 8146634757462968215}
+  - component: {fileID: 4199465553766873830}
   m_Layer: 5
   m_Name: Trowel
   m_TagString: Weapons
@@ -176,5 +177,20 @@ MonoBehaviour:
   WeaponName: Trowel
   InUse: 0
   Discovered: 0
-  Damage: 10
+  Damage: 40
   Image: {fileID: -4032095101091381050, guid: 9567254880df8df439b72b00ff41d4f0, type: 3}
+--- !u!114 &4199465553766873830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402236027325870175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a719155a1f04d01a942d8df78fd7e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponB: {fileID: 11400000, guid: 5cac6364ab13dda458088fbf568ffdb9, type: 2}
+  w: {fileID: 4402236027325870175}
+  Rb: {fileID: 1385896661656782676}

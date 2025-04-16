@@ -1,5 +1,6 @@
 ﻿using Battle;
 using Cinemachine;
+using Enemies;
 using Player;
 using Sliders_scripts;
 using UnityEngine;
@@ -21,12 +22,16 @@ public class GameController:MonoBehaviour
 
     private void Start()
     {
-        if(Instance == null)
+        if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(this);
+        }
+
         playerMovement.OnEncountered += StartBattle;
     }
 
-    private void StartBattle()
+    private void StartBattle(Enemy enemy)
     {
         state = GameState.Battle;
         playerCamera.gameObject.SetActive(false);
@@ -35,14 +40,17 @@ public class GameController:MonoBehaviour
             
         battleSystem.gameObject.SetActive(true);
         battleCamera.gameObject.SetActive(true);
-            
-            
+        battleSystem.LoadEnemyName = enemy.EnemieBase.name;
+        StartCoroutine(battleSystem.Setup_battle());
+
+
     }
 
     public void StopBattle()
     {
         Debug.Log("StopBattle");
         state = GameState.FreeRoam;
+        
         battleSystem.gameObject.SetActive(false);
         battleCamera.gameObject.SetActive(false);
             

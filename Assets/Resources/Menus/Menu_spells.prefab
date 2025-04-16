@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -744,13 +744,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 4912207662020407134}
+  menuOption: {fileID: 4912207662020407134}
   timer: 0.75
   s: {fileID: 7383509772528254271, guid: 8a92e9c6219bbed4ab2c8618b2f0605d, type: 3}
-  name: Brisingr
+  spellName: Brisingr
   text: {fileID: 6103108789845102998}
   description: {fileID: 2666007577990110708}
-  canvas_description: {fileID: 3104516792018441030}
+  canvasDescription: {fileID: 3104516792018441030}
 --- !u!1 &2515830113619633296
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,13 +989,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 9035928454664099109}
+  menuOption: {fileID: 9035928454664099109}
   timer: 0.75
   s: {fileID: 686545872786194450, guid: 5ed7fd1c4deb5dc46a91561fe3453ef3, type: 3}
-  name: Jierda
+  spellName: Jierda
   text: {fileID: 2407771821415596419}
   description: {fileID: 2666007577990110708}
-  canvas_description: {fileID: 3104516792018441030}
+  canvasDescription: {fileID: 3104516792018441030}
 --- !u!1 &2979909050652107509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,8 +1530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menu_option: {fileID: 8699382395630801619}
+  instance: {fileID: 2768573573947684574}
+  menuOption: {fileID: 8699382395630801619}
   timer: 0.5
   isFight: 0
 --- !u!1 &5262290765871319284
@@ -1638,13 +1638,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 8794321600634994939}
+  menuOption: {fileID: 8794321600634994939}
   timer: 0.75
   s: {fileID: 686545872786194450, guid: 43a6944aa3b49864cbb9d394bf5afd7e, type: 3}
-  name: Slytha
+  spellName: Slytha
   text: {fileID: 8172359570257144464}
   description: {fileID: 2666007577990110708}
-  canvas_description: {fileID: 3104516792018441030}
+  canvasDescription: {fileID: 3104516792018441030}
 --- !u!1 &5706471802637607410
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,8 +2379,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
+  m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2550,10 +2550,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   instance: {fileID: 0}
-  menu_option: {fileID: 4816786999489695754}
+  menuOption: {fileID: 4816786999489695754}
   timer: 0.75
   s: {fileID: 686545872786194450, guid: a207f93c6e3408944ad28a7598fa0b9c, type: 3}
-  name: Holy_Blaze
+  spellName: Poison
   text: {fileID: 2463133239680963529}
   description: {fileID: 2666007577990110708}
-  canvas_description: {fileID: 3104516792018441030}
+  canvasDescription: {fileID: 3104516792018441030}

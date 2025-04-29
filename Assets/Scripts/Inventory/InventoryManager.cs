@@ -74,6 +74,7 @@ namespace Inventory
                 Invoke(nameof(finding_animation),2f);
                 weapons.Add(new_weapon);
                 SelectWeapon(new_weapon);
+                PlayerManager.Instance.IsMoving = true;
                 new WaitForSeconds(5f);
                 Destroy(w);
             }

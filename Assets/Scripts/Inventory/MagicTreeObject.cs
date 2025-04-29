@@ -22,6 +22,7 @@ namespace Inventory
                 {
                     //Debug.Log("Learning spell");
                     //spell.SetActive(true);
+                    PlayerManager.Instance.isMoving = true;
                     InventoryManager.Instance.learn_spell(insideSpell2);
                 }
                 //pentru alte obiecte

@@ -35,6 +35,7 @@ namespace Sliders_scripts
             {
                 Debug.Log("slider is null");
             }
+            
         }
 
         // Update is called once per frame
@@ -60,6 +61,7 @@ namespace Sliders_scripts
                     hpSlider.fillRect.GetComponent<Image>().color = hpSlider.value > 40 ? middle : dying;
                 }
             }
+            
         }
     }
 }

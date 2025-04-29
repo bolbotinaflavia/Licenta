@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Battle;
 using Enemies;
 using Inventory;
 using TMPro;
 using Tobii.Research.Unity.Examples;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
@@ -22,6 +22,7 @@ namespace Player
         private static readonly int Eating = Animator.StringToHash("is_eating");
         private static readonly int Item = Animator.StringToHash("new_item");
         private static readonly int FacingRight = Animator.StringToHash("isFacingRight");
+        private static readonly int BBattle=Animator.StringToHash("begin_battle");
 
         public PlayerMovement playerMovement;
 
@@ -56,17 +57,6 @@ namespace Player
         //weapons, objects and spells
         [SerializeField]private InventoryManager inventory;
         //animation parameters, menu ...
-        [FormerlySerializedAs("_isFight")] public bool isFight;
-
-        public bool IsFight
-        {
-            get => isFight;
-            set
-            {
-                isFight = value;
-                isMoving=false;
-            }
-        }
         [FormerlySerializedAs("_isMoving")] public bool isMoving=true;
         public bool IsMoving { 
             get => isMoving;
@@ -146,6 +136,28 @@ namespace Player
             } 
         }
 
+        public bool beginBattle=false;
+
+        private bool BeginBattle
+        {
+            get => beginBattle;
+            set
+            {
+                if (_animator != null)
+                {
+                    
+                    _animator.SetBool(BBattle, value);
+                    _animator.SetBool(Moving,!value);
+                }
+                else
+                {
+                    Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+                }
+
+                beginBattle = value;
+            }
+        }
+
         private void Awake()
         {
             if (Instance == null)
@@ -203,13 +215,13 @@ namespace Player
                 if (other.gameObject.name.Equals("Box"))
                 {
                     Debug.Log($"Object is {other.gameObject.name}\n");
-                    //IsMoving = false;
+                    IsMoving = false;
                     if (Box.Instance.opened == false)
                     {
                         //IsMoving = false;
                         notification.text = "";
                         StartCoroutine(notification_show("Opening Treasure Chest\n"));
-                        IsMoving = false;
+                        //IsMoving = false;
                         var b =other.GetComponent<Box>();
                         b.open_box();
                         //Box.Instance.open_box();
@@ -248,6 +260,7 @@ namespace Player
                 {
                     //Debug.Log("Finding weapon");
                     IsMoving = false;
+                    
                     InventoryManager.Instance.FindWeapon(other.gameObject);
                
                 }
@@ -256,11 +269,20 @@ namespace Player
             //declansare battle
             if (other.gameObject.CompareTag("Enemy"))
             {
-                IsMoving = false;
-                start_battle(other.gameObject);
+                
+               // Invoke(nameof(start_battle),3f);
+               BeginBattle = true;
+               new_battle_anim();
+               StartCoroutine(start_battle_a(other.gameObject));
+
+            }
+            else
+            {
+                IsMoving = true;
             }
 
-       
+            //IsMoving = true;
+
         }
         public IEnumerator notification_show(string final_text)
         {
@@ -269,13 +291,13 @@ namespace Player
             {
                 if (letter.Equals('\n'))
                 {
-                    yield return new WaitForSeconds(1f/20);
+                    yield return new WaitForSeconds(1/30f);
                 }
                 notification.text += letter;
-                yield return new WaitForSeconds(1f/30);
+                yield return new WaitForSeconds(1f/50);
             }
             
-            // new WaitForSeconds(2f);
+            new WaitForSeconds(1f);
             Invoke(nameof(notification_delete),1f);
 
 
@@ -286,12 +308,26 @@ namespace Player
         {
             notification.text = "";
         }
-        
+
+        private void new_battle_anim()
+        {
+            BeginBattle = false;
+            IsMoving = true;
+        }
+
+        private IEnumerator start_battle_a(GameObject enemy)
+        {
+            yield return new WaitForSeconds(3f);
+            start_battle(enemy);
+            
+        }
         //start battle
         private void start_battle(GameObject enemy)
         {
+            
             StartCoroutine(
                 notification_show($"You encountered an enemy \n {enemy.GetComponent<Enemy>().EnemieBase.name}"));
+            new WaitForSeconds(5f);
             OnEncountered?.Invoke(enemy.GetComponent<Enemy>());
             Destroy(enemy);
         }
@@ -301,7 +337,7 @@ namespace Player
             Debug.Log("Animation started");
         
             NewItem = false;
-            //IsMoving = true;
+            IsMoving = true;
         
         }
 
@@ -363,6 +399,7 @@ namespace Player
             {
                 // Debug.Log(playerMovement.current_control);
                 playerMovement.CurrentControl.Move(this);
+
             }
             else
             {

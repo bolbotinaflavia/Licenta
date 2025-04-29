@@ -15,6 +15,7 @@ namespace Sliders_scripts
             {
                 StartCoroutine(PlayerManager.Instance.notification_show("It's not your turn!"));
             }
+            menuOption.value = 1;
         }
     }
 }

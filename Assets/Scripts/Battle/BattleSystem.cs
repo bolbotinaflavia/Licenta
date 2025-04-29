@@ -2,6 +2,7 @@
 using System.Collections;
 using Enemies;
 using Inventory;
+using Player;
 using Sliders_scripts;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -161,6 +162,10 @@ namespace Battle
         
         public void HandleUpdate()
         {
+            if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
+            {
+                PlayerMovement.Instance.CurrentControl.select_sliders();
+            }
             if (state == BattleState.PlayerAction)
             {
                 //se face din slider_scripts actiunea
@@ -173,7 +178,7 @@ namespace Battle
 
             if (state == BattleState.EnemyDead)
             {
-                exit_battle();
+                Invoke(nameof(exit_battle),3f);
             }
             // if (enemyUnit!=null&&enemyUnit.Hp == 0)
             // {

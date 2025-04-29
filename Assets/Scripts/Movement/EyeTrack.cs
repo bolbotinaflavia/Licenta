@@ -52,6 +52,11 @@ namespace Movement
             return _move;
         }
 
+        public InputAction get_click_action()
+        {
+            return _move;
+        }
+
         public void enter_slider(Slider s)
         {
             throw new System.NotImplementedException();
@@ -62,6 +67,29 @@ namespace Movement
             throw new System.NotImplementedException();
         }
 
+        public void load_sliders()
+        {
+            if (this == null)
+                return;
+        }
+
+        public void select_sliders()
+        {
+            if (this == null)
+                return;
+        }
+
+        public void UpdateUI()
+        {
+            if (this == null)
+                return;
+        }
+
+        public void Move_pregame()
+        {
+            if (this == null)
+                return;
+        }
         public void Move(PlayerManager player)
         {
             

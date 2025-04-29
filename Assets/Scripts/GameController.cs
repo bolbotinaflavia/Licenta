@@ -3,17 +3,21 @@ using Cinemachine;
 using Enemies;
 using Player;
 using Sliders_scripts;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public enum GameState
 {
     FreeRoam,
-    Battle
+    Battle,
+    Menu
 }
 public class GameController:MonoBehaviour
 {
     public static GameController Instance;
+    public AudioSource audioIdle;
+    public AudioSource audioBattle;
     public GameState state;
     [FormerlySerializedAs("player_movement")] [SerializeField] private PlayerManager playerMovement;
     [SerializeField] private BattleSystem battleSystem;
@@ -34,13 +38,18 @@ public class GameController:MonoBehaviour
     private void StartBattle(Enemy enemy)
     {
         state = GameState.Battle;
+        audioIdle.Stop();
+        audioBattle.PlayDelayed(0f);
         playerCamera.gameObject.SetActive(false);
         playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
         HpSlider.Instance.UpdateUI();
-            
         battleSystem.gameObject.SetActive(true);
         battleCamera.gameObject.SetActive(true);
         battleSystem.LoadEnemyName = enemy.EnemieBase.name;
+        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
+        {
+            PlayerMovement.Instance.CurrentControl.load_sliders();
+        }
         StartCoroutine(battleSystem.Setup_battle());
 
 
@@ -50,7 +59,9 @@ public class GameController:MonoBehaviour
     {
         Debug.Log("StopBattle");
         state = GameState.FreeRoam;
-        
+        PlayerManager.Instance.IsMoving = true;
+        audioBattle.Stop();
+        audioIdle.Play();
         battleSystem.gameObject.SetActive(false);
         battleCamera.gameObject.SetActive(false);
             
@@ -73,6 +84,16 @@ public class GameController:MonoBehaviour
             {
                 battleSystem.HandleUpdate();
             }
+            else
+            {
+                if (state == GameState.Menu)
+                {
+                    playerMovement.HandleUpdate();
+                  
+                        PlayerMovement.Instance.CurrentControl.UpdateUI();
+                }
+            }
         }
+        
     }
 }

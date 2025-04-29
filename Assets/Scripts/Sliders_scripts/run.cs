@@ -6,6 +6,7 @@
         { 
            GameController.Instance.StopBattle();
            this.menuOption.value = 1;
+           menuOption.value = 1;
         }
     }
 }

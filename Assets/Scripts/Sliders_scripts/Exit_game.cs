@@ -14,6 +14,7 @@ namespace Sliders_scripts
                 SceneManager.LoadScene("StartGame");
                 MenuManager.Instance.BackToPrevious();
             }
+            menuOption.value = 1;
         }
 
         // Start is called before the first frame update

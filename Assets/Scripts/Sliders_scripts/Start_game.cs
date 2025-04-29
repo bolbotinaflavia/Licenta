@@ -1,3 +1,5 @@
+using Inventory;
+using Player;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
@@ -15,8 +17,8 @@ namespace Sliders_scripts
             MenuManager.Instance.gameStarted = true;
             MenuManager.Instance.currentMenu.SetActive(false);
             SceneManager.LoadScene("Gameplay");
+            menuOption.value = 1;
         }
-
         // Start is called before the first frame update
        
     }

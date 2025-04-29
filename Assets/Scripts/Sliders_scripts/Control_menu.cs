@@ -1,6 +1,7 @@
 ﻿using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -13,11 +14,13 @@ namespace Sliders_scripts
         public PlayerMovement playerMovement;
         public InputAction input;
         [FormerlySerializedAs("name")] public string nameControl;
+        public Image fade;
         protected override void OnTimerComplete()
         {
             //i = GetComponent<Control>();
             if(input!=null)
                 Select_item();
+            UpdateUI();
         }
 
         public void FindControls()
@@ -45,9 +48,6 @@ namespace Sliders_scripts
         {
             if (input.enabled==false)
             {
-
-                Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-
                 foreach (InputAction inp in playerMovement.inputActions)
                 {
                     inp.Disable();
@@ -58,23 +58,30 @@ namespace Sliders_scripts
                 {
                     if (s.IsActive())
                     {
-                        if (!s.name.Equals("Back")&&!s.name.Equals("HP"))
-                            s.fillRect.GetComponent<Image>().color = c;
+                        if (!s.name.Equals("Back") && !s.name.Equals("HP"))
+                        {
+                            if (s.GetComponent<ControlMenu>() != null)
+                                s.GetComponent<ControlMenu>().fade.color =
+                                    new Color(0.4901961f, 0.4392157f, 0.4431373f);
+                            s.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                        }
+
+                       
                     }
                 }
-
                 //weapon.InUse = true;
-                menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f, 0.282353f, 0.1803922f);
+                fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
                 input.Enable();
                 Debug.Log(input.name);
                 PlayerMovement.Instance.change_strategy(input);
             }
             else
                 Debug.Log("Control already enabled");
+            menuOption.value = 1;
         }
         public void UpdateUI()
         {
-            if (input is { enabled: true }) menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
+            if (input is { enabled: true })  fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
         }
     }
     

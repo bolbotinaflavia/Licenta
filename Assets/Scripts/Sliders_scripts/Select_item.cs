@@ -30,6 +30,7 @@ namespace Sliders_scripts
                         Debug.Log("HP is already full->100");
                     }
                 }
+                menuOption.value = 1;
         }
     
 

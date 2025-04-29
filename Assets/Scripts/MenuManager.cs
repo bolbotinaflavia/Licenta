@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using Movement;
+using Player;
+using UnityEditor.StyleSheets;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -43,6 +47,25 @@ public class MenuManager : MonoBehaviour
         if (currentMenu != null)
         {
             _menuHistory.Push(currentMenu); // Store previous menu name
+            foreach (var s in GameObject.FindObjectsOfType<Slider>())
+            {
+                if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
+                    s.value = 1;
+            }
+
+            if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
+            {
+                if (GameController.Instance != null)
+                {
+                    if(GameController.Instance.state==GameState.Menu)
+                        PlayerMovement.Instance.CurrentControl.load_sliders();
+                }
+                else
+                {
+                    PlayerMovement.Instance.CurrentControl.load_sliders();
+                }
+            }
+               
             currentMenu.SetActive(false);
         }
 
@@ -64,6 +87,11 @@ public class MenuManager : MonoBehaviour
             {
                 previousMenu.SetActive(true);
                 currentMenu = previousMenu;
+                foreach (var s in GameObject.FindObjectsOfType<Slider>())
+                {
+                    if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
+                        s.value = 1;
+                }
             }
         }
     }
@@ -76,6 +104,11 @@ public class MenuManager : MonoBehaviour
             GameObject previousMenu = _menuHistory.Pop();
             previousMenu.SetActive(true);
             currentMenu = previousMenu;
+            foreach (var s in GameObject.FindObjectsOfType<Slider>())
+            {
+                if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
+                    s.value = 1;
+            }
         }
         else
         {

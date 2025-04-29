@@ -7,6 +7,7 @@ namespace Sliders_scripts
         protected override void OnTimerComplete()
         {
             SceneManager.LoadScene("Gameplay");
+            menuOption.value = 1;
         }
 
         // Start is called before the first frame update

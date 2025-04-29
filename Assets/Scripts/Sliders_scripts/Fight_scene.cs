@@ -17,8 +17,9 @@ namespace Sliders_scripts
             //spell
             if (actiune == 3)
                 Debug.Log("Spell");
-
+            menuOption.value = 1;
         }
+       
 
     }
 }

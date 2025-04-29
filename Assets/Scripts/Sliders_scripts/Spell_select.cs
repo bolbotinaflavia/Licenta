@@ -25,7 +25,6 @@ namespace Sliders_scripts
             {
                 if (GameController.Instance.state == GameState.Battle)
                 {
-
                     MenuManager.Instance.battlePreviousMenu();
                     StartCoroutine( BattleSystem.Instance.PlayerActionMove(s.SpellBase.SpellName));
                
@@ -41,7 +40,7 @@ namespace Sliders_scripts
             {
                 Debug.Log("Spell is not available yet");
             }
-        
+            menuOption.value = 1;
         }
 
         private void open_description()
@@ -69,7 +68,7 @@ namespace Sliders_scripts
             {
                 if (s.get_magic_level()==0)
                 {
-                    menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                    menuOption.fillRect.GetComponent<Image>().color = menuOption.GetComponent<MenuCountdown>().baseColor;
                     text.text = "-1@3~%%$@";
                     description.text="No information available";
                 }
@@ -104,7 +103,7 @@ namespace Sliders_scripts
             }
             else
             {
-                menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                menuOption.fillRect.GetComponent<Image>().color = menuOption.GetComponent<MenuCountdown>().baseColor;
                 text.text = "-1@3~%%$@";
                 description.text="No information available";
             }

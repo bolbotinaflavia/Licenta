@@ -1,4 +1,6 @@
-﻿using Player;
+﻿using System;
+using Player;
+using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -11,28 +13,38 @@ namespace Movement
 
     {
         private readonly InputAction _mousePositionAction;
+        private readonly InputAction _mouseClickAction;
+
         //public string name;
 
         
-        public Mouse(InputAction mousePositionAction)
+        public Mouse(InputAction mousePositionAction, InputAction mouseClickAction)
         {
             this._mousePositionAction = mousePositionAction;
+            this._mouseClickAction = mouseClickAction;
             Debug.Log(mousePositionAction.ReadValue<Vector2>());
         }
 
         public void Enable()
         {
             _mousePositionAction.Enable();
+            _mouseClickAction.Enable();
         }
 
         public void Disable()
         {
             _mousePositionAction.Disable();
+            _mouseClickAction.Disable();
         }
 
         public InputAction get_action()
         {
             return _mousePositionAction;
+        }
+
+        public InputAction get_click_action()
+        {
+            return _mouseClickAction;
         }
 
         public void enter_slider(UnityEngine.UI.Slider s)
@@ -44,9 +56,32 @@ namespace Movement
         {
             throw new System.NotImplementedException();
         }
-        
+
+        public void load_sliders()
+        {
+            if (this == null)
+                return;
+        }
+
+        public void select_sliders()
+        {
+            if (this == null)
+                return;
+        }
+
+        public void Move_pregame()
+        {
+            if (this == null)
+                return;
+        }
+         public void UpdateUI()
+        {
+            if (this == null)
+                return;
+        }
         public void Move(PlayerManager player)
         {
+            if (!PlayerManager.Instance.IsMoving) return;
             Vector2 inputPos = _mousePositionAction.ReadValue<Vector2>();
             Vector3 worldMouse =
                 Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
@@ -59,7 +94,7 @@ namespace Movement
                 float distance = mouseNext.x - player.player.transform.position.x;
                 player.SetFacingDirection(distance);
                 RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
-                if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem)
+                if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
 
                 {
                     player.IsMoving = false;

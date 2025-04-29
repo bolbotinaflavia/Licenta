@@ -1,4 +1,5 @@
 using System.Globalization;
+using Player;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -16,14 +17,17 @@ namespace Sliders_scripts
             {
                 Volume.Instance.Increase();
                 menuOption.value = 1;
-                StartTimer();
+                if(!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
+                    StartTimer();
             }
             else
             {
                 Volume.Instance.Decrease();
                 menuOption.value = 1;
-                StartTimer();
+                if(!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
+                    StartTimer();
             }
+            menuOption.value = 1;
         }
 
         private void Awake()

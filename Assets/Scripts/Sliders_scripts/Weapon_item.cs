@@ -12,15 +12,20 @@ namespace Sliders_scripts
         public string weaponName;
         private WeaponB _weapon;
         public Image img;
+
+        public Image fade;
         //public Sprite weaponSprite;
 
         protected override void OnTimerComplete()
         {
             if (_weapon != null)
             {
-                SelectWeapon();
-                UpdateUI();
+               
+                    SelectWeapon();
+                    UpdateUI();
+               
             }
+            menuOption.value = 1;
         }
 
         public void FindWeaponsInInventory()
@@ -35,7 +40,8 @@ namespace Sliders_scripts
         {
             //weapon = w.gameObject.GetComponent<Weapons>();
             FindWeaponsInInventory();
-            UpdateUI();
+            if(!PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove")) 
+                UpdateUI();
         
         }
 
@@ -45,19 +51,22 @@ namespace Sliders_scripts
         {
             if (_weapon.WeaponName != InventoryManager.Instance.CurrentWeapon.WeaponName)
             {
-            
                 Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                
-                foreach(var s in FindObjectsOfType<Slider>())
+
+                foreach (var s in FindObjectsOfType<Slider>())
                 {
                     if (s.IsActive())
                     {
-                        if (!s.name.Equals("Back") && !s.name.Equals("HP")&&!s.tag.Equals("HP"))
-                            s.fillRect.GetComponent<Image>().color = c;
+                        if(s.GetComponent<WeaponsMenu>()!=null)
+                            s.GetComponent<WeaponsMenu>().fade.color = new Color(0.4901961f, 0.4392157f, 0.4431373f);
                     }
                 }
+
                 //weapon.InUse = true;
-                menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
+                fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                    //menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                
+                
                 InventoryManager.Instance.SelectWeapon(_weapon);
                
             }
@@ -66,37 +75,49 @@ namespace Sliders_scripts
         }
         public void UpdateUI()
         {
-            if (_weapon != null)
-            {
-                img.sprite = _weapon.Image;
-                if(_weapon.WeaponName==InventoryManager.Instance.CurrentWeapon.WeaponName)
-                    menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
+           
+                if (_weapon != null)
+                {
+                    img.sprite = _weapon.Image;
+                    if (_weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
+                    {
+                        fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                       // menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                    }
+                    else
+                    {
+                        menuOption.fillRect.GetComponent<Image>().color =
+                            menuOption.GetComponent<MenuCountdown>().baseColor;
+                    }
+                }
                 else
                 {
-                    menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                    menuOption.fillRect.GetComponent<Image>().color =
+                        menuOption.GetComponent<MenuCountdown>().baseColor;
                 }
-            }
-            else
-            {
-                menuOption.fillRect.GetComponent<Image>().color = Color.gray;
-            }
         }
 
         public void Update()
         {
-            if (_weapon != null)
-            {
-                img.sprite = _weapon.Image;
-                if(_weapon.WeaponName==InventoryManager.Instance.CurrentWeapon.WeaponName)
-                    menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
-                else
+            
+                if (_weapon != null)
                 {
-                    menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                }
-            }
-            else
-            {
-                menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                    img.sprite = _weapon.Image;
+                    if (_weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
+                    {
+
+                        fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                        //menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                    }
+                     else
+                     {
+                         //menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                     }
+                
+                // else
+                // {
+                //     menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                // }
             }
         }
     }

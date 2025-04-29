@@ -10,6 +10,7 @@ namespace Sliders_scripts
             PlayerPrefs.Save();
             menuOption.value = 1;
             MenuManager.Instance.BackToPrevious();
+            menuOption.value = 1;
         }
 
         // Start is called before the first frame update

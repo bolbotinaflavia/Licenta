@@ -44,6 +44,7 @@ namespace Inventory
                     PlayerManager.Instance.isMoving = true;
                     InventoryManager.Instance.FindWeapon(insideObject);
                 }
+                PlayerManager.Instance.isMoving = true;
             }
         }
 
@@ -54,6 +55,7 @@ namespace Inventory
             {
                 insideObject.SetActive(true);
                 this.GetComponent<SpriteRenderer>().sprite = sprite;
+                PlayerManager.Instance.isMoving = true;
             }
             else
             {
@@ -80,6 +82,7 @@ namespace Inventory
                 if(insideObject!=null)
                     insideObject.SetActive(true);
                 this.GetComponent<SpriteRenderer>().sprite = sprite;
+                PlayerManager.Instance.isMoving = true;
             }
         }
     }

@@ -62,6 +62,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6922273-1e38-4ea4-947b-41dae9e2457c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""KeyboardClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""625a1403-df69-4cec-8ebd-2657c191f74f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +181,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""KeyboardMove"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f07acee3-9f70-497e-a0ec-da8eab0833ee"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7127ffc5-0749-4b18-ad81-7bcb8c6a4918"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""KeyboardClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -175,6 +215,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_MouseMove = m_Player.FindAction("MouseMove", throwIfNotFound: true);
         m_Player_KeyboardMove = m_Player.FindAction("KeyboardMove", throwIfNotFound: true);
         m_Player_EyeMove = m_Player.FindAction("EyeMove", throwIfNotFound: true);
+        m_Player_MouseClick = m_Player.FindAction("MouseClick", throwIfNotFound: true);
+        m_Player_KeyboardClick = m_Player.FindAction("KeyboardClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -240,6 +282,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MouseMove;
     private readonly InputAction m_Player_KeyboardMove;
     private readonly InputAction m_Player_EyeMove;
+    private readonly InputAction m_Player_MouseClick;
+    private readonly InputAction m_Player_KeyboardClick;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -248,6 +292,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @MouseMove => m_Wrapper.m_Player_MouseMove;
         public InputAction @KeyboardMove => m_Wrapper.m_Player_KeyboardMove;
         public InputAction @EyeMove => m_Wrapper.m_Player_EyeMove;
+        public InputAction @MouseClick => m_Wrapper.m_Player_MouseClick;
+        public InputAction @KeyboardClick => m_Wrapper.m_Player_KeyboardClick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,6 +315,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EyeMove.started += instance.OnEyeMove;
             @EyeMove.performed += instance.OnEyeMove;
             @EyeMove.canceled += instance.OnEyeMove;
+            @MouseClick.started += instance.OnMouseClick;
+            @MouseClick.performed += instance.OnMouseClick;
+            @MouseClick.canceled += instance.OnMouseClick;
+            @KeyboardClick.started += instance.OnKeyboardClick;
+            @KeyboardClick.performed += instance.OnKeyboardClick;
+            @KeyboardClick.canceled += instance.OnKeyboardClick;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -285,6 +337,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EyeMove.started -= instance.OnEyeMove;
             @EyeMove.performed -= instance.OnEyeMove;
             @EyeMove.canceled -= instance.OnEyeMove;
+            @MouseClick.started -= instance.OnMouseClick;
+            @MouseClick.performed -= instance.OnMouseClick;
+            @MouseClick.canceled -= instance.OnMouseClick;
+            @KeyboardClick.started -= instance.OnKeyboardClick;
+            @KeyboardClick.performed -= instance.OnKeyboardClick;
+            @KeyboardClick.canceled -= instance.OnKeyboardClick;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -308,5 +366,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnMouseMove(InputAction.CallbackContext context);
         void OnKeyboardMove(InputAction.CallbackContext context);
         void OnEyeMove(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
+        void OnKeyboardClick(InputAction.CallbackContext context);
     }
 }

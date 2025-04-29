@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 4629569711816190685}
   - component: {fileID: 3866166920124640434}
   - component: {fileID: 4624674893532237642}
+  - component: {fileID: 4062925046832271162}
   m_Layer: 6
   m_Name: Item3
   m_TagString: Untagged
@@ -182,10 +183,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 4624674893532237642}
   menuOption: {fileID: 3866166920124640434}
+  baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
   itemName: Potion
   _f: {fileID: 11400000, guid: cbc6efeec36b2f545a95c7d63de3875a, type: 2}
   t: {fileID: 364679186057597625}
+--- !u!114 &4062925046832271162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611735142407818129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4624674893532237642}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &661055148844889832
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,6 +493,7 @@ GameObject:
   - component: {fileID: 8510760759800995451}
   - component: {fileID: 4679891689518619011}
   - component: {fileID: 6438407149704129062}
+  - component: {fileID: 188555124883870927}
   m_Layer: 6
   m_Name: Item2
   m_TagString: Untagged
@@ -557,10 +589,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 6438407149704129062}
   menuOption: {fileID: 4679891689518619011}
+  baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
   itemName: Health
   _f: {fileID: 11400000, guid: c3950255f9cdc424f890f680f5107d09, type: 2}
   t: {fileID: 8173816949247836574}
+--- !u!114 &188555124883870927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1962847466382295518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6438407149704129062}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2326075467858925790
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +634,7 @@ GameObject:
   - component: {fileID: 6286546777534139923}
   - component: {fileID: 981415811302798526}
   - component: {fileID: 3196219667107675988}
+  - component: {fileID: 8130974611506625824}
   m_Layer: 6
   m_Name: Item4
   m_TagString: Untagged
@@ -667,10 +730,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 3196219667107675988}
   menuOption: {fileID: 981415811302798526}
+  baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
   itemName: RedMushroom
   _f: {fileID: 11400000, guid: c809230afa60a624dbe1300fcb8bbac6, type: 2}
   t: {fileID: 8073878453956674203}
+--- !u!114 &8130974611506625824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2326075467858925790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3196219667107675988}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2482751153436279729
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,11 +873,11 @@ RectTransform:
   m_Children:
   - {fileID: 6842096695885656278}
   - {fileID: 8850413069927230790}
-  - {fileID: 2195381473700975583}
-  - {fileID: 8510760759800995451}
-  - {fileID: 4629569711816190685}
-  - {fileID: 6286546777534139923}
   - {fileID: 5130507627526034357}
+  - {fileID: 6286546777534139923}
+  - {fileID: 4629569711816190685}
+  - {fileID: 8510760759800995451}
+  - {fileID: 2195381473700975583}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1028,6 +1121,7 @@ GameObject:
   - component: {fileID: 8850413069927230790}
   - component: {fileID: 6594521010745141464}
   - component: {fileID: 7508018563180806599}
+  - component: {fileID: 2204715066811252888}
   m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
@@ -1122,8 +1216,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 7508018563180806599}
   menuOption: {fileID: 6594521010745141464}
+  baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
   isFight: 0
+--- !u!114 &2204715066811252888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474780981993979995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7508018563180806599}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3511293559283420359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,6 +1525,7 @@ GameObject:
   - component: {fileID: 5130507627526034357}
   - component: {fileID: 8196583824982917298}
   - component: {fileID: 7345398998342708424}
+  - component: {fileID: 139305709974350307}
   m_Layer: 6
   m_Name: Item5
   m_TagString: Untagged
@@ -1496,10 +1621,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 7345398998342708424}
   menuOption: {fileID: 8196583824982917298}
+  baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
   itemName: Bread
   _f: {fileID: 11400000, guid: cd02c179012f2744fa3b1c9a4407ccbe, type: 2}
   t: {fileID: 2724797723334890969}
+--- !u!114 &139305709974350307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210705327741431965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7345398998342708424}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &4530988861115929055
 GameObject:
   m_ObjectHideFlags: 0
@@ -2115,6 +2270,7 @@ GameObject:
   - component: {fileID: 2195381473700975583}
   - component: {fileID: 2458345561467471731}
   - component: {fileID: 9002574585662451221}
+  - component: {fileID: 8980985236771147847}
   m_Layer: 6
   m_Name: Item1
   m_TagString: Untagged
@@ -2210,10 +2366,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instance: {fileID: 9002574585662451221}
   menuOption: {fileID: 2458345561467471731}
+  baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
   itemName: Mushroom
   _f: {fileID: 11400000, guid: b45a1dd4682b4cf4c8ab549953a32518, type: 2}
   t: {fileID: 1161301846686690621}
+--- !u!114 &8980985236771147847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6286039771696004040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9002574585662451221}
+          m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
+          m_MethodName: OnClicked
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6342442657606500168
 GameObject:
   m_ObjectHideFlags: 0

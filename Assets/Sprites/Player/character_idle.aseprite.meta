@@ -127,7 +127,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 4
-      y: 4
+      y: 142
       width: 22
       height: 64
     spriteID: 46f520d4117031b44b63e859ff06522c
@@ -138,7 +138,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: 4, y: 142}
   - name: character_idle_Frame_1
     originalName: 
     pivot: {x: 0.7058824, y: 0}
@@ -147,7 +147,7 @@ ScriptedImporter:
     rect:
       serializedVersion: 2
       x: 34
-      y: 4
+      y: 142
       width: 17
       height: 58
     spriteID: dbb7c405a84c83a4f9231b3eb3027b8e
@@ -158,7 +158,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 34, y: 4}
+    uvTransform: {x: 34, y: 142}
   - name: character_idle_Frame_2
     originalName: 
     pivot: {x: 0.7058824, y: 0}
@@ -166,7 +166,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 59
+      x: 63
       y: 4
       width: 17
       height: 58
@@ -178,7 +178,67 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 59, y: 4}
+    uvTransform: {x: 63, y: 4}
+  - name: character_idle_Frame_3
+    originalName: 
+    pivot: {x: 0.7058824, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 63
+      y: 70
+      width: 17
+      height: 58
+    spriteID: fb8072eda69eed841a57950aa7c7daad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 63, y: 70}
+  - name: character_idle_Frame_4
+    originalName: 
+    pivot: {x: 0.52, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 74
+      width: 50
+      height: 60
+    spriteID: 1acc75d50c6ff6b44888fd8b2c9ad384
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 74}
+  - name: character_idle_Frame_5
+    originalName: 
+    pivot: {x: 0.50980395, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 51
+      height: 62
+    spriteID: 781d7e757a2fd6f42bd1cc581cc1e642
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -212,6 +272,30 @@ ScriptedImporter:
         width: 17
         height: 58
       spriteId: e52d6dbedeae7724c8924329994eed9d
+    - name: character_idle_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 20
+        y: 0
+        width: 17
+        height: 58
+      spriteId: fb8072eda69eed841a57950aa7c7daad
+    - name: character_idle_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 6
+        y: 0
+        width: 50
+        height: 60
+      spriteId: 1acc75d50c6ff6b44888fd8b2c9ad384
+    - name: character_idle_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 6
+        y: 0
+        width: 51
+        height: 62
+      spriteId: 781d7e757a2fd6f42bd1cc581cc1e642
     linkedCells: []
     parentIndex: -1
   platformSettings: []

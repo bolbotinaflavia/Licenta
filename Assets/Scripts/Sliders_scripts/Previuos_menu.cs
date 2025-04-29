@@ -24,7 +24,7 @@ namespace Sliders_scripts
             {
                 MenuManager.Instance.BackToPrevious();
             }
-
+            menuOption.value = 1;
         }
 
         // Start is called before the first frame update

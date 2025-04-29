@@ -1,6 +1,8 @@
-﻿using Movement;
+﻿using System;
+using Movement;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Mouse = Movement.Mouse;
 using Keyboard = Movement.Keyboard;
 using EyeTrack = Movement.EyeTrack;
@@ -17,6 +19,7 @@ namespace Player
             set => _instance = value;
         }
         public InputActionAsset inputActions;
+        public InputActionMap inputActionMap;
         public IControl CurrentControl;
         public PlayerManager managerPlayer;
 
@@ -31,11 +34,12 @@ namespace Player
         private void Start()
         {
             InputActionMap playerActionMap = inputActions.FindActionMap("Player");
-
+            inputActionMap = playerActionMap;
             InputAction m1= playerActionMap.FindAction("MouseMove");
+            InputAction m2= playerActionMap.FindAction("MouseClick");
 
             // Initialize movement strategies
-            CurrentControl = new Mouse(m1);
+            CurrentControl = new Mouse(m1,m2);
             // Set the initial movement strategy
             CurrentControl.Enable();
             //playerManager.SetMovementStrategy(current_control);
@@ -49,15 +53,18 @@ namespace Player
         {
             if (strategy.name == "MouseMove")
             {
-                CurrentControl = new Mouse(strategy);
+                InputAction strategy2= inputActionMap.FindAction("MouseClick");
+                CurrentControl = new Mouse(strategy,strategy2);
                 CurrentControl.Enable();
                 Debug.Log("move with:mouse");
             }
 
             if (strategy.name == "KeyboardMove")
             {
-                CurrentControl = new Keyboard(strategy);
+                InputAction strategy2= inputActionMap.FindAction("KeyboardClick");
+                CurrentControl = new Keyboard(strategy, strategy2);
                 CurrentControl.Enable();
+                CurrentControl.load_sliders();
                 Debug.Log("move with:keyboard=>"+ret_icontrol_name(CurrentControl));
             }
 

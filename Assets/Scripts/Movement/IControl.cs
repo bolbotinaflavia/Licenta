@@ -12,7 +12,12 @@ namespace Movement
         void Enable();
         void Disable();
         InputAction get_action();
+        InputAction get_click_action();
         public void enter_slider(Slider s);
         public void exit_slider(Slider s);
+        public void load_sliders();
+        public void select_sliders();
+        public void Move_pregame();
+        public void UpdateUI();
     }
 }

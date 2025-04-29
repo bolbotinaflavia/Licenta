@@ -9,6 +9,7 @@ namespace Sliders_scripts
         {
             menuOption.value = 1;
             MenuManager.Instance.LoadMenu(nextMenu);
+            menuOption.value = 1;
         }
 
         // Start is called before the first frame update

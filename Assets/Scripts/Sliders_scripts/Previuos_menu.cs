@@ -1,24 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Dynamic;
+using UnityEditor;
 
-public class Previuos_menu : Menu_countdown
+namespace Sliders_scripts
 {
-    protected override void OnTimerComplete()
+    public class PreviuosMenu : MenuCountdown
     {
-        menu_option.value = 1;
-        MenuManager.Instance.BackToPrevious();
-    }
+        public bool isFight;
+        protected override void OnTimerComplete()
+        {
+            menuOption.value = 1;
+            if (GameController.Instance != null)
+            {
+                if (GameController.Instance.state == GameState.Battle)
+                {
+                    MenuManager.Instance.battlePreviousMenu();
+                }
+                else
+                {
+                    MenuManager.Instance.BackToPrevious();
+                }
+            }
+            else
+            {
+                MenuManager.Instance.BackToPrevious();
+            }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
+       
     }
 }

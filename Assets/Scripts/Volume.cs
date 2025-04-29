@@ -34,7 +34,7 @@ public class Volume : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (globalVolume == null)
         {

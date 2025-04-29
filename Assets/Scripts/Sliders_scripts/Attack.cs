@@ -1,0 +1,22 @@
+﻿using Battle;
+using Player;
+
+namespace Sliders_scripts
+{
+    public class Attack:MenuCountdown
+    {
+        protected override void OnTimerComplete()
+        {
+            if (BattleSystem.Instance.State == BattleState.PlayerAction)
+            {
+                
+               StartCoroutine( BattleSystem.Instance.PlayerActionMove("attack"));
+               
+            }
+            else
+            {
+                StartCoroutine(PlayerManager.Instance.notification_show("It's not your turn!"));
+            }
+        }
+    }
+}

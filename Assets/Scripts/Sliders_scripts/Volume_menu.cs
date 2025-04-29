@@ -1,50 +1,52 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System.Globalization;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Volume_menu : Menu_countdown
+namespace Sliders_scripts
 {
-    private Volume v;
-    public static Volume_menu Instance;
-    public int inc_dec;
-    public Text counterText;
-    protected override void OnTimerComplete()
+    public class VolumeMenu : MenuCountdown
     {
-        if (inc_dec > 0)
+        private Volume _v;
+        public static VolumeMenu Instance;
+        [FormerlySerializedAs("inc_dec")] public int incDec;
+        public Text counterText;
+        protected override void OnTimerComplete()
         {
-            Volume.Instance.Increase();
-            menu_option.value = 1;
-            StartTimer();
+            if (incDec > 0)
+            {
+                Volume.Instance.Increase();
+                menuOption.value = 1;
+                StartTimer();
+            }
+            else
+            {
+                Volume.Instance.Decrease();
+                menuOption.value = 1;
+                StartTimer();
+            }
         }
-        else
+
+        private void Awake()
         {
-            Volume.Instance.Decrease();
-            menu_option.value = 1;
-            StartTimer();
+            Instance = this;
+            _v= Volume.FindObjectOfType<Volume>();
+            counterText.text = (_v.globalVolume.weight * 100).ToString(CultureInfo.InvariantCulture);
         }
-    }
-
-    void Awake()
-    {
-        Instance = this;
-        v= Volume.FindObjectOfType<Volume>();
-        counterText.text = (v.globalVolume.weight * 100).ToString();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        counterText.text=v.globalVolume.weight.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (counterText != null)
+        // Start is called before the first frame update
+        private void Start()
         {
-            //v = PlayerPrefs.GetFloat("Volume", 0);
-            counterText.text = (v.globalVolume.weight*100).ToString();
-            //counterText.text = (s.volume*100).ToString();
+            counterText.text=(_v.globalVolume.weight).ToString(CultureInfo.InvariantCulture);
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            if (counterText != null)
+            {
+                //v = PlayerPrefs.GetFloat("Volume", 0);
+                counterText.text = (_v.globalVolume.weight*100).ToString(CultureInfo.InvariantCulture);
+                //counterText.text = (s.volume*100).ToString();
+            }
         }
     }
 }

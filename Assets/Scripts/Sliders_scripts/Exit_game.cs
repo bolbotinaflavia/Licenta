@@ -1,30 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
-public class Exit_game : Menu_countdown
+namespace Sliders_scripts
 {
-    public string next_menu;
-
-    protected override void OnTimerComplete()
+    public class ExitGame : MenuCountdown
     {
-        if (MenuManager.Instance != null)
+        [FormerlySerializedAs("next_menu")] public string nextMenu;
+
+        protected override void OnTimerComplete()
         {
-            SceneManager.LoadScene("StartGame");
-            MenuManager.Instance.BackToPrevious();
+            if (MenuManager.Instance != null)
+            {
+                SceneManager.LoadScene("StartGame");
+                MenuManager.Instance.BackToPrevious();
+            }
         }
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
     }
 }

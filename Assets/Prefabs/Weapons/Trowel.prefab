@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7789866130382351074}
-  - component: {fileID: 2291828935305592936}
   - component: {fileID: 1385896661656782676}
   - component: {fileID: 3161990635394578926}
   - component: {fileID: 1384431467968610624}
+  - component: {fileID: 8146634757462968215}
+  - component: {fileID: 4199465553766873830}
   m_Layer: 5
   m_Name: Trowel
   m_TagString: Weapons
@@ -35,23 +36,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2291828935305592936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4402236027325870175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5fd2d76c19a7604099117285d3c3426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weapon: {fileID: 4402236027325870175}
-  rb: {fileID: 1385896661656782676}
-  InUse: 0
-  Discovered: 0
-  image: {fileID: -4032095101091381050, guid: 9567254880df8df439b72b00ff41d4f0, type: 3}
 --- !u!50 &1385896661656782676
 Rigidbody2D:
   serializedVersion: 4
@@ -176,3 +160,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8146634757462968215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402236027325870175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e65744967a243aa93111460b199dda2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weapon: {fileID: 4402236027325870175}
+  Rb: {fileID: 1385896661656782676}
+  WeaponName: Trowel
+  InUse: 0
+  Discovered: 0
+  Damage: 40
+  Image: {fileID: -4032095101091381050, guid: 9567254880df8df439b72b00ff41d4f0, type: 3}
+--- !u!114 &4199465553766873830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4402236027325870175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a719155a1f04d01a942d8df78fd7e8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponB: {fileID: 11400000, guid: 5cac6364ab13dda458088fbf568ffdb9, type: 2}
+  w: {fileID: 4402236027325870175}
+  Rb: {fileID: 1385896661656782676}

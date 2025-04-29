@@ -1,68 +1,130 @@
-using System;
+using Battle;
+using Inventory;
+using Player;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
-public class Spell_select : Menu_countdown
+namespace Sliders_scripts
 {
-    public String name;
-    private Spell s;
-    private Scene scene;
-    protected override void OnTimerComplete()
+    public class SpellSelect : MenuCountdown
     {
-        if (s != null)
+        [FormerlySerializedAs("S")] public Spells.Spell s;
+        [FormerlySerializedAs("name")] public string spellName;
+        private Scene _scene;
+        public TextMeshProUGUI text;
+        public TextMeshProUGUI description;
+        [FormerlySerializedAs("canvas_description")] public GameObject canvasDescription;
+        protected override void OnTimerComplete()
         {
-            if (scene.name.Equals("Fight"))
+            if (s != null)
             {
-                use_spell();
-            }
-            else
-            {
-                Debug.Log("Is not a Fight!!");
-            }
+                if (GameController.Instance.state == GameState.Battle)
+                {
+
+                    MenuManager.Instance.battlePreviousMenu();
+                    StartCoroutine( BattleSystem.Instance.PlayerActionMove(s.SpellBase.SpellName));
+               
+                }
+                else
+                {
+                    open_description();
+                    UpdateUI();
+                }
             
-        }
-        else
-        {
-            Debug.Log("Spell is not available yet");
-        }
-        
-    }
-    public void FindSpellsInGame()
-    {
-        s= GameObject.Find(name).ConvertTo<Spell>();
-        
-    }
-    public void use_spell()
-    {
-        //DE VAZUT LA FIGHT
-    }
-
-    public void UpdateUI()
-    {
-        Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-        if (s != null)
-        {
-            if(s.isDiscovered()==false)
-                menu_option.fillRect.GetComponent<Image>().color = Color.gray;
+            }
             else
             {
-                menu_option.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);;
+                Debug.Log("Spell is not available yet");
+            }
+        
+        }
+
+        private void open_description()
+        {
+            canvasDescription.GameObject().SetActive(true);
+            description.GameObject().SetActive(true);
+        }
+
+        private void FindSpellsInInventory()
+        {
+            if (InventoryManager.Instance != null)
+            {
+                s = InventoryManager.Instance.getSpell(spellName);
+            }
+
+        }
+        public void use_spell()
+        {
+            //DE VAZUT LA FIGHT
+        }
+
+        public void UpdateUI()
+        {
+            if (s != null)
+            {
+                if (s.get_magic_level()==0)
+                {
+                    menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                    text.text = "-1@3~%%$@";
+                    description.text="No information available";
+                }
+                else
+                {
+                    menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+              
+                    if (s.get_magic_level().Equals(0))
+                    {
+                        text.text = s.name;
+                    }
+
+                    if (s.get_magic_level().Equals(1))
+                    {
+                        text.text = spellName;
+                        description.text="No information available";
+                    }
+
+                    if (s.get_magic_level().Equals(2))
+                    {
+                        text.text = spellName;
+                        description.text = s.SpellBase.Description2;
+                        Debug.Log(description.text);
+                    }
+
+                    if (s.get_magic_level().Equals(3))
+                    {
+                        text.text = spellName;
+                        description.text = s.SpellBase.Description2+"\n"+s.SpellBase.Description3;
+                    }
+                }
+            }
+            else
+            {
+                menuOption.fillRect.GetComponent<Image>().color = Color.gray;
+                text.text = "-1@3~%%$@";
+                description.text="No information available";
             }
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        FindSpellsInGame();
-        scene=SceneManager.GetActiveScene();
-        UpdateUI();
-    }
+        // Start is called before the first frame update
+        private void Start()
+        {
+            FindSpellsInInventory();
+            // canvas_description.GetComponent<Sprite>();
+            // text = GetComponent<TextMeshProUGUI>();
+            // description = GetComponent<TextMeshProUGUI>();
+            if(canvasDescription!=null)
+                canvasDescription.SetActive(false);
+            if(description!=null)
+                description.GameObject().SetActive(false);
+            _scene=SceneManager.GetActiveScene();
+            UpdateUI();
+        
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateUI();
+        // Update is called once per frame
     }
 }

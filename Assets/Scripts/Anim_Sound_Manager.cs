@@ -1,23 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
-public class Anim_Sound_Manager : StateMachineBehaviour
+public class AnimSoundManager : StateMachineBehaviour
 {
-    private Animator animator;
-    public string name;
+    private Animator _animator;
+    [FormerlySerializedAs("name")] public string animationName;
 
     public AudioSource audio;
 
-    public AudioSource audio_idle;
+    [FormerlySerializedAs("audio_idle")] public AudioSource audioIdle;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateEnter(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        audio_idle=GameObject.Find("idle_song").GetComponent<AudioSource>();
-        audio=GameObject.Find(name).GetComponent<AudioSource>();
-        audio_idle.Stop();
+        audioIdle=GameObject.Find("idle_song").GetComponent<AudioSource>();
+        audio=GameObject.Find(animationName).GetComponent<AudioSource>();
+        audioIdle.Stop();
         audio.Play();
     }
 
@@ -28,11 +25,11 @@ public class Anim_Sound_Manager : StateMachineBehaviour
     //}
 
      //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateExit(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
     {
         audio.Stop();
         
-        audio_idle.Play();
+        audioIdle.Play();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

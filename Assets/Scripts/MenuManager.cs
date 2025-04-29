@@ -1,16 +1,14 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
-    public bool game_started = false;
+    [FormerlySerializedAs("game_started")] public bool gameStarted;
 
-    public GameObject current_menu;
-    private Stack<GameObject> menuHistory = new Stack<GameObject>(); // Store menu names
+    [FormerlySerializedAs("current_menu")] public GameObject currentMenu;
+    private Stack<GameObject> _menuHistory = new Stack<GameObject>(); // Store menu names
 
     private void Awake()
     {
@@ -26,15 +24,7 @@ public class MenuManager : MonoBehaviour
         }
 
 
-        if (!game_started)
-        {
-            LoadMenu("Menu_start"); // Load initial menu
-        }
-        else
-        {
-            LoadMenu("Menu_basic");
-        }
-       
+        LoadMenu(!gameStarted ? "Menu_start" : "Menu_basic"); // Load initial menu
     }
 
     /*public void LoadGame()
@@ -48,26 +38,44 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene("Gameplay");
     }*/
 
-    public void LoadMenu(string menu_name)
+    public void LoadMenu(string menuName)
     {
-        if (current_menu != null)
+        if (currentMenu != null)
         {
-            menuHistory.Push(current_menu); // Store previous menu name
-            current_menu.SetActive(false);
+            _menuHistory.Push(currentMenu); // Store previous menu name
+            currentMenu.SetActive(false);
         }
 
-        InstantiateMenu(menu_name);
+        InstantiateMenu(menuName);
         
+    }
+
+    public void battlePreviousMenu()
+    {
+        if (!currentMenu.gameObject.name.Equals("Menu_basic(Clone)"))
+        {
+            Destroy(currentMenu);
+            GameObject previousMenu = _menuHistory.Pop();
+            if (previousMenu.gameObject.name.Equals("Menu_basic(Clone)"))
+            {
+                currentMenu = previousMenu;
+            }
+            else
+            {
+                previousMenu.SetActive(true);
+                currentMenu = previousMenu;
+            }
+        }
     }
 
     public void BackToPrevious()
     {
-        if (menuHistory.Count > 0)
+        if (_menuHistory.Count > 0)
         {
-            Destroy(current_menu);
-            GameObject previousMenu = menuHistory.Pop();
+            Destroy(currentMenu);
+            GameObject previousMenu = _menuHistory.Pop();
             previousMenu.SetActive(true);
-            current_menu = previousMenu;
+            currentMenu = previousMenu;
         }
         else
         {
@@ -75,20 +83,20 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void InstantiateMenu(string menu_name)
+    private void InstantiateMenu(string menuName)
     {
-        Debug.Log($"Attempting to load menu: {menu_name}");
+        Debug.Log($"Attempting to load menu: {menuName}");
 
-        GameObject menuPrefab = Resources.Load<GameObject>($"Menus/{menu_name}");
+        GameObject menuPrefab = Resources.Load<GameObject>($"Menus/{menuName}");
         if (menuPrefab != null)
         {
-            current_menu = Instantiate(menuPrefab, transform);
-            current_menu.SetActive(true);
-            Debug.Log($"Successfully instantiated '{menu_name}'.");
+            currentMenu = Instantiate(menuPrefab, transform);
+            currentMenu.SetActive(true);
+            Debug.Log($"Successfully instantiated '{menuName}'.");
         }
         else
         {
-            Debug.LogError($"Menu '{menu_name}' not found in Resources/Menus/.");
+            Debug.LogError($"Menu '{menuName}' not found in Resources/Menus/.");
         }
     }
 

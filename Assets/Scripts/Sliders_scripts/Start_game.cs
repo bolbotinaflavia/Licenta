@@ -1,31 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
-public class Start_game: Menu_countdown
+namespace Sliders_scripts
 {
-    public string next_menu;
-    //public AudioSource basic;
-
-    protected override void OnTimerComplete()
+    public class StartGame: MenuCountdown
     {
-        menu_option.value = 1;
-        MenuManager.Instance.LoadMenu(next_menu);
-        MenuManager.Instance.game_started = true;
-        MenuManager.Instance.current_menu.SetActive(false);
-        SceneManager.LoadScene("Gameplay");
-    }
+        [FormerlySerializedAs("next_menu")] public string nextMenu;
+        //public AudioSource basic;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        protected override void OnTimerComplete()
+        {
+            menuOption.value = 1;
+            MenuManager.Instance.LoadMenu(nextMenu);
+            MenuManager.Instance.gameStarted = true;
+            MenuManager.Instance.currentMenu.SetActive(false);
+            SceneManager.LoadScene("Gameplay");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
+       
     }
 }

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426fc9cec0ae18e4581af67855b63f39, type: 3}
+  m_Name: Ghost
+  m_EditorClassIdentifier: 
+  enemyName: Ghost
+  description: creppy ghost
+  sprite1: {fileID: -878596902298307068, guid: 625ad2eb3bd3daf46afa8458cf62f9da, type: 3}
+  type: 1
+  attackS: {fileID: 0}
+  defenseS: {fileID: 0}
+  w1: 1
+  w2: 1
+  hpMax: 90
+  attack: 10
+  defense: 20
+  speed: 1
+  moves:
+  - move: {fileID: 11400000, guid: fd5cb860b3218f3419ce6535733f7606, type: 2}
+  - move: {fileID: 11400000, guid: 396b343e5f7211c488d9f345869345d8, type: 2}

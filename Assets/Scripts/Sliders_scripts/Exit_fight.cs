@@ -1,24 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Exit_fight : Menu_countdown
+namespace Sliders_scripts
 {
-    protected override void OnTimerComplete()
+    public class ExitFight : MenuCountdown
     {
-        SceneManager.LoadScene("Gameplay");
-    }
+        protected override void OnTimerComplete()
+        {
+            SceneManager.LoadScene("Gameplay");
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Start is called before the first frame update
     }
 }

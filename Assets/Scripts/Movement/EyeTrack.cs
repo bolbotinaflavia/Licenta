@@ -1,37 +1,55 @@
-﻿using Tobii.Research.Unity;
+﻿using Player;
+using Tobii.Research.Unity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.XR;
 
 namespace Movement
 {
     public class EyeTrack:IControl
     {
-        public EyeTrack instance;
-        private InputAction move;
-
-        public Eyes eyes;
+        public EyeTrack Instance;
+        private readonly InputAction _move;
+        private EyeTracker _eyeTrack;
+        public GazeTrail Trail;
        // public string name;
        
         public EyeTrack(InputAction moveAction)
         {
-            this.move = moveAction;
+            this._move = moveAction;
         }
 
         public void Enable()
         {
-            move.Enable();
+            _move.Enable();
+            if (_eyeTrack == null)
+            {
+                _eyeTrack = Object.FindObjectOfType<EyeTracker>();
+                if (_eyeTrack != null)
+                {
+                    _eyeTrack.enabled = true;
+                    Trail = Object.FindObjectOfType<GazeTrail>();
+                    Debug.Log("Connected to Eye Track:" + _eyeTrack.name);
+                }
+                else
+                {
+                    Debug.Log("No Eye Track Found");
+                }
+            }
+            else
+            {
+                Debug.Log("Already connected to Eye Track");
+            }
         }
 
         public void Disable()
         {
-            move.Disable();
+            _move.Disable();
         }
 
         public InputAction get_action()
         {
-            return move;
+            return _move;
         }
 
         public void enter_slider(Slider s)
@@ -47,30 +65,30 @@ namespace Movement
         public void Move(PlayerManager player)
         {
             
-            Vector2 inputPos = move.ReadValue<Vector2>();
+            Vector2 inputPos = _move.ReadValue<Vector2>();
+            //Debug.Log(inputPos);
             Vector3 worldMouse =
                 Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
             Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
 
             // Implement mouse-based movement logic
-            if (MenuManager.Instance.current_menu.activeSelf == false)
+            if (MenuManager.Instance.currentMenu.activeSelf == false)
             {
 
                 float distance = mouseNext.x - player.player.transform.position.x;
-                player.setFacingDirection(distance);
-                RaycastHit2D hit = Physics2D.Raycast(inputPos, UnityEngine.Vector2.zero);
-                if ((hit.collider != null && hit.collider.gameObject == player.player) || player.new_item == true)
+                player.SetFacingDirection(distance);
+                RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
+                if ((hit.collider != null && hit.collider.gameObject == player.player) || player.NewItem)
 
                 {
                     player.IsMoving = false;
-                    return;
                 }
                 else
                 {
                     if (player.player.transform.position.x < 398)
                     {
                         //IsMoving = false;
-                        player.player.transform.position = UnityEngine.Vector3.MoveTowards(
+                        player.player.transform.position = Vector3.MoveTowards(
                             player.player.transform.position,
                             new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
                     }
@@ -79,7 +97,7 @@ namespace Movement
 
                         player.IsMoving = true;
                         player.transform.position =
-                            UnityEngine.Vector3.MoveTowards(player.player.transform.position, mouseNext,
+                            Vector3.MoveTowards(player.player.transform.position, mouseNext,
                                 Time.deltaTime * 50f);
                     }
                 }
@@ -90,7 +108,6 @@ namespace Movement
             else
             {
                 player.IsMoving = false;
-                return;
             }
             
         }

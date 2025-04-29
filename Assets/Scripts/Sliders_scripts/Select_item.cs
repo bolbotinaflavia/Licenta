@@ -1,55 +1,56 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using Inventory;
+using Items;
+using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Select_item : Menu_countdown
+namespace Sliders_scripts
 {
-   // public static Select_item Instance;
-    public string name;
-    private Item i;
-    public Text t;
-    protected override void OnTimerComplete()
+    public class SelectItem : MenuCountdown
     {
-       
-        if (i != null)
+        // public static Select_item Instance;
+        [FormerlySerializedAs("name")] public string itemName;
+        [SerializeField]private FoodBase _f;
+        private Sprite img;
+        public Text t;
+        protected override void OnTimerComplete()
         {
-            i.consume();
-            if (PlayerManager.Instance.HP + i.hp < 100f)
-            {
-                PlayerManager.Instance.HP += i.hp;
-            }
-            else
-            {
-                Debug.Log("HP is already full->100");
-            }
-            
+       
+           
+                if (_f != null)
+                {
+                    InventoryManager.Instance.Consume(_f);
+                    if (PlayerManager.Instance.hp + _f.Hp < 100f)
+                    {
+                        PlayerManager.Instance.hp += _f.Hp;
+                    }
+                    else
+                    {
+                        Debug.Log("HP is already full->100");
+                    }
+                }
         }
-
-        Debug.Log("Item selected");
-    }
     
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        i=PlayerManager.Instance.objects.Find(item => item.name.Equals(name));
-        if(i!=null)
-            t.text = i.number.ToString();
-        else
+        // Start is called before the first frame update
+        private void Start()
         {
-            t.text = "0";
+            img = GetComponent<Sprite>();
+           
+            var food=Resources.Load<FoodBase>($"Food/{_f.FoodName}");
+            _f=food;
+            img = food.Img;
+            t.text = _f!=null ? InventoryManager.Instance.get_number_of_food_item(food.FoodName).ToString() : "0";
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (i != null)
+        // Update is called once per frame
+        private void Update()
         {
-            t.text = i.number.ToString();
+            if (_f != null)
+            {
+                t.text = InventoryManager.Instance.get_number_of_food_item(_f.FoodName).ToString();
+            }
         }
     }
 }

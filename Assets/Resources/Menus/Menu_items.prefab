@@ -180,9 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 3866166920124640434}
-  timer: 1
-  name: 
+  instance: {fileID: 4624674893532237642}
+  menuOption: {fileID: 3866166920124640434}
+  timer: 0.75
+  itemName: Potion
+  _f: {fileID: 11400000, guid: cbc6efeec36b2f545a95c7d63de3875a, type: 2}
   t: {fileID: 364679186057597625}
 --- !u!1 &661055148844889832
 GameObject:
@@ -553,9 +555,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 4679891689518619011}
-  timer: 1
-  name: Health
+  instance: {fileID: 6438407149704129062}
+  menuOption: {fileID: 4679891689518619011}
+  timer: 0.75
+  itemName: Health
+  _f: {fileID: 11400000, guid: c3950255f9cdc424f890f680f5107d09, type: 2}
   t: {fileID: 8173816949247836574}
 --- !u!1 &2326075467858925790
 GameObject:
@@ -661,9 +665,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 981415811302798526}
-  timer: 1
-  name: Mushroom_2
+  instance: {fileID: 3196219667107675988}
+  menuOption: {fileID: 981415811302798526}
+  timer: 0.75
+  itemName: RedMushroom
+  _f: {fileID: 11400000, guid: c809230afa60a624dbe1300fcb8bbac6, type: 2}
   t: {fileID: 8073878453956674203}
 --- !u!1 &2482751153436279729
 GameObject:
@@ -807,7 +813,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5573784676968217161
 MonoBehaviour:
@@ -994,7 +1000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1114,8 +1120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 6594521010745141464}
+  instance: {fileID: 7508018563180806599}
+  menuOption: {fileID: 6594521010745141464}
   timer: 0.5
+  isFight: 0
 --- !u!1 &3511293559283420359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,9 +1494,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 8196583824982917298}
-  timer: 1
-  name: 
+  instance: {fileID: 7345398998342708424}
+  menuOption: {fileID: 8196583824982917298}
+  timer: 0.75
+  itemName: Bread
+  _f: {fileID: 11400000, guid: cd02c179012f2744fa3b1c9a4407ccbe, type: 2}
   t: {fileID: 2724797723334890969}
 --- !u!1 &4530988861115929055
 GameObject:
@@ -2198,9 +2208,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8613d73de898c4c8d61d7b2ab90aa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 2458345561467471731}
-  timer: 1
-  name: Mushroom_1
+  instance: {fileID: 9002574585662451221}
+  menuOption: {fileID: 2458345561467471731}
+  timer: 0.75
+  itemName: Mushroom
+  _f: {fileID: 11400000, guid: b45a1dd4682b4cf4c8ab549953a32518, type: 2}
   t: {fileID: 1161301846686690621}
 --- !u!1 &6342442657606500168
 GameObject:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 774493935841068859}
   - component: {fileID: 8599169471003594795}
   - component: {fileID: 2609205814381572351}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 7801400559971079475}
   - component: {fileID: 8693671338504382326}
   - component: {fileID: 2610205626303275196}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,8 +237,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 8693671338504382326}
+  instance: {fileID: 2610205626303275196}
+  menuOption: {fileID: 8693671338504382326}
   timer: 0.5
+  isFight: 0
 --- !u!1 &2296608390480046834
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +254,7 @@ GameObject:
   - component: {fileID: 6414584756678568967}
   - component: {fileID: 4533944259836033077}
   - component: {fileID: 4499417998431170825}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Menu_bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -304,7 +306,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6414584756678568967
 MonoBehaviour:
@@ -367,7 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7200279855668649896}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -405,7 +407,7 @@ GameObject:
   - component: {fileID: 7421663548871533125}
   - component: {fileID: 9007773580541200646}
   - component: {fileID: 4283587770286108800}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +482,7 @@ GameObject:
   - component: {fileID: 1644855201764408915}
   - component: {fileID: 4479516720494379255}
   - component: {fileID: 4701135296257739702}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -553,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7381858328095575234}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +593,7 @@ GameObject:
   - component: {fileID: 2369317318281471267}
   - component: {fileID: 6956347408945623945}
   - component: {fileID: 1740827528402954098}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,7 +666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2972259062626934251}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -702,7 +704,7 @@ GameObject:
   - component: {fileID: 7145251040078173474}
   - component: {fileID: 6580269436742391455}
   - component: {fileID: 8385276110440007454}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +838,7 @@ GameObject:
   - component: {fileID: 5747108067257322315}
   - component: {fileID: 8932105859434566321}
   - component: {fileID: 3380611752920707903}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +913,7 @@ GameObject:
   - component: {fileID: 2400027318971101432}
   - component: {fileID: 2347026098146960733}
   - component: {fileID: 5720941222736912927}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1047,7 @@ GameObject:
   - component: {fileID: 4382351934440762480}
   - component: {fileID: 7873348627552590098}
   - component: {fileID: 6669591097260057449}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1137,9 +1139,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 7873348627552590098}
-  timer: 0.7
-  next_menu: Menu_items
+  instance: {fileID: 6669591097260057449}
+  menuOption: {fileID: 7873348627552590098}
+  timer: 0.75
+  nextMenu: Menu_items
 --- !u!1 &6883889623343807917
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1154,7 @@ GameObject:
   - component: {fileID: 4068083643984774035}
   - component: {fileID: 6356566290044836642}
   - component: {fileID: 2329848200780284314}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1198,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1226,7 +1229,7 @@ GameObject:
   - component: {fileID: 6518082415020597617}
   - component: {fileID: 7097864999250772637}
   - component: {fileID: 5475964360576293759}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1318,9 +1321,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6522d98819dc3124db91ddbb530f3cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 7097864999250772637}
-  timer: 0.7
-  next_menu: Menu_weapons
+  instance: {fileID: 5475964360576293759}
+  menuOption: {fileID: 7097864999250772637}
+  timer: 0.75
+  nextMenu: Menu_weapons
 --- !u!1 &7890297026097838078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,7 +1337,7 @@ GameObject:
   - component: {fileID: 5414714649042071253}
   - component: {fileID: 7076105439866874703}
   - component: {fileID: 8782984542240293858}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Bag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1423,7 +1427,7 @@ GameObject:
   - component: {fileID: 2964924127601768707}
   - component: {fileID: 2703308572044624769}
   - component: {fileID: 6335373738540893958}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1498,7 +1502,7 @@ GameObject:
   - component: {fileID: 1397896958491382224}
   - component: {fileID: 7622061920657748008}
   - component: {fileID: 6128981285356682145}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -462,9 +462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ffb5d936c02c34bb86324199d3c855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 4309489282938097419}
-  timer: 1
-  name: Crossbow
+  instance: {fileID: 3736291605925371407}
+  menuOption: {fileID: 4309489282938097419}
+  timer: 0.75
+  weaponName: Crossbow
   img: {fileID: 7350841127947180689}
 --- !u!1 &2128430060640583251
 GameObject:
@@ -569,9 +570,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ffb5d936c02c34bb86324199d3c855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 4064910133114506050}
-  timer: 1
-  name: Trowel
+  instance: {fileID: 3540322805976119918}
+  menuOption: {fileID: 4064910133114506050}
+  timer: 0.75
+  weaponName: Shovel
   img: {fileID: 7825361721630035943}
 --- !u!1 &2154453096046699450
 GameObject:
@@ -639,7 +641,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &6082961793121530543
 MonoBehaviour:
@@ -871,9 +873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ffb5d936c02c34bb86324199d3c855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 6594363940133199346}
-  timer: 1
-  name: Shovel
+  instance: {fileID: 7836894487297442548}
+  menuOption: {fileID: 6594363940133199346}
+  timer: 0.75
+  weaponName: Trowel
   img: {fileID: 5754720672416710970}
 --- !u!1 &2527747134040345380
 GameObject:
@@ -1164,8 +1167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c343fd8aab968734b92a764ace55faff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 3974348292954588421}
+  instance: {fileID: 0}
+  menuOption: {fileID: 3974348292954588421}
   timer: 0.5
+  isFight: 0
 --- !u!1 &3782859941940916736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1299,7 +1304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.8784314}
+  m_Color: {r: 0.22352941, g: 0.19215687, b: 0.29411766, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1938,9 +1943,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ffb5d936c02c34bb86324199d3c855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu_option: {fileID: 685226796290818068}
-  timer: 1
-  name: Sword
+  instance: {fileID: 4881228601118669329}
+  menuOption: {fileID: 685226796290818068}
+  timer: 0.75
+  weaponName: Sword
   img: {fileID: 4104348500477983493}
 --- !u!1 &7975536364125982975
 GameObject:

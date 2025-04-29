@@ -159,6 +159,26 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 34, y: 4}
+  - name: character_idle_Frame_2
+    originalName: 
+    pivot: {x: 0.7058824, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 59
+      y: 4
+      width: 17
+      height: 58
+    spriteID: e52d6dbedeae7724c8924329994eed9d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 59, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -184,6 +204,14 @@ ScriptedImporter:
         width: 17
         height: 58
       spriteId: dbb7c405a84c83a4f9231b3eb3027b8e
+    - name: character_idle_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 20
+        y: 0
+        width: 17
+        height: 58
+      spriteId: e52d6dbedeae7724c8924329994eed9d
     linkedCells: []
     parentIndex: -1
   platformSettings: []

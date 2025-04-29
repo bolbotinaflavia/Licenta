@@ -1,43 +1,43 @@
-using UnityEngine;
 using System.Collections;
+using TMPro;
+using UnityEngine;
 
-
-namespace TMPro.Examples
+namespace TextMesh_Pro.Examples___Extras.Scripts
 {
     public class TextConsoleSimulator : MonoBehaviour
     {
-        private TMP_Text m_TextComponent;
-        private bool hasTextChanged;
+        private TMP_Text _mTextComponent;
+        private bool _hasTextChanged;
 
-        void Awake()
+        private void Awake()
         {
-            m_TextComponent = gameObject.GetComponent<TMP_Text>();
+            _mTextComponent = gameObject.GetComponent<TMP_Text>();
         }
 
 
-        void Start()
+        private void Start()
         {
-            StartCoroutine(RevealCharacters(m_TextComponent));
+            StartCoroutine(RevealCharacters(_mTextComponent));
             //StartCoroutine(RevealWords(m_TextComponent));
         }
 
 
-        void OnEnable()
+        private void OnEnable()
         {
             // Subscribe to event fired when text object has been regenerated.
             TMPro_EventManager.TEXT_CHANGED_EVENT.Add(ON_TEXT_CHANGED);
         }
 
-        void OnDisable()
+        private void OnDisable()
         {
             TMPro_EventManager.TEXT_CHANGED_EVENT.Remove(ON_TEXT_CHANGED);
         }
 
 
         // Event received when the text object has changed.
-        void ON_TEXT_CHANGED(Object obj)
+        private void ON_TEXT_CHANGED(Object obj)
         {
-            hasTextChanged = true;
+            _hasTextChanged = true;
         }
 
 
@@ -45,7 +45,7 @@ namespace TMPro.Examples
         /// Method revealing the text one character at a time.
         /// </summary>
         /// <returns></returns>
-        IEnumerator RevealCharacters(TMP_Text textComponent)
+        private IEnumerator RevealCharacters(TMP_Text textComponent)
         {
             textComponent.ForceMeshUpdate();
 
@@ -56,10 +56,10 @@ namespace TMPro.Examples
 
             while (true)
             {
-                if (hasTextChanged)
+                if (_hasTextChanged)
                 {
                     totalVisibleCharacters = textInfo.characterCount; // Update visible character count.
-                    hasTextChanged = false; 
+                    _hasTextChanged = false; 
                 }
 
                 if (visibleCount > totalVisibleCharacters)
@@ -81,7 +81,7 @@ namespace TMPro.Examples
         /// Method revealing the text one word at a time.
         /// </summary>
         /// <returns></returns>
-        IEnumerator RevealWords(TMP_Text textComponent)
+        private IEnumerator RevealWords(TMP_Text textComponent)
         {
             textComponent.ForceMeshUpdate();
 

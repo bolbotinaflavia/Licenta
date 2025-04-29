@@ -1,19 +1,18 @@
-﻿using System;
-using System.Linq;
+﻿using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 
 
 namespace Sliders_scripts
 {
-    public class Control_menu: Menu_countdown
+    public class ControlMenu: MenuCountdown
     {
         //de vazut cum selectezi input ul si il activezi
         public PlayerMovement playerMovement;
         public InputAction input;
-        public string name;
+        [FormerlySerializedAs("name")] public string nameControl;
         protected override void OnTimerComplete()
         {
             //i = GetComponent<Control>();
@@ -25,7 +24,7 @@ namespace Sliders_scripts
         {
             InputActionMap playerActionMap = playerMovement.inputActions.FindActionMap("Player");
             input = new InputAction();
-            input= playerActionMap.FindAction(name);
+            input= playerActionMap.FindAction(nameControl);
             //InputAction mousePositionAction = playerActionMap.FindAction("Position");
            // InputAction moveAction = playerActionMap.FindAction("2D Vector");
             //InputAction devicePositionAction = playerActionMap.FindAction("devicePosition");
@@ -34,7 +33,7 @@ namespace Sliders_scripts
 
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             //weapon = w.gameObject.GetComponent<Weapons>();
             playerMovement = FindObjectOfType<PlayerMovement>();
@@ -48,7 +47,6 @@ namespace Sliders_scripts
             {
 
                 Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                Color c_back = new Color(0.4901961F, 0.4392157F, 0.4431373F);
 
                 foreach (InputAction inp in playerMovement.inputActions)
                 {
@@ -66,21 +64,17 @@ namespace Sliders_scripts
                 }
 
                 //weapon.InUse = true;
-                menu_option.fillRect.GetComponent<Image>().color = new Color(0.9019608f, 0.282353f, 0.1803922f);
+                menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f, 0.282353f, 0.1803922f);
                 input.Enable();
                 Debug.Log(input.name);
-                PlayerMovement.instance.change_strategy(input);
+                PlayerMovement.Instance.change_strategy(input);
             }
             else
                 Debug.Log("Control already enabled");
         }
         public void UpdateUI()
         {
-            if (input!= null)
-            {
-                if(input.enabled==true)
-                    menu_option.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
-            }
+            if (input is { enabled: true }) menuOption.fillRect.GetComponent<Image>().color = new Color(0.9019608f,0.282353f,0.1803922f);
         }
     }
     

@@ -1,68 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using Player;
 using UnityEngine;
-using Unity.VisualScripting;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class Hp_slider : MonoBehaviour
+namespace Sliders_scripts
 {
-    public static Hp_slider Instance;
-    public UnityEngine.UI.Slider hp_slider;
+    public class HpSlider : MonoBehaviour
+    {
+        public static HpSlider Instance;
+        [FormerlySerializedAs("hp_slider")] public Slider hpSlider;
 
-    void Awake()
-    {
-        if(Instance==null)
-            Instance = this;
-    }
-    void Hp_Slider_zero()
-    {
-        Debug.Log("HP is zero, you are DEAD!!");
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        hp_slider = this.GetComponent<UnityEngine.UI.Slider>();
-        if (hp_slider != null)
+        private void Awake()
         {
-            hp_slider.value = PlayerManager.Instance.HP;
-            UpdateUI();
+            if(Instance==null)
+                Instance = this;
+            // animator = GetComponent<Animator>();
         }
-        else
+
+        private void Hp_Slider_zero()
         {
-            Debug.Log("slider is null");
+            Debug.Log("HP is zero, you are DEAD!!");
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void UpdateUI()
-    {
-
-        Color healty = new Color(0.2235294f, 0.4823529f, 0.2666667f);
-        Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-        Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
-        hp_slider.value = PlayerManager.Instance.HP;
-        if (hp_slider.value == 0f)
-            Hp_Slider_zero();
-        else
+        // Start is called before the first frame update
+        private void Start()
         {
-            if (hp_slider.value >= 70)
+            hpSlider = this.GetComponent<Slider>();
+            if (hpSlider != null)
             {
-                hp_slider.fillRect.GetComponent<Image>().color = healty;
+                hpSlider.value = PlayerManager.Instance.hp;
+                UpdateUI();
             }
             else
             {
-                if (hp_slider.value > 40)
-                   hp_slider.fillRect.GetComponent<Image>().color = middle;
+                Debug.Log("slider is null");
+            }
+        }
+
+        // Update is called once per frame
+
+
+        public void UpdateUI()
+        {
+        
+            Color healthy = new Color(0.2235294f, 0.4823529f, 0.2666667f);
+            Color middle = new Color(0.9568627f, 0.7058824f, 0.1058824f);
+            Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
+            hpSlider.value = PlayerManager.Instance.hp;
+            if (hpSlider.value == 0f)
+                Hp_Slider_zero();
+            else
+            {
+                if (hpSlider.value >= 70)
+                {
+                    hpSlider.fillRect.GetComponent<Image>().color = healthy;
+                }
                 else
                 {
-                    hp_slider.fillRect.GetComponent<Image>().color = dying;
+                    hpSlider.fillRect.GetComponent<Image>().color = hpSlider.value > 40 ? middle : dying;
                 }
             }
         }

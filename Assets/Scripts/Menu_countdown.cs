@@ -1,23 +1,14 @@
-using System;
-using JetBrains.Annotations;
 using System.Collections;
-using System.Collections.Generic;
-using Movement;
-using Unity.VisualScripting;
-using UnityEditor.Overlays;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
+using UnityEngine.Serialization;
 
-public abstract class Menu_countdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public Menu_countdown instance;
-    public UnityEngine.UI.Slider menu_option;
+    public MenuCountdown instance;
+    [FormerlySerializedAs("menu_option")] public UnityEngine.UI.Slider menuOption;
     public float timer = 5f;
-    private Coroutine unfill_coroutine;
+    private Coroutine _unfillCoroutine;
 
     private void Awake()
     {
@@ -38,35 +29,33 @@ public abstract class Menu_countdown : MonoBehaviour, IPointerEnterHandler, IPoi
     public void StartTimer()
     {
         // Debug.Log("Timer started");
-        if (unfill_coroutine == null)
-            unfill_coroutine = StartCoroutine(UnFillSlider());
-
+        _unfillCoroutine ??= StartCoroutine(UnFillSlider());
     }
     public void EndTimer()
     {
         // Debug.Log("Timer ended");
-        if (unfill_coroutine != null)
+        if (_unfillCoroutine != null)
         {
-            StopCoroutine(unfill_coroutine);
-            unfill_coroutine = null;
+            StopCoroutine(_unfillCoroutine);
+            _unfillCoroutine = null;
         }
 
-        menu_option.value = 1;
+        menuOption.value = 1;
     }
     private IEnumerator UnFillSlider()
     {
         float decRate = 0.3f / timer;
 
-        while (menu_option.value > 0)
+        while (menuOption.value > 0)
         {
 
-            menu_option.value -= decRate * Time.deltaTime;
+            menuOption.value -= decRate * Time.deltaTime;
 
             yield return null;
         }
 
-        menu_option.value = 0;
-        unfill_coroutine = null;
+        menuOption.value = 0;
+        _unfillCoroutine = null;
         OnTimerComplete();
     }
 

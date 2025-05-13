@@ -16,8 +16,7 @@ MonoBehaviour:
   description: creppy ghost
   sprite1: {fileID: -878596902298307068, guid: 625ad2eb3bd3daf46afa8458cf62f9da, type: 3}
   type: 1
-  attackS: {fileID: 0}
-  defenseS: {fileID: 0}
+  _animator: {fileID: 9100000, guid: 3f56d5eaba17b4a4ca7964db6d77558c, type: 2}
   w1: 1
   w2: 1
   hpMax: 90

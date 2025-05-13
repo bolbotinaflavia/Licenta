@@ -1,6 +1,7 @@
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Weapons;
 
 namespace Inventory
 {
@@ -36,7 +37,7 @@ namespace Inventory
             {
                 if (insideObject.CompareTag("Weapons"))
                 {
-                    var weapon = insideObject.gameObject.GetComponent<WeaponBase>();
+                    var weapon = insideObject.gameObject.GetComponent<Weapon>();
                     if (weapon == null) return;
                     Debug.Log("Finding weapon");
                     insideObject.SetActive(false);

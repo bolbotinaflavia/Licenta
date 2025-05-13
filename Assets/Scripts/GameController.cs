@@ -39,7 +39,7 @@ public class GameController:MonoBehaviour
     {
         state = GameState.Battle;
         audioIdle.Stop();
-        audioBattle.PlayDelayed(0f);
+        audioBattle.PlayDelayed(2f);
         playerCamera.gameObject.SetActive(false);
         playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
         HpSlider.Instance.UpdateUI();
@@ -50,9 +50,8 @@ public class GameController:MonoBehaviour
         {
             PlayerMovement.Instance.CurrentControl.load_sliders();
         }
+        audioIdle.mute = true;
         StartCoroutine(battleSystem.Setup_battle());
-
-
     }
 
     public void StopBattle()
@@ -62,6 +61,7 @@ public class GameController:MonoBehaviour
         PlayerManager.Instance.IsMoving = true;
         audioBattle.Stop();
         audioIdle.Play();
+        audioIdle.mute = false;
         battleSystem.gameObject.SetActive(false);
         battleCamera.gameObject.SetActive(false);
             

@@ -1,8 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using Battle;
 using Inventory;
 using Player;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,13 +29,13 @@ namespace Sliders_scripts
                 if (GameController.Instance.state == GameState.Battle)
                 {
                     MenuManager.Instance.battlePreviousMenu();
-                    StartCoroutine( BattleSystem.Instance.PlayerActionMove(s.SpellBase.SpellName));
-               
+                    battleAction();
                 }
                 else
                 {
                     open_description();
                     UpdateUI();
+                    StartCoroutine(close_description());
                 }
             
             }
@@ -43,10 +46,31 @@ namespace Sliders_scripts
             menuOption.value = 1;
         }
 
+        private void battleAction()
+        {
+            if (BattleSystem.Instance.State == BattleState.PlayerAction)
+            {
+                
+                StartCoroutine( BattleSystem.Instance.PlayerActionMove($"{s.SpellBase.SpellName}"));
+                menuOption.value = 1;
+            }
+            else
+            {
+                StartCoroutine(BattleSystem.Instance.Notification.notification_show("It's not your turn!",2f));
+            }
+        }
+
         private void open_description()
         {
             canvasDescription.GameObject().SetActive(true);
             description.GameObject().SetActive(true);
+        }
+
+        private IEnumerator close_description()
+        {
+            yield return new WaitForSeconds(3f);
+            canvasDescription.GameObject().SetActive(false);
+            description.GameObject().SetActive(false);
         }
 
         private void FindSpellsInInventory()

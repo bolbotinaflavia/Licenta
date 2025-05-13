@@ -13,6 +13,7 @@ namespace Weapons
         [SerializeField]private Sprite image;
 
         public string WeaponName => weaponName;
+        public string Description => description;
 
         public bool InUse
         {

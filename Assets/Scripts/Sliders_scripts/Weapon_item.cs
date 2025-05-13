@@ -1,7 +1,10 @@
+using System.Collections;
 using Inventory;
 using Player;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Weapons;
 
@@ -14,23 +17,50 @@ namespace Sliders_scripts
         public Image img;
 
         public Image fade;
+        public TextMeshProUGUI description;
+        public GameObject canvasDescription;
         //public Sprite weaponSprite;
 
         protected override void OnTimerComplete()
         {
             if (_weapon != null)
             {
-               
+                if (_weapon.InUse)
+                {
+                    open_description();
+                    UpdateUI();
+                    StartCoroutine(close_description());
+                }
+                else
+                {
                     SelectWeapon();
                     UpdateUI();
-               
+                }
+
             }
+
             menuOption.value = 1;
         }
 
-        public void FindWeaponsInInventory()
+        private void open_description()
+        {
+            canvasDescription.GameObject().SetActive(true);
+            description.GameObject().SetActive(true);
+            StartCoroutine(close_description());
+        }
+
+        private IEnumerator close_description()
+        {
+            yield return new WaitForSeconds(3f);
+            canvasDescription.GameObject().SetActive(false);
+            description.GameObject().SetActive(false);
+        }
+
+    public void FindWeaponsInInventory()
         {
             _weapon = InventoryManager.Instance.Weapons.Find(w => w.WeaponName == weaponName);
+            if(description != null&&_weapon!=null)
+                description.text = _weapon.Description;
         }
 
 
@@ -42,6 +72,10 @@ namespace Sliders_scripts
             FindWeaponsInInventory();
             if(!PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove")) 
                 UpdateUI();
+            if(canvasDescription!=null)
+                canvasDescription.SetActive(false);
+            if(description!=null)
+                description.GameObject().SetActive(false);
         
         }
 

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8881955921585854622}
   - component: {fileID: 4208664816496878770}
   - component: {fileID: 7375213521482139182}
-  - component: {fileID: 8205782576299676350}
   - component: {fileID: 977626572279175455}
   m_Layer: 5
   m_Name: Shovel
@@ -160,25 +159,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8205782576299676350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109521212070203626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e65744967a243aa93111460b199dda2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Weapon: {fileID: 109521212070203626}
-  Rb: {fileID: 7375213521482139182}
-  WeaponName: Shovel
-  InUse: 0
-  Discovered: 0
-  Damage: 20
-  Image: {fileID: 210801867209499050, guid: 546b64c17b600144298e00c62bbd5552, type: 3}
 --- !u!114 &977626572279175455
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,12 @@ namespace Inventory
                     //Debug.Log("Learning spell");
                     //spell.SetActive(true);
                     PlayerManager.Instance.isMoving = true;
-                    InventoryManager.Instance.learn_spell(insideSpell2);
+                    if(PlayerManager.Instance.learnSpellSkill)
+                        InventoryManager.Instance.learn_spell(insideSpell2);
+                    else
+                    {
+                        PlayerManager.Instance.Notification.notification_show("You cannot learn the spell yet",2f);
+                    }
                 }
                 //pentru alte obiecte
             }

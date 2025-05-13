@@ -13,6 +13,55 @@ namespace Battle
         [SerializeField] public int defense;
         [SerializeField] public int attack;
         [FormerlySerializedAs("HP_anim")] [SerializeField] private HpBarAnimation hpAnim;
+        public Animator animator { get; set; }
+
+        public bool IsIdle
+        {
+            get => IsIdle;
+            set
+            {
+                if (animator != null)
+                {
+                    animator.SetBool("isIdle", value);
+                }
+                else
+                {
+                    Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+                }
+            }
+        }
+
+        public bool IsAttacking
+        {
+            get => IsAttacking;
+            set
+            {
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacking", value);
+                }
+                else
+                {
+                    Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+                }
+            }
+        }
+
+        public bool IsAttacked
+        {
+            get => IsAttacked;
+            set
+            {
+                if (animator != null)
+                {
+                    animator.SetBool("isAttacked", value);
+                }
+                else
+                {
+                    Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+                }
+            }
+        }
         
         public float Hp
         {
@@ -39,9 +88,8 @@ namespace Battle
         }
         public void Setup()
         {
-            player = GetComponent<PlayerManager>();
-            attack = player.attackSpeed;
-            defense = player.defense;
+            player = PlayerManager.Instance;
+            animator = GetComponent<Animator>();
         }
 
         public void current_weapon()

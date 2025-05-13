@@ -13,6 +13,7 @@ TagManager:
   - Spells
   - HP
   - Fight
+  - Artefacts
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@
     "com.unity.timeline": "1.7.5",
     "com.unity.ugui": "1.0.0",
     "com.unity.visualscripting": "1.8.0",
+    "com.unity.xr.management": "4.5.1",
+    "tech.eyeware.beam-eye-tracker": "file:C:/Users/flavia/Downloads/beam_eye_tracker_sdk/beam_eye_tracker_sdk-2.1.0/unity/beam-eye-tracker-plugin",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

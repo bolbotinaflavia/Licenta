@@ -1,8 +1,5 @@
 ﻿using Enemies;
-using Inventory;
 using Player;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Weapons;
@@ -11,22 +8,24 @@ namespace Battle
 {
     public class BattleUnit : MonoBehaviour
     {
+        private static readonly int Idle = Animator.StringToHash("isIdle");
+
         [FormerlySerializedAs("_enemy_base")] [SerializeField]
         private EnemieBase enemyBase;
 
         [FormerlySerializedAs("HP_enemy_a")] [SerializeField]
         private HpBarAnimation hpEnemyA;
 
-        public Animator animator { get; set; }
+        public Animator Animator { get; set; }
 
         public bool IsIdle
         {
             get => IsIdle;
             set
             {
-                if (animator != null)
+                if (Animator != null)
                 {
-                    animator.SetBool("isIdle", value);
+                    Animator.SetBool(Idle, value);
                 }
                 else
                 {
@@ -42,10 +41,10 @@ namespace Battle
             get => isAttacking;
             set
             {
-                if (animator != null)
+                if (Animator != null)
                 {
 
-                    animator.SetBool("isAttacking", value);
+                    Animator.SetBool("isAttacking", value);
                 }
                 else
                 {
@@ -59,9 +58,9 @@ namespace Battle
             get => IsAttacked;
             set
             {
-                if (animator != null)
+                if (Animator != null)
                 {
-                    animator.SetBool("isAttacked", value);
+                    Animator.SetBool("isAttacked", value);
                 }
                 else
                 {
@@ -94,8 +93,8 @@ namespace Battle
             this.enemyBase = Resources.Load<EnemieBase>($"Enemies/{enemyName}");
             //this._enemy_base = Instantiate(_enemy_base);
             this.GetComponent<SpriteRenderer>().sprite = enemyBase.Sprite1;
-            animator = GetComponent<Animator>();
-            animator.runtimeAnimatorController = enemyBase.Animator;
+            Animator = GetComponent<Animator>();
+            Animator.runtimeAnimatorController = enemyBase.Animator;
 
             this.hp = enemyBase.HpMax;
             Debug.Log(" Enemy is: " + this.enemyBase.name + " with hp: " + this.hp);
@@ -104,10 +103,18 @@ namespace Battle
         public void Attack(Moves move, PlayerManager player)
         {
             Debug.Log("the move is: " + move.MoveName);
-            float modifiers = Random.Range(0f + move.Accuracy * 0.01f, 1f);
+            float modifiers = Random.Range(0f, 1f);
             float d;
-            d = (3f * move.Power + 2f * enemyBase.Attack) / 10f;
-            d = d * modifiers - player.defense / 10;
+            d = (enemyBase.Attack * 0.6f + move.Power * 0.4f) / 5f * (modifiers + 1);
+            if (modifiers*move.Accuracy/10f > 1)
+            {
+                d = d - player.defense / 10f;
+            }
+            else
+            {
+                d = 0;
+            }
+
             Debug.Log("Player damage is: " + d);
             if (d > 0)
             {
@@ -118,26 +125,32 @@ namespace Battle
 
         public void AttackedBySpell(Spells.Spell spell, PlayerManager player)
         {
-            float modifiers = Random.Range(0f + spell.SpellBase.Accuracy * 0.01f, 1f);
+            float modifiers = Random.Range(0f, 1f);
             float d;
-            d = (3f * spell.SpellBase.Power + 2f * player.attackSpeed) / 10f;
-            d = d * modifiers - enemyBase.Defense / 10;
+            float bonus = get_spell_bonus(spell, player);
+            d = (spell.SpellBase.Power*0.4f +  player.attackSpeed*0.6f) / 4f*(1+bonus*2+modifiers);
+            if (modifiers * spell.SpellBase.Accuracy / 10f > 1)
+            {
+                d = d - enemyBase.Defense / 10f;
+            }
+            else
+            {
+                d = 0;
+            }
             this.hp = this.hp - d;
-            Debug.Log("Enemy damage is: " + d);
+            Debug.Log("Enemy damage is after spell : " + d);
 
         }
 
         public void Attacked(WeaponB w, PlayerManager player)
         {
             Debug.Log("Attacked enemy");
-            float modifiers = Random.Range(0.5f, 1f);
+            float modifiers = Random.Range(0f, 1f);
             float attackWeapon = w.Damage;
             float d;
-            if (enemyBase.W1.ToString().Equals(w.WeaponName))
-                d = (3f * attackWeapon + 2f * player.attackSpeed) / 10f;
-            else
-                d = (4f * attackWeapon + 2f * player.attackSpeed) / 10f;
-            d = d * modifiers - enemyBase.Defense / 10;
+            float bonus = get_bonus(player,w);
+            d = (player.attackSpeed * 0.6f + attackWeapon * 0.4f) / 4f * (1 + modifiers + bonus);
+            d = d - this.enemyBase.Defense / 10f;
             this.hp = this.hp - d;
             Debug.Log("Enemy damage is: " + d);
         }
@@ -146,6 +159,35 @@ namespace Battle
         {
             int r = Random.Range(0, enemyBase.Moves.Count);
             return enemyBase.Moves[r].Move;
+        }
+
+        public float get_spell_bonus(Spells.Spell spell, PlayerManager player)
+        {
+            float bonus = 0f;
+            if (this.enemyBase.W2.Equals(spell.SpellBase.SpellName))
+            {
+                bonus += 1;
+            }
+
+            if (player.Inventory.getArtefact("Talisman"))
+            {
+                bonus += 1;
+            }
+            return bonus;
+        }
+        public float get_bonus(PlayerManager player,WeaponB w)
+        {
+            float bonus = 0f;
+            if (enemyBase.W1.Equals(w.WeaponName))
+            {
+                bonus += 1;
+            }
+
+            if (player.Inventory.getArtefact("WarriorBook"))
+            {
+                bonus += 1;
+            }
+            return bonus;
         }
     }
 }

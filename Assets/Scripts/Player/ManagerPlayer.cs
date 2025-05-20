@@ -12,6 +12,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Weapons;
+using Eyeware.BeamEyeTracker;
+using Eyeware.BeamEyeTracker.Unity;
 
 namespace Player
 {
@@ -63,6 +65,11 @@ namespace Player
         }
         //weapons, objects and spells
         [SerializeField]private InventoryManager inventory;
+
+        public InventoryManager Inventory
+        {
+            get => inventory;
+        }
         //animation parameters, menu ...
         [FormerlySerializedAs("_isMoving")] public bool isMoving=true;
         public bool IsMoving { 
@@ -379,7 +386,7 @@ namespace Player
 
         public void HandleUpdate()
         {
-            if (player == null || isHover)
+            if (player == null||isHover)
             {
                 return;
 

@@ -342,6 +342,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &262171141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262171143}
+  - component: {fileID: 262171142}
+  m_Layer: 0
+  m_Name: BeamStartEyeTrack
+  m_TagString: EyeTracker
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &262171142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262171141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6331c87d1c5f1e749ac065c5a557da8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startBeamEyeTrackerOnStart: 0
+--- !u!4 &262171143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262171141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 541.7167, y: 126.86188, z: 8.273926}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &693638409
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +543,7 @@ GameObject:
   - component: {fileID: 984666603}
   - component: {fileID: 984666606}
   - component: {fileID: 984666607}
+  - component: {fileID: 984666608}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -657,6 +703,19 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &984666608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984666602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a3a92fcf7c8734584cdaebd86b123a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraControlIsPaused: 1
 --- !u!1001 &1024566638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -889,7 +948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1701610317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,7 +999,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 984666604}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
@@ -1209,7 +1268,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5806247193193871942, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
+    - {fileID: 7928380735330014514, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
@@ -1225,3 +1286,4 @@ SceneRoots:
   - {fileID: 1024566638}
   - {fileID: 4610905538418048407}
   - {fileID: 1839110321}
+  - {fileID: 262171143}

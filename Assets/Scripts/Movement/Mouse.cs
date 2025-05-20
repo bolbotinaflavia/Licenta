@@ -95,11 +95,18 @@ namespace Movement
                 player.SetFacingDirection(distance);
                 RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
                 if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
-
+                
                 {
-                    player.IsMoving = false;
+                    //player.IsMoving = false;
+                    player.menu_slider_open();
+                    player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
                 }
                 else
+                {
+                    player.IsMoving = true;
+                }
+                
+                if (player.IsMoving)
                 {
                     if (player.player.transform.position.x < 398)
                     {

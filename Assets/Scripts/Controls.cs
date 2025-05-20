@@ -119,7 +119,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d7ac72fc-2d9e-46fe-940a-525001d7f399"",
-                    ""path"": ""<XRHMD>/centerEyePosition"",
+                    ""path"": ""<TrackedDevice>/devicePosition"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

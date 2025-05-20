@@ -1,12 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Battle;
 using Inventory;
-using Player;
 using TMPro;
 using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.NCalc;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;

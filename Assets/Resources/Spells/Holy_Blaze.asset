@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad25d0289e3b4fb39b6328e673d30ab0, type: 3}
   m_Name: Holy_Blaze
   m_EditorClassIdentifier: 
-  name: Holy Blaze
+  spellName: Holy Blaze
   power: 15
   accuracy: 50
-  description2: a blinding light spell
-  description3: used for ghosts
-  magicLevel: 0
+  description2: A poison spell
+  description3: used for goblins

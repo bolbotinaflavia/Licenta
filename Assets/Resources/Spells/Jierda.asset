@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad25d0289e3b4fb39b6328e673d30ab0, type: 3}
   m_Name: Jierda
   m_EditorClassIdentifier: 
-  name: Jierda
+  spellName: Jierda
   power: 10
   accuracy: 10
-  description2: cracking bones
+  description2: Paralyze Spell
   description3: used for skeletons
-  magicLevel: 0

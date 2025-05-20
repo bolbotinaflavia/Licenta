@@ -19,10 +19,11 @@ MonoBehaviour:
   _animator: {fileID: 9100000, guid: 3f56d5eaba17b4a4ca7964db6d77558c, type: 2}
   w1: 1
   w2: 1
-  hpMax: 90
-  attack: 10
-  defense: 20
+  hpMax: 80
+  attack: 40
+  defense: 40
   speed: 1
   moves:
   - move: {fileID: 11400000, guid: fd5cb860b3218f3419ce6535733f7606, type: 2}
   - move: {fileID: 11400000, guid: 396b343e5f7211c488d9f345869345d8, type: 2}
+  - move: {fileID: 11400000, guid: e3a1abc3c3ec7a9468c798fe5df47e7c, type: 2}

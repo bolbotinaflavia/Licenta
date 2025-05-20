@@ -19,7 +19,8 @@ namespace Battle
         PlayerMove,
         EnemyMove,
         Busy,
-        EnemyDead
+        EnemyDead,
+        PlayerDead,
     }
     public class BattleSystem : MonoBehaviour
     {
@@ -139,6 +140,7 @@ namespace Battle
            
             if (enemyUnit.Hp <= 0)
             {
+                StartCoroutine(enemyDefeted());
                 state = BattleState.EnemyDead;
             }
             else
@@ -167,8 +169,8 @@ namespace Battle
             
             if (player.player.hp <= 0)
             {
-                yield return new WaitForSeconds(2f);
-                state = BattleState.EnemyDead;
+                StartCoroutine(playerDefeted());
+                state = BattleState.PlayerDead;
             }
             else
             {
@@ -205,9 +207,6 @@ namespace Battle
 
             if (state == BattleState.EnemyDead)
             {
-                StartCoroutine(_notification.notification_show($"Enemy Defeated",4f));
-                exit_battle();
-                state = BattleState.Busy;
             }
             // if (enemyUnit!=null&&enemyUnit.Hp == 0)
             // {
@@ -228,6 +227,24 @@ namespace Battle
            
         }
 
+        private IEnumerator enemyDefeted()
+        {
+            state = BattleState.Busy;
+            StartCoroutine(_notification.notification_show($"Enemy Defeated",4f));
+            //maybe ceva animatie
+            yield return new WaitForSeconds(2f);
+            exit_battle();
+        }
+
+        private IEnumerator playerDefeted()
+        {
+            state = BattleState.Busy;
+            StartCoroutine(_notification.notification_show($"Player Defeated",4f));
+            player.player.hp = 20;
+            //maybe ceva animatie
+            yield return new WaitForSeconds(2f);
+            exit_battle();
+        }
         public void exit_battle()
         {
             GameController.Instance.StopBattle();

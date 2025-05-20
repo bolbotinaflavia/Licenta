@@ -1387,8 +1387,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0.85
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1621,6 +1621,7 @@ GameObject:
   - component: {fileID: 4622426294511284234}
   - component: {fileID: 4057159240926244686}
   - component: {fileID: 5116915120331064041}
+  - component: {fileID: 5303724551216984994}
   m_Layer: 6
   m_Name: Exit
   m_TagString: Untagged
@@ -1647,7 +1648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1541, y: -594}
+  m_AnchoredPosition: {x: 1824, y: -761}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4622426294511284234
@@ -1717,6 +1718,7 @@ MonoBehaviour:
   menuOption: {fileID: 4622426294511284234}
   baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
   timer: 1
+  immersiveHUDPanelBehaviour: {fileID: 0}
   nextMenu: Menu_start
 --- !u!114 &5116915120331064041
 MonoBehaviour:
@@ -1747,6 +1749,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5303724551216984994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6979768051067049952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &7522525801076766659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1759,6 +1776,7 @@ GameObject:
   - component: {fileID: 5218109981986594688}
   - component: {fileID: 528064050826574534}
   - component: {fileID: 7321271973829587431}
+  - component: {fileID: 357879546446087073}
   m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
@@ -1785,7 +1803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 971, y: -583}
+  m_AnchoredPosition: {x: -6, y: -763}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5218109981986594688
@@ -1855,6 +1873,7 @@ MonoBehaviour:
   menuOption: {fileID: 5218109981986594688}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
 --- !u!114 &7321271973829587431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,6 +1903,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &357879546446087073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7522525801076766659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &7628799379168121826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2082,6 +2116,7 @@ GameObject:
   - component: {fileID: 2826996103682715329}
   - component: {fileID: 1227481676565918384}
   - component: {fileID: 9155579119985488350}
+  - component: {fileID: 4863053518418901652}
   m_Layer: 6
   m_Name: Settings
   m_TagString: Untagged
@@ -2108,7 +2143,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 768, y: 21}
+  m_AnchoredPosition: {x: 1809, y: 8}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2826996103682715329
@@ -2178,6 +2213,7 @@ MonoBehaviour:
   menuOption: {fileID: 2826996103682715329}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   nextMenu: Menu_settings
 --- !u!114 &9155579119985488350
 MonoBehaviour:
@@ -2208,6 +2244,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4863053518418901652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8043241215737661757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &8128493204471318290
 GameObject:
   m_ObjectHideFlags: 0
@@ -2220,6 +2271,7 @@ GameObject:
   - component: {fileID: 1892972364941143067}
   - component: {fileID: 8955550562285496898}
   - component: {fileID: 1406590996879927778}
+  - component: {fileID: 3416518724567794479}
   m_Layer: 6
   m_Name: Spells
   m_TagString: Untagged
@@ -2246,7 +2298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -818, y: 30}
+  m_AnchoredPosition: {x: -1833, y: -34}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1892972364941143067
@@ -2316,6 +2368,7 @@ MonoBehaviour:
   menuOption: {fileID: 1892972364941143067}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   nextMenu: Menu_spells
 --- !u!114 &1406590996879927778
 MonoBehaviour:
@@ -2346,6 +2399,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3416518724567794479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8128493204471318290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &8913536368491572356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,6 +2426,7 @@ GameObject:
   - component: {fileID: 1320250004200252832}
   - component: {fileID: 5199460257184991428}
   - component: {fileID: 7071668934521145183}
+  - component: {fileID: 1772431793232950304}
   m_Layer: 6
   m_Name: Bag
   m_TagString: Untagged
@@ -2454,6 +2523,7 @@ MonoBehaviour:
   menuOption: {fileID: 1320250004200252832}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   nextMenu: Menu_bag
 --- !u!114 &7071668934521145183
 MonoBehaviour:
@@ -2484,3 +2554,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1772431793232950304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913536368491572356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2

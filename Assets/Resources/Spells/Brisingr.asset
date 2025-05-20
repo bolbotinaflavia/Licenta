@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Brisingr
   m_EditorClassIdentifier: 
   spellName: Brisingr
-  power: 5
+  power: 50
   accuracy: 40
   description2: a fire spell
-  description3: used for zombies, vampires
+  description3: used for zombies

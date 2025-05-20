@@ -14,6 +14,7 @@ TagManager:
   - HP
   - Fight
   - Artefacts
+  - EyeTracker
   layers:
   - Default
   - TransparentFX

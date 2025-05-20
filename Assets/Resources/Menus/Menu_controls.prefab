@@ -722,8 +722,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1019,6 +1019,7 @@ GameObject:
   - component: {fileID: 1096432725123575601}
   - component: {fileID: 9002404513248474173}
   - component: {fileID: 612033805918981981}
+  - component: {fileID: 252026272074302058}
   m_Layer: 6
   m_Name: Mouse
   m_TagString: Untagged
@@ -1116,6 +1117,7 @@ MonoBehaviour:
   menuOption: {fileID: 1096432725123575601}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1157,6 +1159,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &252026272074302058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229840755757522632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &5521841178166522363
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1261,7 @@ GameObject:
   - component: {fileID: 3349720954718145412}
   - component: {fileID: 2226815314421713739}
   - component: {fileID: 3866388071682218723}
+  - component: {fileID: 7492313691990535746}
   m_Layer: 6
   m_Name: Keyboard
   m_TagString: Untagged
@@ -1271,7 +1289,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 754, y: 31}
+  m_AnchoredPosition: {x: 1852, y: 31}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3349720954718145412
@@ -1341,6 +1359,7 @@ MonoBehaviour:
   menuOption: {fileID: 3349720954718145412}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1382,6 +1401,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7492313691990535746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5774624605510813553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &6142798727738610772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1653,7 @@ GameObject:
   - component: {fileID: 4591015509297129696}
   - component: {fileID: 2577643409732496513}
   - component: {fileID: 2429665127449170060}
+  - component: {fileID: 5780026068961796532}
   m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
@@ -1645,7 +1680,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 975, y: -560}
+  m_AnchoredPosition: {x: -35, y: -758}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4591015509297129696
@@ -1715,6 +1750,7 @@ MonoBehaviour:
   menuOption: {fileID: 4591015509297129696}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &2429665127449170060
 MonoBehaviour:
@@ -1745,6 +1781,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5780026068961796532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7121571298854864323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &7848309128766165311
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,6 +2187,7 @@ GameObject:
   - component: {fileID: 6060915480968806863}
   - component: {fileID: 2934304510415651880}
   - component: {fileID: 8584898356896190871}
+  - component: {fileID: 4982597323562674796}
   m_Layer: 6
   m_Name: Eye-Track
   m_TagString: Untagged
@@ -2163,7 +2215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -816, y: 41}
+  m_AnchoredPosition: {x: -1826, y: -25}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.49999994}
 --- !u!114 &6060915480968806863
@@ -2233,6 +2285,7 @@ MonoBehaviour:
   menuOption: {fileID: 6060915480968806863}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -2274,3 +2327,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4982597323562674796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983663029227245110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2

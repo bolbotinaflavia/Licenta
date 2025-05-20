@@ -85,6 +85,5 @@ namespace Battle
             hpBarPlayer.UpdateUI();
             yield return new WaitForSeconds(1f);
         }
-
     }
 }

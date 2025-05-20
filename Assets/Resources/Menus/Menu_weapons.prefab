@@ -446,6 +446,7 @@ GameObject:
   - component: {fileID: 4309489282938097419}
   - component: {fileID: 3736291605925371407}
   - component: {fileID: 2730380549195756083}
+  - component: {fileID: 4386140996174880520}
   m_Layer: 6
   m_Name: Weapon4
   m_TagString: Untagged
@@ -473,7 +474,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1152, y: 42.640015}
+  m_AnchoredPosition: {x: 1892, y: -76}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4309489282938097419
@@ -543,6 +544,7 @@ MonoBehaviour:
   menuOption: {fileID: 4309489282938097419}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   weaponName: Crossbow
   img: {fileID: 7350841127947180689}
   fade: {fileID: 8605422361808894592}
@@ -577,6 +579,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4386140996174880520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063618991827883109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &2128430060640583251
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +606,7 @@ GameObject:
   - component: {fileID: 4064910133114506050}
   - component: {fileID: 3540322805976119918}
   - component: {fileID: 4972531383660270566}
+  - component: {fileID: 2841165400472377155}
   m_Layer: 6
   m_Name: Weapon3
   m_TagString: Untagged
@@ -616,7 +634,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 562, y: 634}
+  m_AnchoredPosition: {x: 1243, y: 693}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4064910133114506050
@@ -686,6 +704,7 @@ MonoBehaviour:
   menuOption: {fileID: 4064910133114506050}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   weaponName: Shovel
   img: {fileID: 7825361721630035943}
   fade: {fileID: 1973221672392425333}
@@ -720,6 +739,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2841165400472377155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128430060640583251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &2154453096046699450
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,8 +840,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1004,6 +1038,7 @@ GameObject:
   - component: {fileID: 6594363940133199346}
   - component: {fileID: 7836894487297442548}
   - component: {fileID: 1414876340482496839}
+  - component: {fileID: 3611913812369377543}
   m_Layer: 6
   m_Name: Weapon2
   m_TagString: Untagged
@@ -1031,7 +1066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -626.30005, y: 634}
+  m_AnchoredPosition: {x: -1150, y: 673}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6594363940133199346
@@ -1101,6 +1136,7 @@ MonoBehaviour:
   menuOption: {fileID: 6594363940133199346}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   weaponName: Trowel
   img: {fileID: 5754720672416710970}
   fade: {fileID: 862569156298063073}
@@ -1135,6 +1171,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &3611913812369377543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456179876434013852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &2527747134040345380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1459,7 @@ GameObject:
   - component: {fileID: 3974348292954588421}
   - component: {fileID: 6577918294237994622}
   - component: {fileID: 536130937387493762}
+  - component: {fileID: 7769453007804158487}
   m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
@@ -1434,7 +1486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 967, y: -578}
+  m_AnchoredPosition: {x: 19, y: -775}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3974348292954588421
@@ -1504,6 +1556,7 @@ MonoBehaviour:
   menuOption: {fileID: 3974348292954588421}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &536130937387493762
 MonoBehaviour:
@@ -1534,6 +1587,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7769453007804158487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077228892067567991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &3782859941940916736
 GameObject:
   m_ObjectHideFlags: 0
@@ -2365,6 +2433,7 @@ GameObject:
   - component: {fileID: 685226796290818068}
   - component: {fileID: 4881228601118669329}
   - component: {fileID: 8839416451016177837}
+  - component: {fileID: 2748669508054689794}
   m_Layer: 6
   m_Name: Weapon1
   m_TagString: Untagged
@@ -2392,7 +2461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1219, y: 42.640015}
+  m_AnchoredPosition: {x: -1861, y: -66}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685226796290818068
@@ -2462,6 +2531,7 @@ MonoBehaviour:
   menuOption: {fileID: 685226796290818068}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   weaponName: Sword
   img: {fileID: 4104348500477983493}
   fade: {fileID: 4763102111767642736}
@@ -2496,6 +2566,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2748669508054689794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7731017995240870361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &7975536364125982975
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using Eyeware.BeamEyeTracker;
 using Eyeware.BeamEyeTracker.Unity;
+using Inventory;
 using Player;
 using Tobii.Research.Unity;
 using Unity.VisualScripting;
@@ -31,7 +32,7 @@ namespace Movement
 
         public void Enable()
         {
-            _move.Enable();
+           
             
                 api = new API("licenta", new ViewportGeometry());
                 if(api != null)
@@ -41,6 +42,18 @@ namespace Movement
                 api.AttemptStartingTheBeamEyeTracker();
                 Debug.Log(api.GetVersion().Major);
                 Debug.Log(api.GetTrackingDataReceptionStatus());
+                if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.NotReceivingTrackingData)
+                {
+                    Debug.Log("not receiving data");
+                   //  InputActionMap playerActionMap = PlayerMovement.Instance.inputActions.FindActionMap("Player");
+                   // var input = new InputAction();
+                   //  input= playerActionMap.FindAction("MouseMove");
+                   //  PlayerMovement.Instance.change_strategy(input);
+                }
+                else
+                {
+                    _move.Enable();
+                }
                 }
             else
             {
@@ -99,6 +112,7 @@ namespace Movement
 
         public void Move(PlayerManager player)
         {
+            if (!PlayerManager.Instance.IsMoving) return;
             if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.ReceivingTrackingData)
             {
                 Point inputpos = api.GetLatestTrackingStateSet().UserState.UnifiedScreenGaze.PointOfRegard;
@@ -110,21 +124,22 @@ namespace Movement
                 // Implement mouse-based movement logic
                 if (MenuManager.Instance.currentMenu.activeSelf == false)
                 {
-                    player.menuOpen.gameObject.SetActive(true);
+                    PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
+                    PlayerManager.Instance.menuOpen.gameObject.SetActive(true);
                     float distance = mouseNext.x - player.player.transform.position.x;
                     player.SetFacingDirection(distance);
-                    
-                    
-                    // if (player.GetComponent<Collider2D>().bounds
-                    //     .Contains(new Vector3(inputpos.X, inputpos.Y, Camera.main.nearClipPlane)))
-                    // {
-                    //     Debug.Log("the menu should open");
-                    //     player.IsMoving = false;
-                    //     player.isHover = true;
-                    //     player.menu_slider_open();
-                    //     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
-                    // }
-                    if (player.isMoving != false)
+                    RaycastHit2D hit = Physics2D.Raycast(new Vector2(inputpos.X,inputpos.Y), Vector2.zero);
+                    if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
+                
+                    {
+                        player.IsMoving = false;
+                    }
+                    else
+                    {
+                        player.IsMoving = true;
+                    }
+                
+                    if (player.IsMoving)
                     {
                         if (player.player.transform.position.x < 398)
                         {
@@ -132,6 +147,12 @@ namespace Movement
                             player.player.transform.position = Vector3.MoveTowards(
                                 player.player.transform.position,
                                 new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                        }
+                        if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
+                        {
+                            player.player.transform.position = Vector3.MoveTowards(
+                                player.player.transform.position,
+                                new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * player.speed);
                         }
                         else
                         {
@@ -146,10 +167,8 @@ namespace Movement
                 }
                 else
                 {
-                    player.menuOpen.gameObject.SetActive(false);
                     player.IsMoving = false;
                 }
-
             }
         }
     }

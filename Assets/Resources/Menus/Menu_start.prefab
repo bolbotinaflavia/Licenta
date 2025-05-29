@@ -628,8 +628,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 3560460492872245136}
   - component: {fileID: 6930614947540859670}
   - component: {fileID: 7167835369777770262}
-  - component: {fileID: 6759247245306321254}
+  - component: {fileID: 8656827712528929825}
   m_Layer: 6
   m_Name: Play
   m_TagString: Untagged
@@ -709,8 +709,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45, y: -579}
-  m_SizeDelta: {x: 500, y: 500}
+  m_AnchoredPosition: {x: 10, y: -706}
+  m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3560460492872245136
 MonoBehaviour:
@@ -779,7 +779,7 @@ MonoBehaviour:
   menuOption: {fileID: 3560460492872245136}
   baseColor: {r: 0.22352941, g: 0.48235294, b: 0.26666668, a: 1}
   timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  immersiveHUDPanelBehaviour: {fileID: 8656827712528929825}
   nextMenu: Menu_basic
 --- !u!114 &7167835369777770262
 MonoBehaviour:
@@ -822,7 +822,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &6759247245306321254
+--- !u!114 &8656827712528929825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 8063808342680750055}
   - component: {fileID: 4608103419878583500}
   - component: {fileID: 6472179235277160297}
-  - component: {fileID: 2156997321059420521}
+  - component: {fileID: 403858782316554498}
   m_Layer: 6
   m_Name: Exit
   m_TagString: Untagged
@@ -876,8 +876,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1879, y: -51}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 1391, y: -101}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8063808342680750055
 MonoBehaviour:
@@ -946,7 +946,7 @@ MonoBehaviour:
   menuOption: {fileID: 8063808342680750055}
   baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
   timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  immersiveHUDPanelBehaviour: {fileID: 403858782316554498}
 --- !u!114 &6472179235277160297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -976,7 +976,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &2156997321059420521
+--- !u!114 &403858782316554498
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1083,8 +1083,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 8915212256034393326}
   - component: {fileID: 3444818444788553457}
   - component: {fileID: 3887741132210811957}
-  - component: {fileID: 4216609823815340050}
+  - component: {fileID: 2642823195643668640}
   m_Layer: 6
   m_Name: Settings
   m_TagString: Untagged
@@ -1425,8 +1425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1849, y: -51}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -1461, y: -84}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8915212256034393326
 MonoBehaviour:
@@ -1495,7 +1495,7 @@ MonoBehaviour:
   menuOption: {fileID: 8915212256034393326}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  immersiveHUDPanelBehaviour: {fileID: 2642823195643668640}
   nextMenu: Menu_settings
 --- !u!114 &3887741132210811957
 MonoBehaviour:
@@ -1526,7 +1526,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &4216609823815340050
+--- !u!114 &2642823195643668640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

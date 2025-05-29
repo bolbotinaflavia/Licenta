@@ -159,6 +159,26 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 1092}
+  - name: Background_forest_Frame_2
+    originalName: 
+    pivot: {x: 0.5, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2180
+      width: 1920
+      height: 1080
+    spriteID: fba2e09bb01c1d74ba31a4086823cba5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2180}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -184,6 +204,14 @@ ScriptedImporter:
         width: 1920
         height: 1080
       spriteId: 485ad956d80c44041ab977dd7481afd0
+    - name: Background_forest_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
+      spriteId: fba2e09bb01c1d74ba31a4086823cba5
     linkedCells: []
     parentIndex: -1
   platformSettings:

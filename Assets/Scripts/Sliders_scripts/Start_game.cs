@@ -16,7 +16,7 @@ namespace Sliders_scripts
             MenuManager.Instance.LoadMenu(nextMenu);
             MenuManager.Instance.gameStarted = true;
             MenuManager.Instance.currentMenu.SetActive(false);
-            SceneManager.LoadScene("Gameplay");
+            SceneManager.LoadScene("StoryStart");
             menuOption.value = 1;
         }
         // Start is called before the first frame update

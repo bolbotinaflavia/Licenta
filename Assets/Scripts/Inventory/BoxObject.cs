@@ -24,7 +24,12 @@ namespace Inventory
                // this.GetComponent<SpriteRenderer>().sprite = sprite;
                 Update();
                 insideObject.SetActive(true);
-                insideObject.GetComponent<SpriteRenderer>().color = Color.white;
+                if (insideObject.CompareTag("Spells"))
+                {
+                    check_object();
+                }
+                else
+                    insideObject.GetComponent<SpriteRenderer>().color = Color.white;
                // Invoke(nameof(check_object),2f);
                
                 //pentru alte obiecte
@@ -44,6 +49,15 @@ namespace Inventory
                     insideObject.GetComponent<SpriteRenderer>().color = Color.clear;
                     PlayerManager.Instance.isMoving = true;
                     InventoryManager.Instance.FindWeapon(insideObject);
+                }
+
+                if (insideObject.CompareTag("Spells"))
+                {
+                    var spell = insideObject.gameObject.GetComponent<Spells.Spell>();
+                    if (spell == null) return;
+                    insideObject.SetActive(false);
+                    PlayerManager.Instance.isMoving = true;
+                    InventoryManager.Instance.learn_spell(spell);
                 }
                 PlayerManager.Instance.isMoving = true;
             }

@@ -150,7 +150,7 @@ namespace Movement
                             {
                                 sliders[currentSliderIndex].value = 1;
                              
-                                    sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
+                                sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
                                 currentSliderIndex = 0;
                                 sliders[currentSliderIndex].value = 1;
                                 sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = selectedColor;
@@ -192,20 +192,21 @@ namespace Movement
         public void Move(PlayerManager player)
         {
             
-         
            // Debug.Log(inputPos);
-           
-                if(GameController.Instance.state==GameState.Menu||SceneManager.GetActiveScene().name=="StartGame")
-                    select_sliders();
 
-                else
+           if (GameController.Instance.state == GameState.Menu || SceneManager.GetActiveScene().name == "StartGame")
+           {
+               select_sliders();
+           }
+
+           else
                 {
                     Vector2 inputPos = _moveAction.ReadValue<Vector2>();
-
                     if (Mathf.Approximately(inputPos.y, 1))
                     {
                         player.IsMoving = false;
                         player.menu_slider_open();
+                        player.isHover = false;
                         player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
                         //enter_slider(player.menu_open);
                     }
@@ -224,7 +225,7 @@ namespace Movement
                     {
                         if (MenuManager.Instance.currentMenu.activeSelf == false && inputPos.x != 0)
                         {
-
+                            
                             player.SetFacingDirection(inputPos.x);
                             RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
                             if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem)
@@ -240,6 +241,12 @@ namespace Movement
                                     player.player.transform.position = Vector3.MoveTowards(
                                         player.player.transform.position,
                                         new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                                }
+                                if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
+                                {
+                                    player.player.transform.position = Vector3.MoveTowards(
+                                        player.player.transform.position,
+                                        new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * player.speed);
                                 }
                                 else
                                 {

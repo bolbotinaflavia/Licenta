@@ -1,4 +1,5 @@
 ﻿using System;
+using Inventory;
 using Player;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
@@ -113,7 +114,14 @@ namespace Movement
                         //IsMoving = false;
                         player.player.transform.position = Vector3.MoveTowards(
                             player.player.transform.position,
-                            new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                            new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 75f);
+                    }
+
+                    if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
+                    {
+                            player.player.transform.position = Vector3.MoveTowards(
+                                player.player.transform.position,
+                                new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * 75f);
                     }
                     else
                     {
@@ -121,7 +129,7 @@ namespace Movement
                         player.IsMoving = true;
                         player.transform.position =
                             Vector3.MoveTowards(player.player.transform.position, mouseNext,
-                                Time.deltaTime * 50f);
+                                Time.deltaTime * 75f);
                     }
                 }
 

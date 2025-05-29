@@ -72,11 +72,19 @@ namespace Player
             {
                 CurrentControl = new EyeTrack(strategy);
                 CurrentControl.Enable();
-                Debug.Log("move with:eye_track");
+                if (CurrentControl.get_action().enabled == false)
+                {
+                    InputAction s= inputActionMap.FindAction("MouseMove");
+                    CurrentControl.Disable();
+                    change_strategy(s);
+                    
+                }
+                else
+                    Debug.Log("move with:eye_track");
             }
         }
 
-        private string ret_icontrol_name(IControl icontrol)
+        public string ret_icontrol_name(IControl icontrol)
         {
             return icontrol.GetType().Name;
         }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Battle;
 using Items;
 using Player;
 using Sliders_scripts;
@@ -31,8 +32,35 @@ namespace Inventory
 
         public void Awake()
         {
-            if(Instance==null) Instance = this;
-            DontDestroyOnLoad(this);
+            if (Instance == null) Instance = this;
+        }
+
+        public void add_object(GameObject obj){
+            if (obj.tag.Equals("Spells"))
+            {
+                learn_spell(obj.GetComponent<Spells.Spell>());
+            }
+            else
+            {
+                if (obj.tag.Equals("Artefacts"))
+                {
+                    add_artefact(obj);
+                }
+                else
+                {
+                    if (obj.tag.Equals("Weapons"))
+                    {
+                        FindWeapon(obj);
+                    }
+                    else
+                    {
+                        if (obj.tag.Equals("Food"))
+                        {
+                            add_food(obj);
+                        }
+                    }
+                }
+            }
         }
         //Weapons stuff
         public WeaponB Attack()
@@ -72,6 +100,7 @@ namespace Inventory
             if (check_weapons(new_weapon.WeaponName)==false)
             {
                 StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new weapon\n Check your bag...",2f));
+                PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 0f;
                 PlayerManager.Instance.NewItem = true;
                 Invoke(nameof(finding_animation),2f);
                 weapons.Add(new_weapon);
@@ -87,10 +116,25 @@ namespace Inventory
         public void learn_spell(Spells.Spell s)
         {
             if (s != null)
-            { 
-                spells.Add(s.GetComponent<Spells.Spell>());
-                spells.Last().level_up();
-                //StartCoroutine(notification_show("Learning a spell...\n"));
+            {
+                if (PlayerManager.Instance.learnSpellSkill)
+                {
+                    if (spells.Contains(s))
+                    {
+                        spells.Find(spell => spell.SpellBase.Equals(s.SpellBase)).level_up();
+                    }
+                    else
+                    {
+                        spells.Add(s.GetComponent<Spells.Spell>());
+                        spells.Last().level_up();
+                    }
+
+                    StartCoroutine(PlayerManager.Instance.Notification.notification_show("Learning a spell...\n",2f));
+                }
+                else
+                {
+                    StartCoroutine(PlayerManager.Instance.Notification.notification_show("You cannot learn the spell yet\n",2f));
+                }
             }
         }
         public Spells.Spell getSpell(string name)
@@ -120,6 +164,7 @@ namespace Inventory
             if (get_number_of_food_item(f.FoodName) <= 0) return;
             PlayerManager.Instance.IsEating = true;
             HpSlider.Instance.UpdateUI();
+            
             food.Remove(f);
             PlayerManager.Instance.HpPlayerA.healing_animation();
             Invoke(nameof(eating_animation),2f);
@@ -137,6 +182,7 @@ namespace Inventory
             else
             {
                 StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new artefact\n Check your bag...",2f));
+                PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 0f;
                 PlayerManager.Instance.NewItem = true;
                 Invoke(nameof(finding_animation),2f);
                 artefacts.Add(artefact);
@@ -161,8 +207,9 @@ namespace Inventory
         public void finding_animation()
         {
             Debug.Log("Animation started");
-        
             PlayerManager.Instance.NewItem = false;
+            PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
+            PlayerManager.Instance.menuOpen.gameObject.SetActive(false);
             //IsMoving = true;
         
         }

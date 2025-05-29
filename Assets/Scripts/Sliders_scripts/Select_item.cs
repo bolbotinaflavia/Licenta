@@ -24,6 +24,7 @@ namespace Sliders_scripts
                     if (PlayerManager.Instance.hp + _f.Hp < 100f)
                     {
                         PlayerManager.Instance.hp += _f.Hp;
+                        UpdateUI();
                     }
                     else
                     {
@@ -46,7 +47,7 @@ namespace Sliders_scripts
         }
 
         // Update is called once per frame
-        private void Update()
+        private void UpdateUI()
         {
             if (_f != null)
             {

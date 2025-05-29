@@ -1,17 +1,22 @@
-﻿using Battle;
+﻿using System.Collections;
+using System.IO.Enumeration;
+using Battle;
 using Cinemachine;
 using Enemies;
+using Eyeware.BeamEyeTracker.Unity;
+using Inventory;
 using Player;
 using Sliders_scripts;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public enum GameState
 {
     FreeRoam,
     Battle,
-    Menu
+    Menu,
 }
 public class GameController:MonoBehaviour
 {
@@ -23,23 +28,28 @@ public class GameController:MonoBehaviour
     [SerializeField] private BattleSystem battleSystem;
     [FormerlySerializedAs("battle_camera")] [SerializeField] private Camera battleCamera;
     [FormerlySerializedAs("player_camera")] [SerializeField] private CinemachineVirtualCamera playerCamera;
+    [SerializeField] private GameObject enemy_obj;
 
     private void Start()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(this);
         }
-
+        
+        if(playerMovement==null)
+            playerMovement = PlayerManager.Instance;
+       
         playerMovement.OnEncountered += StartBattle;
     }
-
-    private void StartBattle(Enemy enemy)
+    private void StartBattle(Enemy enemy,GameObject obj)
     {
         state = GameState.Battle;
-        audioIdle.Stop();
-        audioBattle.PlayDelayed(2f);
+        if(audioIdle!=null)
+            audioIdle.Stop();
+        if(audioBattle!=null)
+            audioBattle.PlayDelayed(2f);
+        PlayerManager.Instance.isMoving = false;
         playerCamera.gameObject.SetActive(false);
         playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = false;
         HpSlider.Instance.UpdateUI();
@@ -50,18 +60,38 @@ public class GameController:MonoBehaviour
         {
             PlayerMovement.Instance.CurrentControl.load_sliders();
         }
-        audioIdle.mute = true;
+
+        enemy_obj = obj;
+        if(audioIdle!=null)
+            audioIdle.mute = true;
         StartCoroutine(battleSystem.Setup_battle());
     }
-
-    public void StopBattle()
+    
+    public void StopBattle(bool enemyDefeated)
     {
+        if (enemyDefeated)
+        {
+            enemy_obj.GetComponent<Enemy>().InsideObject.SetActive(true);
+            var insideObj = enemy_obj.GetComponent<Enemy>().InsideObject;
+            if(insideObj!=null)
+                InventoryManager.Instance.add_object(insideObj);
+            Destroy(enemy_obj);
+        }
+        else
+        {
+            playerMovement.player.transform.position += new Vector3(enemy_obj.transform.position.x +100f, 0, 0);
+        }
         Debug.Log("StopBattle");
         state = GameState.FreeRoam;
         PlayerManager.Instance.IsMoving = true;
-        audioBattle.Stop();
-        audioIdle.Play();
-        audioIdle.mute = false;
+        if(audioBattle!=null)
+            audioBattle.Stop();
+        if (audioIdle != null)
+        {
+            audioIdle.Play();
+            audioIdle.mute = false;
+        }
+
         battleSystem.gameObject.SetActive(false);
         battleCamera.gameObject.SetActive(false);
             
@@ -72,8 +102,14 @@ public class GameController:MonoBehaviour
 
             
     }
+    
     private void Update()
     {
+        // if (SceneManager.GetActiveScene().name == "Level2")
+        // {
+        //     if(battleSystem==null)
+        //          update_gameobjects();
+        // }
         if (state == GameState.FreeRoam)
         {
             playerMovement.HandleUpdate();

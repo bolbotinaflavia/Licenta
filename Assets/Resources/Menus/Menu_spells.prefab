@@ -652,6 +652,7 @@ GameObject:
   - component: {fileID: 4912207662020407134}
   - component: {fileID: 9173937993765651785}
   - component: {fileID: 2299890167756634852}
+  - component: {fileID: 15618994527618298}
   m_Layer: 6
   m_Name: Spell1
   m_TagString: Untagged
@@ -676,9 +677,9 @@ RectTransform:
   - {fileID: 648166281152684259}
   m_Father: {fileID: 5996976298033656788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 768, y: -1000}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1887, y: -51}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4912207662020407134
@@ -748,6 +749,7 @@ MonoBehaviour:
   menuOption: {fileID: 4912207662020407134}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   s: {fileID: 0}
   spellName: Brisingr
   text: {fileID: 6103108789845102998}
@@ -782,6 +784,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &15618994527618298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2438053112584395494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &2515830113619633296
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +945,7 @@ GameObject:
   - component: {fileID: 9035928454664099109}
   - component: {fileID: 1476929330209863452}
   - component: {fileID: 1558239802548373103}
+  - component: {fileID: 7901324284408022362}
   m_Layer: 6
   m_Name: Spell3
   m_TagString: Untagged
@@ -952,9 +970,9 @@ RectTransform:
   - {fileID: 4998696347283799574}
   m_Father: {fileID: 5996976298033656788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2452, y: -430}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1153, y: 727}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9035928454664099109
@@ -1024,6 +1042,7 @@ MonoBehaviour:
   menuOption: {fileID: 9035928454664099109}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   s: {fileID: 0}
   spellName: Jierda
   text: {fileID: 2407771821415596419}
@@ -1058,6 +1077,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &7901324284408022362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2551054624991122690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &2979909050652107509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,6 +1535,7 @@ GameObject:
   - component: {fileID: 8699382395630801619}
   - component: {fileID: 2768573573947684574}
   - component: {fileID: 3583204929116137656}
+  - component: {fileID: 8998540627523797766}
   m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
@@ -1527,7 +1562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3092.0005, y: -1653.9999}
+  m_AnchoredPosition: {x: 2139, y: -1717}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8699382395630801619
@@ -1597,6 +1632,7 @@ MonoBehaviour:
   menuOption: {fileID: 8699382395630801619}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &3583204929116137656
 MonoBehaviour:
@@ -1627,6 +1663,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8998540627523797766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4210100656956293455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &5262290765871319284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,6 +1690,7 @@ GameObject:
   - component: {fileID: 8794321600634994939}
   - component: {fileID: 5236354301771066386}
   - component: {fileID: 4704428504342021285}
+  - component: {fileID: 8268473654226497575}
   m_Layer: 6
   m_Name: Spell4
   m_TagString: Untagged
@@ -1663,9 +1715,9 @@ RectTransform:
   - {fileID: 3018827772943240172}
   m_Father: {fileID: 5996976298033656788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 3173, y: -1000}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 1856, y: -36}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8794321600634994939
@@ -1735,6 +1787,7 @@ MonoBehaviour:
   menuOption: {fileID: 8794321600634994939}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   s: {fileID: 0}
   spellName: Slytha
   text: {fileID: 8172359570257144464}
@@ -1769,6 +1822,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &8268473654226497575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5262290765871319284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2
 --- !u!1 &5706471802637607410
 GameObject:
   m_ObjectHideFlags: 0
@@ -1930,8 +1998,8 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 1
-  m_MatchWidthOrHeight: 0
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2582,6 +2650,7 @@ GameObject:
   - component: {fileID: 4816786999489695754}
   - component: {fileID: 1971605420709112310}
   - component: {fileID: 521153325198695165}
+  - component: {fileID: 2908019658493851137}
   m_Layer: 6
   m_Name: Spell2
   m_TagString: Untagged
@@ -2606,9 +2675,9 @@ RectTransform:
   - {fileID: 8786813413129179221}
   m_Father: {fileID: 5996976298033656788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1490, y: -437}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -1254, y: 658}
   m_SizeDelta: {x: 400, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4816786999489695754
@@ -2678,6 +2747,7 @@ MonoBehaviour:
   menuOption: {fileID: 4816786999489695754}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
   timer: 0.75
+  immersiveHUDPanelBehaviour: {fileID: 0}
   s: {fileID: 0}
   spellName: Poison
   text: {fileID: 2463133239680963529}
@@ -2712,3 +2782,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2908019658493851137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8503383932801931930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68452025a10d8b4fb43c98e5f7850ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeOutSpeed: 2
+  fadeInSpeed: 10
+  minOpacity: 0.2

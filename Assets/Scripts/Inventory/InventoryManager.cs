@@ -19,6 +19,7 @@ namespace Inventory
         [SerializeField] private List<FoodBase> food=new List<FoodBase>();
         [SerializeField] private List<ItemObject> items=new List<ItemObject>();
         [SerializeField] private List<Spells.Spell> spells=new List<Spells.Spell>();
+        [SerializeField] private List<ArtefactBase> artefacts=new List<ArtefactBase>();
 
         //public InventoryManager Instance => _instance;
         public List<global::Weapons.WeaponB> Weapons => weapons;
@@ -26,6 +27,7 @@ namespace Inventory
         public List<FoodBase> Food => food;
         public List<ItemObject> Items => items;
         public List<Spells.Spell> Spells => spells;
+        public List<ArtefactBase> Artefacts => artefacts;
 
         public void Awake()
         {
@@ -69,7 +71,7 @@ namespace Inventory
             //de implementat cand collide cu o arma
             if (check_weapons(new_weapon.WeaponName)==false)
             {
-                StartCoroutine(PlayerManager.Instance.notification_show("You found a new weapon\n Check your bag..."));
+                StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new weapon\n Check your bag...",2f));
                 PlayerManager.Instance.NewItem = true;
                 Invoke(nameof(finding_animation),2f);
                 weapons.Add(new_weapon);
@@ -105,6 +107,7 @@ namespace Inventory
         public void add_food(GameObject f)
         {
             var new_food=Resources.Load<FoodBase>($"Food/{f.GetComponent<Food>().Base.FoodName}");
+            StartCoroutine(PlayerManager.Instance.Notification.notification_show($"You found a {new_food.FoodName}",2f));
             food.Add(new_food);
             Destroy(f,0.2f);
         }
@@ -120,6 +123,38 @@ namespace Inventory
             food.Remove(f);
             PlayerManager.Instance.HpPlayerA.healing_animation();
             Invoke(nameof(eating_animation),2f);
+        }
+        
+        //artefacts
+        public void add_artefact(GameObject a)
+        {
+            var artefact =
+                Resources.Load<ArtefactBase>($"Artefacts/{a.GetComponent<Artefact>().ArtefactBase.ArtefactName}");
+            if (artefacts.Count+1 > 4)
+            {
+                PlayerManager.Instance.Notification.notification_show("You have too many artefacts!",2f);
+            }
+            else
+            {
+                StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new artefact\n Check your bag...",2f));
+                PlayerManager.Instance.NewItem = true;
+                Invoke(nameof(finding_animation),2f);
+                artefacts.Add(artefact);
+                if (artefact.ArtefactName.Equals("SpellBook"))
+                    PlayerManager.Instance.learnSpellSkill = true;
+                new WaitForSeconds(5f);
+                Destroy(a);
+            }
+        }
+
+        public ArtefactBase getArtefact(string name)
+        {
+            foreach (var a in artefacts)
+            {
+                if (a.ArtefactName == name)
+                    return a;
+            }
+            return null;
         }
         
         //animations

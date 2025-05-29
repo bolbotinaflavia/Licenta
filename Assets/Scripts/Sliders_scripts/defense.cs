@@ -13,7 +13,7 @@ namespace Sliders_scripts
             }
             else
             {
-                StartCoroutine(PlayerManager.Instance.notification_show("It's not your turn!"));
+                StartCoroutine(BattleSystem.Instance.Notification.notification_show("It's not your turn!",2f));
             }
             menuOption.value = 1;
         }

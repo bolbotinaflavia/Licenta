@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Battle;
+using DefaultNamespace;
 using Enemies;
 using Inventory;
 using TMPro;
@@ -10,6 +11,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Weapons;
+using Eyeware.BeamEyeTracker;
+using Eyeware.BeamEyeTracker.Unity;
 
 namespace Player
 {
@@ -17,7 +21,12 @@ namespace Player
     {
         public static PlayerManager Instance;
         //pentru notifications
-        [SerializeField]private TextMeshProUGUI notification;
+        [SerializeField]private Notification notification;
+
+        public Notification Notification
+        {
+            get { return notification; }
+        }
         private static readonly int Moving = Animator.StringToHash("isMoving");
         private static readonly int Eating = Animator.StringToHash("is_eating");
         private static readonly int Item = Animator.StringToHash("new_item");
@@ -32,7 +41,7 @@ namespace Player
         public int defense;
         [FormerlySerializedAs("attack_speed")] public int attackSpeed;
         //skills
-        [FormerlySerializedAs("learn_spell_skill")] public bool learnSpellSkill;//after finding a magic book you can learn spells
+        [FormerlySerializedAs("learn_spell_skill")] public bool learnSpellSkill=false;//after finding a magic book you can learn spells
     
         //mouse, keyboard
         //[SerializeField] public List<Control> controls;
@@ -56,6 +65,11 @@ namespace Player
         }
         //weapons, objects and spells
         [SerializeField]private InventoryManager inventory;
+
+        public InventoryManager Inventory
+        {
+            get => inventory;
+        }
         //animation parameters, menu ...
         [FormerlySerializedAs("_isMoving")] public bool isMoving=true;
         public bool IsMoving { 
@@ -219,8 +233,8 @@ namespace Player
                     if (Box.Instance.opened == false)
                     {
                         //IsMoving = false;
-                        notification.text = "";
-                        StartCoroutine(notification_show("Opening Treasure Chest\n"));
+                        notification.Message.text = "";
+                        StartCoroutine(notification.notification_show("Opening Treasure Chest\n",2f));
                         //IsMoving = false;
                         var b =other.GetComponent<Box>();
                         b.open_box();
@@ -240,8 +254,8 @@ namespace Player
             {
                 if (MagicTree.Instance.discovered != true)
                 {
-                    notification.text = "";
-                    StartCoroutine(notification_show("You found a magic tree...\n"));
+                    notification.Message.text = "";
+                    StartCoroutine(notification.notification_show("You found a magic tree...\n",2f));
                    // Debug.Log("Learning spell");
                     //animatie search tree
                     NewItem = true;
@@ -255,7 +269,7 @@ namespace Player
             {
                
                // Debug.Log("Weapon!!!");
-                WeaponBase weaponItem = other.gameObject.GetComponent<WeaponBase>();
+                Weapon weaponItem = other.gameObject.GetComponent<Weapon>();
                 if (weaponItem != null)
                 {
                     //Debug.Log("Finding weapon");
@@ -272,9 +286,15 @@ namespace Player
                 
                // Invoke(nameof(start_battle),3f);
                BeginBattle = true;
-               new_battle_anim();
+               StartCoroutine(new_battle_anim());
                StartCoroutine(start_battle_a(other.gameObject));
 
+            }
+
+            if (other.gameObject.CompareTag("Artefacts"))
+            {
+                    IsMoving = false;
+                    InventoryManager.Instance.add_artefact(other.gameObject);
             }
             else
             {
@@ -284,51 +304,28 @@ namespace Player
             //IsMoving = true;
 
         }
-        public IEnumerator notification_show(string final_text)
+
+        private IEnumerator new_battle_anim()
         {
-            notification.text = "";
-            foreach (var letter in final_text.ToCharArray())
-            {
-                if (letter.Equals('\n'))
-                {
-                    yield return new WaitForSeconds(1/30f);
-                }
-                notification.text += letter;
-                yield return new WaitForSeconds(1f/50);
-            }
-            
-            new WaitForSeconds(1f);
-            Invoke(nameof(notification_delete),1f);
-
-
-        }
-        
-
-        private void notification_delete()
-        {
-            notification.text = "";
-        }
-
-        private void new_battle_anim()
-        {
+            yield return new WaitForSeconds(3f);
             BeginBattle = false;
             IsMoving = true;
         }
 
         private IEnumerator start_battle_a(GameObject enemy)
         {
-            yield return new WaitForSeconds(3f);
-            start_battle(enemy);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(start_battle(enemy));
             
         }
         //start battle
-        private void start_battle(GameObject enemy)
+        private IEnumerator start_battle(GameObject enemy)
         {
             
             StartCoroutine(
-                notification_show($"You encountered an enemy \n {enemy.GetComponent<Enemy>().EnemieBase.name}"));
-            new WaitForSeconds(5f);
+                notification.notification_show($"You encountered an enemy \n {enemy.GetComponent<Enemy>().EnemieBase.name}",1f));
             OnEncountered?.Invoke(enemy.GetComponent<Enemy>());
+            yield return new WaitForSeconds(2f);
             Destroy(enemy);
         }
         //Items
@@ -389,7 +386,7 @@ namespace Player
 
         public void HandleUpdate()
         {
-            if (player == null || isHover)
+            if (player == null||isHover)
             {
                 return;
 

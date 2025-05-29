@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Movement;
 using Player;
-using UnityEditor.StyleSheets;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;

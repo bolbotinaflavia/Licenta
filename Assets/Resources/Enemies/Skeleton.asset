@@ -16,13 +16,12 @@ MonoBehaviour:
   description: 
   sprite1: {fileID: -4566929576296075330, guid: 4927ff7e2a1eeed40bc7791389e1051d, type: 3}
   type: 0
-  attackS: {fileID: 0}
-  defenseS: {fileID: 0}
+  _animator: {fileID: 9100000, guid: f42c4f6ce82359345a61e7a74e65271d, type: 2}
   w1: 3
-  w2: 0
-  hpMax: 60
-  attack: 5
-  defense: 1
+  w2: 2
+  hpMax: 40
+  attack: 10
+  defense: 10
   speed: 1
   moves:
   - move: {fileID: 11400000, guid: fd5cb860b3218f3419ce6535733f7606, type: 2}

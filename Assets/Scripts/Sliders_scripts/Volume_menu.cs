@@ -17,14 +17,14 @@ namespace Sliders_scripts
             {
                 Volume.Instance.Increase();
                 menuOption.value = 1;
-                if(!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
+                if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
                     StartTimer();
             }
             else
             {
                 Volume.Instance.Decrease();
                 menuOption.value = 1;
-                if(!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
+                if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
                     StartTimer();
             }
             menuOption.value = 1;

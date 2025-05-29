@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections;
+using DefaultNamespace;
 using Enemies;
 using Inventory;
 using Player;
 using Sliders_scripts;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,24 +19,29 @@ namespace Battle
         PlayerMove,
         EnemyMove,
         Busy,
-        EnemyDead
+        EnemyDead,
+        PlayerDead,
     }
     public class BattleSystem : MonoBehaviour
     {
         public static BattleSystem Instance;
+        [SerializeField] private BattleAnimationManager animationManager;
         [SerializeField] private PlayerUnit player;
         [FormerlySerializedAs("hpBar_player")] [SerializeField]
         private HpSlider hpBarPlayer;
         [SerializeField] private BattleUnit enemyUnit;
         [SerializeField] private HpBar hpBar;
         [SerializeField] private string loadEnemyName;
+        [SerializeField] private Notification _notification;
+        public Notification Notification => _notification;
+        public BattleAnimationManager AnimationManager => animationManager;
         public string LoadEnemyName
         {
             get => loadEnemyName;
             set => loadEnemyName=value;
         }
 
-        private BattleState state;
+        [SerializeField] private BattleState state;
 
         public BattleState State
         {
@@ -57,7 +65,7 @@ namespace Battle
 
         public IEnumerator Setup_battle()
         {
-            //player.Setup();
+            player.Setup();
            // enemyUnit = gameObject.AddComponent<BattleUnit>();
        
             enemyUnit.Setup_Enemy(loadEnemyName);
@@ -67,32 +75,35 @@ namespace Battle
             hpBar.Setup(enemyUnit);
             hpBar.UpdateUI_Enemy();
             hpBarPlayer.UpdateUI();
-            
             yield return new WaitForSeconds(1f);
-
             StartCoroutine(PlayerActions());
         }
 
         private IEnumerator PlayerActions()
         {
             state = BattleState.PlayerAction;
-          
+            StartCoroutine(_notification.notification_show("It's your turn!!",5f));
             yield return new WaitForSeconds(1f);
         }
 
+        private IEnumerator spell_battle(string actionName)
+        {
+            StartCoroutine(animationManager.startAnimationsPlayerAttack());
+            new WaitForSeconds(5f);
+            yield return new WaitForSeconds(5f);
+            state = BattleState.EnemyMove;
+        }
         // ReSharper disable Unity.PerformanceAnalysis
-        public IEnumerator PlayerActionMove(String actionName)
+        public IEnumerator PlayerActionMove(string actionName)
         {
             BattleSystem.Instance.State = BattleState.Busy;
+           // yield return new WaitForSeconds(2f);
             switch (actionName)
             {
                 case "attack":
                 {
                     var attackDamage = player.AttackBattle();
                     enemyUnit.Attacked(attackDamage,player.player);
-                    new WaitForSeconds(2f);
-                    hpBar.UpdateUI_Enemy();
-                   
                     //nu merge animatia la hpbar
             
                     //  Debug.Log("player attack is "+player.attack());
@@ -110,6 +121,7 @@ namespace Battle
                 case"Brisingr":
                     var spell = InventoryManager.Instance.getSpell(actionName);
                     enemyUnit.AttackedBySpell(spell, player.player);
+                    StartCoroutine(spell_battle(actionName));
                     break;
                 case "Jierda":
                     spell = InventoryManager.Instance.getSpell(actionName);
@@ -125,40 +137,50 @@ namespace Battle
                     break;
                 
             }
+           
             if (enemyUnit.Hp <= 0)
             {
-                yield return player.player.notification_show("The enemy is dead");
+                StartCoroutine(enemyDefeted());
                 state = BattleState.EnemyDead;
             }
             else
             {
                 new WaitForSeconds(5f);
-                StartCoroutine(EnemyMove());
+                StartCoroutine(_notification.notification_show($"You used {actionName}", 2f));
+                yield return StartCoroutine(animationManager.startAnimationsPlayerAttack());
+                new WaitForSeconds(2f);
+                state = BattleState.EnemyMove;
             }
+            yield return new WaitForSeconds(6f);
         }
 
         private IEnumerator EnemyMove()
         {
-            state = BattleState.EnemyMove;
-            var move = enemyUnit.getRandomMove();
-            var damage=enemyUnit.Attack(move,player.player);
-            player.player.hp -= damage;
-            new WaitForSeconds(2f);
+            //state = BattleState.EnemyMove;
+            new WaitForSeconds(3f);
+            StartCoroutine(_notification.notification_show("Enemy turn!!",4f));
+            yield return new WaitForSeconds(2f);
+            var move = enemyUnit.getRandomMove(); 
+            enemyUnit.Attack(move,player.player);
+           
             // player.HP-=player.HP-(enemyUnit.attack()+(int)(player.defense*0.1));
-            player.HpAnim.damaging_animation();
-            hpBarPlayer.UpdateUI();
+           
            // hpBar.UpdateUI_Enemy();
             
             if (player.player.hp <= 0)
             {
-                yield return player.player.notification_show("The player is dead");
-                state = BattleState.EnemyDead;
+                StartCoroutine(playerDefeted());
+                state = BattleState.PlayerDead;
             }
             else
             {
+                StartCoroutine(animationManager.startAnimationsEnemyAttack());
+                StartCoroutine(_notification.notification_show($"Enemy used {move.MoveName}",4f));
+                yield return new WaitForSeconds(6f);
                 StartCoroutine(PlayerActions());
             }
         }
+        
         
         public void HandleUpdate()
         {
@@ -176,9 +198,15 @@ namespace Battle
                 //aici animatia
             }
 
+            if (state == BattleState.EnemyMove)
+            {
+                StopAllCoroutines();
+                StartCoroutine(EnemyMove());
+                state = BattleState.Busy;
+            }
+
             if (state == BattleState.EnemyDead)
             {
-                Invoke(nameof(exit_battle),3f);
             }
             // if (enemyUnit!=null&&enemyUnit.Hp == 0)
             // {
@@ -199,9 +227,29 @@ namespace Battle
            
         }
 
+        private IEnumerator enemyDefeted()
+        {
+            state = BattleState.Busy;
+            StartCoroutine(_notification.notification_show($"Enemy Defeated",4f));
+            //maybe ceva animatie
+            yield return new WaitForSeconds(2f);
+            exit_battle();
+        }
+
+        private IEnumerator playerDefeted()
+        {
+            state = BattleState.Busy;
+            StartCoroutine(_notification.notification_show($"Player Defeated",4f));
+            player.player.hp = 20;
+            //maybe ceva animatie
+            yield return new WaitForSeconds(2f);
+            exit_battle();
+        }
         public void exit_battle()
         {
             GameController.Instance.StopBattle();
+            state = BattleState.Busy;
         }
+        
     }
 }

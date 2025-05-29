@@ -17,8 +17,8 @@ namespace Enemies
         [SerializeField] private Type type;
         public Sprite Sprite1 => sprite1;
         //aici ar trebui animatii
-        [FormerlySerializedAs("attack_s")] [SerializeField] private Sprite attackS;
-        [FormerlySerializedAs("defense_s")] [SerializeField] private Sprite defenseS;
+        [FormerlySerializedAs("_animator")] [SerializeField] private RuntimeAnimatorController animator;
+        
         [SerializeField] private WeaponWeakness w1;
         [SerializeField] private SpellWeakness w2;
     
@@ -29,6 +29,8 @@ namespace Enemies
         [SerializeField] private float defense;
         [SerializeField] private int speed;
         [SerializeField] private List<LearnableMoves> moves;
+        
+        public RuntimeAnimatorController Animator => animator;
         public List<string> get_all_enemies_entities()
         {
             var allEnemies = GameObject.FindObjectsOfType<EnemieBase>().ToList().ConvertAll(x => x.enemyName);

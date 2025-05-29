@@ -1,17 +1,27 @@
-﻿using Player;
+﻿using Eyeware.BeamEyeTracker;
+using Eyeware.BeamEyeTracker.Unity;
+using Player;
 using Tobii.Research.Unity;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
+
 
 namespace Movement
 {
     public class EyeTrack:IControl
     {
+       
         public EyeTrack Instance;
         private readonly InputAction _move;
-        private EyeTracker _eyeTrack;
+        private API api;
+        private BeamEyeTrackerInputDevice _eyeTrackerInputDevice;
         public GazeTrail Trail;
+
+        public Pointer p;
        // public string name;
        
         public EyeTrack(InputAction moveAction)
@@ -22,23 +32,19 @@ namespace Movement
         public void Enable()
         {
             _move.Enable();
-            if (_eyeTrack == null)
-            {
-                _eyeTrack = Object.FindObjectOfType<EyeTracker>();
-                if (_eyeTrack != null)
-                {
-                    _eyeTrack.enabled = true;
-                    Trail = Object.FindObjectOfType<GazeTrail>();
-                    Debug.Log("Connected to Eye Track:" + _eyeTrack.name);
+            
+                api = new API("licenta", new ViewportGeometry());
+                if(api != null)
+                { 
+                //Camera.main.gameObject.GetComponent<CameraControlBehaviour>().cameraControlIsPaused = false;
+                api.StartRecenterSimGameCamera();
+                api.AttemptStartingTheBeamEyeTracker();
+                Debug.Log(api.GetVersion().Major);
+                Debug.Log(api.GetTrackingDataReceptionStatus());
                 }
-                else
-                {
-                    Debug.Log("No Eye Track Found");
-                }
-            }
             else
             {
-                Debug.Log("Already connected to Eye Track");
+                Debug.Log("API is null");
             }
         }
 
@@ -59,7 +65,7 @@ namespace Movement
 
         public void enter_slider(Slider s)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("You looked at this slider: "+s.gameObject.name);
         }
 
         public void exit_slider(Slider s)
@@ -90,54 +96,61 @@ namespace Movement
             if (this == null)
                 return;
         }
+
         public void Move(PlayerManager player)
         {
-            
-            Vector2 inputPos = _move.ReadValue<Vector2>();
-            //Debug.Log(inputPos);
-            Vector3 worldMouse =
-                Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
-            Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
-
-            // Implement mouse-based movement logic
-            if (MenuManager.Instance.currentMenu.activeSelf == false)
+            if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.ReceivingTrackingData)
             {
-
-                float distance = mouseNext.x - player.player.transform.position.x;
-                player.SetFacingDirection(distance);
-                RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
-                if ((hit.collider != null && hit.collider.gameObject == player.player) || player.NewItem)
-
+                Point inputpos = api.GetLatestTrackingStateSet().UserState.UnifiedScreenGaze.PointOfRegard;
+                p = new Pointer();
+                Vector3 worldMouse =
+                    Camera.main.ScreenToWorldPoint(new Vector3(inputpos.X, inputpos.Y,
+                        Camera.main.nearClipPlane));
+                Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
+                // Implement mouse-based movement logic
+                if (MenuManager.Instance.currentMenu.activeSelf == false)
                 {
-                    player.IsMoving = false;
+                    player.menuOpen.gameObject.SetActive(true);
+                    float distance = mouseNext.x - player.player.transform.position.x;
+                    player.SetFacingDirection(distance);
+                    
+                    
+                    // if (player.GetComponent<Collider2D>().bounds
+                    //     .Contains(new Vector3(inputpos.X, inputpos.Y, Camera.main.nearClipPlane)))
+                    // {
+                    //     Debug.Log("the menu should open");
+                    //     player.IsMoving = false;
+                    //     player.isHover = true;
+                    //     player.menu_slider_open();
+                    //     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
+                    // }
+                    if (player.isMoving != false)
+                    {
+                        if (player.player.transform.position.x < 398)
+                        {
+                            //IsMoving = false;
+                            player.player.transform.position = Vector3.MoveTowards(
+                                player.player.transform.position,
+                                new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                        }
+                        else
+                        {
+
+                            player.IsMoving = true;
+                            player.transform.position =
+                                Vector3.MoveTowards(player.player.transform.position, mouseNext,
+                                    Time.deltaTime * 50f);
+                        }
+                    }
+
                 }
                 else
                 {
-                    if (player.player.transform.position.x < 398)
-                    {
-                        //IsMoving = false;
-                        player.player.transform.position = Vector3.MoveTowards(
-                            player.player.transform.position,
-                            new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
-                    }
-                    else
-                    {
-
-                        player.IsMoving = true;
-                        player.transform.position =
-                            Vector3.MoveTowards(player.player.transform.position, mouseNext,
-                                Time.deltaTime * 50f);
-                    }
+                    player.menuOpen.gameObject.SetActive(false);
+                    player.IsMoving = false;
                 }
 
             }
-
-
-            else
-            {
-                player.IsMoving = false;
-            }
-            
         }
     }
 }

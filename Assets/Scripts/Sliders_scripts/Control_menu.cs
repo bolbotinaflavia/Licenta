@@ -51,29 +51,18 @@ namespace Sliders_scripts
                 foreach (InputAction inp in playerMovement.inputActions)
                 {
                     inp.Disable();
-
-                }
-
-                foreach (var s in FindObjectsOfType<Slider>())
-                {
-                    if (s.IsActive())
-                    {
-                        if (!s.name.Equals("Back") && !s.name.Equals("HP"))
-                        {
-                            if (s.GetComponent<ControlMenu>() != null)
-                                s.GetComponent<ControlMenu>().fade.color =
-                                    new Color(0.4901961f, 0.4392157f, 0.4431373f);
-                            s.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                        }
-
-                       
-                    }
                 }
                 //weapon.InUse = true;
-                fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
-                input.Enable();
-                Debug.Log(input.name);
                 PlayerMovement.Instance.change_strategy(input);
+             //   input.Enable();
+                if (PlayerMovement.Instance.CurrentControl.get_action().Equals(nameControl))
+                {
+                    Debug.Log(input.name);
+                }
+                else
+                {
+                    Debug.Log("the input could not be found");
+                }
             }
             else
                 Debug.Log("Control already enabled");
@@ -81,7 +70,32 @@ namespace Sliders_scripts
         }
         public void UpdateUI()
         {
-            if (input is { enabled: true })  fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
+            foreach (var s in FindObjectsOfType<Slider>())
+            {
+                if (s.IsActive())
+                {
+                    if (!s.name.Equals("Back") && !s.gameObject.tag.Equals("HP"))
+                    {
+                        if (s.GetComponent<ControlMenu>() != null)
+                        {
+                            if (s.GetComponent<ControlMenu>().input.enabled == false)
+                            {
+                                s.GetComponent<ControlMenu>().fade.color =
+                                    new Color(0.4901961f, 0.4392157f, 0.4431373f);
+                                s.fillRect.GetComponent<Image>().color =
+                                    new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                            }
+                            else
+                            {
+                                s.GetComponent<ControlMenu>().fade.color =
+                                    new Color(0.2234294f, 0.4823529f, 0.2666667f);
+                                s.fillRect.GetComponent<Image>().color =
+                                    new Color(0.9568627f, 0.7058824f, 0.1058824f);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

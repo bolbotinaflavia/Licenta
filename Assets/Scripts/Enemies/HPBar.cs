@@ -58,8 +58,6 @@ namespace Enemies
                 Color dying = new Color(0.6627451f, 0.2313726f, 0.2313726f);
                 if(enemy != null){
                     hpSlider.value = enemy.Hp;
-                    if(hpSlider.value == 0)
-                        GameController.Instance.StopBattle();
                 }
                 if (hpSlider.value == 0f)
                     Hp_Slider_zero();

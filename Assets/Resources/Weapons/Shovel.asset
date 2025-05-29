@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Shovel
   m_EditorClassIdentifier: 
   weaponName: Shovel
-  description: 
+  description: Used for digging
   inUse: 0
   discovered: 0
   damage: 20

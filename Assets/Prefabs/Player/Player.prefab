@@ -48,14 +48,15 @@ GameObject:
   - component: {fileID: 7100074073203274395}
   - component: {fileID: 1067565503244232869}
   - component: {fileID: 1803680550272262276}
-  - component: {fileID: 4838046437165249311}
+  - component: {fileID: 5895078423053909095}
+  - component: {fileID: 2833146940243795947}
   m_Layer: 5
   m_Name: OpenMenu
-  m_TagString: Player
+  m_TagString: HP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6954475491731030068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -74,7 +75,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 882, y: 564}
+  m_AnchoredPosition: {x: 161, y: 536}
   m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7100074073203274395
@@ -144,7 +145,7 @@ MonoBehaviour:
   menuOption: {fileID: 7100074073203274395}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
   timer: 1
-  lookedUpPanel: {fileID: 0}
+  immersiveHUDPanelBehaviour: {fileID: 5895078423053909095}
 --- !u!114 &1803680550272262276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,8 +174,8 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
---- !u!114 &4838046437165249311
+          m_CallState: 1
+--- !u!114 &5895078423053909095
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,6 +190,18 @@ MonoBehaviour:
   fadeOutSpeed: 2
   fadeInSpeed: 10
   minOpacity: 0.2
+--- !u!225 &2833146940243795947
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4331257133018466880}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4889586322009145369
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,7 +286,7 @@ SpriteRenderer:
   m_SortingLayerID: 1357677739
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4083761923556748656, guid: 8d56104157fea04429dfe88dbcf2f1dc, type: 3}
+  m_Sprite: {fileID: 2724551684442473783, guid: 8d56104157fea04429dfe88dbcf2f1dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -298,14 +311,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notification: {fileID: 8959821539752899205}
   playerMovement: {fileID: 0}
-  hp: 80
+  hp: 1
   defense: 30
   attackSpeed: 10
   learnSpellSkill: 0
-  mTobiiControl: {fileID: 0}
   menuOpen: {fileID: 7100074073203274395}
   player: {fileID: 4889586322009145369}
-  speed: 0.1
+  speed: 1
   hpPlayerA: {fileID: 921727212768666493}
   inventory: {fileID: 0}
   isMoving: 1
@@ -346,18 +358,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01970765, y: 0.3647031}
+  m_Offset: {x: -0.027894035, y: 0.3647031}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.6315789, y: 0}
-    oldSize: {x: 0.19, y: 0.58}
+    pivot: {x: 0.7058824, y: 0}
+    oldSize: {x: 0.17, y: 0.58}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.56341785, y: 0.7534315}
+  m_Size: {x: 0.38331738, y: 0.7534315}
   m_EdgeRadius: 0
 --- !u!50 &1245389214670551065
 Rigidbody2D:
@@ -517,7 +529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -605, y: -195.08}
+  m_AnchoredPosition: {x: -51, y: 28}
   m_SizeDelta: {x: 505.4134, y: 89.8382}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6589808081695226130
@@ -1192,11 +1204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8261950590061468829, guid: f6f083235015c054bb771b4d571e766c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.21
+      value: -1.177
       objectReference: {fileID: 0}
     - target: {fileID: 8261950590061468829, guid: f6f083235015c054bb771b4d571e766c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.716
+      value: 0.699
       objectReference: {fileID: 0}
     - target: {fileID: 8261950590061468829, guid: f6f083235015c054bb771b4d571e766c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

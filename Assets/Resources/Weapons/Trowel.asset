@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trowel
   m_EditorClassIdentifier: 
   weaponName: Trowel
-  description: 
+  description: A simple tool
   inUse: 0
   discovered: 0
   damage: 40

@@ -4,7 +4,7 @@
     {
         protected override void OnTimerComplete()
         { 
-           GameController.Instance.StopBattle();
+           GameController.Instance.StopBattle(false);
            this.menuOption.value = 1;
            menuOption.value = 1;
         }

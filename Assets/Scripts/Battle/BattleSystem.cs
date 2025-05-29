@@ -8,6 +8,7 @@ using Sliders_scripts;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 namespace Battle
@@ -83,6 +84,8 @@ namespace Battle
         {
             state = BattleState.PlayerAction;
             StartCoroutine(_notification.notification_show("It's your turn!!",5f));
+            hpBar.UpdateUI_Enemy();
+            hpBarPlayer.UpdateUI();
             yield return new WaitForSeconds(1f);
         }
 
@@ -233,21 +236,25 @@ namespace Battle
             StartCoroutine(_notification.notification_show($"Enemy Defeated",4f));
             //maybe ceva animatie
             yield return new WaitForSeconds(2f);
-            exit_battle();
+            exit_battle(true);
         }
 
         private IEnumerator playerDefeted()
         {
             state = BattleState.Busy;
             StartCoroutine(_notification.notification_show($"Player Defeated",4f));
-            player.player.hp = 20;
+            exit_battle(false);
+            Destroy(PlayerManager.Instance.gameObject);
+            MenuManager.Instance.BackToPrevious();
+            Destroy(Volume.Instance.gameObject);
+            MenuManager.Instance.LoadMenu("GameOver");
+            SceneManager.LoadScene("GameOver");
             //maybe ceva animatie
             yield return new WaitForSeconds(2f);
-            exit_battle();
         }
-        public void exit_battle()
+        public void exit_battle(bool winner)
         {
-            GameController.Instance.StopBattle();
+            GameController.Instance.StopBattle(winner);
             state = BattleState.Busy;
         }
         

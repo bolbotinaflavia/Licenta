@@ -14,6 +14,7 @@ using UnityEngine.UI;
 using Weapons;
 using Eyeware.BeamEyeTracker;
 using Eyeware.BeamEyeTracker.Unity;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -35,7 +36,7 @@ namespace Player
 
         public PlayerMovement playerMovement;
 
-        public event Action<Enemy> OnEncountered;
+        public event Action<Enemy,GameObject> OnEncountered;
         //Base stats
         [FormerlySerializedAs("HP")] public float hp;
         public int defense;
@@ -48,12 +49,11 @@ namespace Player
         //public InputAction mouse;
         //public InputAction keyboard;
         //public InputAction tobii;
-        public TobiiControl mTobiiControl;
     
         [FormerlySerializedAs("menu_open")] public Slider menuOpen; // Assign in Inspector
         public GameObject player;
 
-        public float speed=0.1f;
+        public float speed=1f;
         private Animator _animator;
         [FormerlySerializedAs("HP_player_a")] [SerializeField]
         private HpBarAnimation hpPlayerA;
@@ -196,6 +196,7 @@ namespace Player
             }
             if (menuOpen != null)
             {
+                menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
                 menuOpen.gameObject.SetActive(false);
 
             }
@@ -223,6 +224,12 @@ namespace Player
                 //push player cand atinge ca niciodata sa nu treaca de start
 
             }
+
+            if (other.gameObject.CompareTag("END"))
+            {
+                player.transform.position = new Vector2(424, 64);
+                SceneManager.LoadScene("Level2");
+            }
             if (other.gameObject.CompareTag("Objects"))
             {
           
@@ -244,7 +251,7 @@ namespace Player
                 }
 
                 else{
-                   // Debug.Log($"Object is {other.gameObject.name}");
+                   Debug.Log($"Object is {other.gameObject.name}");
                     inventory.add_food(other.gameObject);
                 }
                 //open box/something with the objects
@@ -280,6 +287,15 @@ namespace Player
                 }
 
             }
+
+            if (other.gameObject.CompareTag("Door"))
+            {
+                IsMoving = false;
+               // player.transform.position = player.transform.position-new Vector3(200f,0,0);
+                Door.Instance.Open_Door();
+                if(Door.Instance.Opened)
+                    Door.Instance.gameObject.GetComponent<Collider2D>().enabled = false;
+            }
             //declansare battle
             if (other.gameObject.CompareTag("Enemy"))
             {
@@ -302,7 +318,7 @@ namespace Player
             }
 
             //IsMoving = true;
-
+           menuOpen.gameObject.SetActive(false);
         }
 
         private IEnumerator new_battle_anim()
@@ -321,18 +337,16 @@ namespace Player
         //start battle
         private IEnumerator start_battle(GameObject enemy)
         {
-            
+           menuOpen.gameObject.SetActive(false);
             StartCoroutine(
                 notification.notification_show($"You encountered an enemy \n {enemy.GetComponent<Enemy>().EnemieBase.name}",1f));
-            OnEncountered?.Invoke(enemy.GetComponent<Enemy>());
+            OnEncountered?.Invoke(enemy.GetComponent<Enemy>(),enemy);
             yield return new WaitForSeconds(2f);
-            Destroy(enemy);
         }
         //Items
         public void finding_animation()
         {
             Debug.Log("Animation started");
-        
             NewItem = false;
             IsMoving = true;
         
@@ -341,7 +355,7 @@ namespace Player
         //Open Menu stuff
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log(playerMovement.CurrentControl.get_action().name);
+            //Debug.Log(playerMovement.CurrentControl.get_action().name);
             if (!playerMovement.CurrentControl.get_action().name.Equals("KeyboardMove")&&!eventData.pointerEnter.name.Equals("HP_bar"))
             {
                 isHover = true;
@@ -362,22 +376,22 @@ namespace Player
         public void menu_slider_open()
         {
             IsMoving = false;
-            //isHover = true;
+            isHover = true;
             if (menuOpen != null)
             {
-            
+
                 menuOpen.gameObject.SetActive(true);
-           
+
             }    
         }
 
         public void menu_slider_close()
         {
-            //isHover = false;
+            isHover = false;
             if (menuOpen != null)
             {
             
-                menuOpen.gameObject.SetActive(false);
+               menuOpen.gameObject.SetActive(false);
            
             
             }
@@ -386,7 +400,7 @@ namespace Player
 
         public void HandleUpdate()
         {
-            if (player == null||isHover)
+            if (player == null)
             {
                 return;
 

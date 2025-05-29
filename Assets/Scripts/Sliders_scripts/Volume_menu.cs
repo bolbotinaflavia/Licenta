@@ -16,6 +16,7 @@ namespace Sliders_scripts
             if (incDec > 0)
             {
                 Volume.Instance.Increase();
+                UpdateUI();
                 menuOption.value = 1;
                 if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
                     StartTimer();
@@ -23,6 +24,7 @@ namespace Sliders_scripts
             else
             {
                 Volume.Instance.Decrease();
+                UpdateUI();
                 menuOption.value = 1;
                 if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
                     StartTimer();
@@ -35,15 +37,17 @@ namespace Sliders_scripts
             Instance = this;
             _v= Volume.FindObjectOfType<Volume>();
             counterText.text = (_v.globalVolume.weight * 100).ToString(CultureInfo.InvariantCulture);
+            UpdateUI();
         }
         // Start is called before the first frame update
         private void Start()
         {
             counterText.text=(_v.globalVolume.weight).ToString(CultureInfo.InvariantCulture);
+            UpdateUI();
         }
 
         // Update is called once per frame
-        private void Update()
+        private void UpdateUI()
         {
             if (counterText != null)
             {

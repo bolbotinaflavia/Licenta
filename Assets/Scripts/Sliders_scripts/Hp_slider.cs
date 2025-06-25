@@ -1,4 +1,5 @@
 using Battle;
+using DefaultNamespace;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 namespace Sliders_scripts
 {
+    [PlantUmlDiagram]
     public class HpSlider : MonoBehaviour
     {
         public static HpSlider Instance;

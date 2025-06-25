@@ -1,0 +1,27 @@
+{
+    "name": "Testsplay",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "ArtefactsAdventure",
+        "Unity.InputSystem",
+        "Cinemachine.Runtime.Tests",
+        "Unity.VisualScripting.Core",
+        "Cinemachine",
+        "Unity.InputSystem.TestFramework"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

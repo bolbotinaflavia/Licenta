@@ -1,13 +1,15 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-public class Volume : MonoBehaviour
+public class VolumeManager : MonoBehaviour
 {
-    public static Volume Instance;
+    public static VolumeManager Instance;
     public List<AudioSource> audioSource = new List<AudioSource>();
-    public UnityEngine.Rendering.Volume globalVolume;
+    public UnityEngine.Rendering.Volume  globalVolume;
 
     private void Awake()
     {

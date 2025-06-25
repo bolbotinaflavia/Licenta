@@ -1,6 +1,7 @@
 ﻿using System;
 using Inventory;
 using Player;
+using StaticObjects;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
@@ -13,7 +14,12 @@ namespace Movement
     public class Mouse : IControl
 
     {
-        private readonly InputAction _mousePositionAction;
+        private  InputAction _mousePositionAction;
+        public InputAction MousePositionAction
+        {
+            get => _mousePositionAction;
+            set => _mousePositionAction = value;
+        }
         private readonly InputAction _mouseClickAction;
 
         //public string name;
@@ -98,7 +104,6 @@ namespace Movement
                 if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
                 
                 {
-                    //player.IsMoving = false;
                     player.menu_slider_open();
                     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
                 }

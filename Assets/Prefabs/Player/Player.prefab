@@ -311,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notification: {fileID: 8959821539752899205}
   playerMovement: {fileID: 0}
-  hp: 1
+  hp: 100
   defense: 30
   attackSpeed: 10
   learnSpellSkill: 0
@@ -904,7 +904,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2291495606270183821
 MonoBehaviour:
   m_ObjectHideFlags: 0

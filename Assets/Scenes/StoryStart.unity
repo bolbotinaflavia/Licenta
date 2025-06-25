@@ -690,7 +690,7 @@ SpriteRenderer:
   m_SortingLayerID: -1657545317
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5426927356934133000, guid: 504648701d541544a8fa6588a24f1602, type: 3}
+  m_Sprite: {fileID: -5788653884895222140, guid: 504648701d541544a8fa6588a24f1602, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1151,7 +1151,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 119.55313, y: -7.125183, z: 99.15875, w: 0}
+  m_margin: {x: -5.619751, y: -7.125183, z: 2.434204, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

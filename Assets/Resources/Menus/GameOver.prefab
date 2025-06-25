@@ -408,9 +408,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2938322127206040754}
   - component: {fileID: 8167546987760793412}
-  - component: {fileID: 3152396670130109696}
   - component: {fileID: 8426547944032986232}
   - component: {fileID: 4722676966318089761}
+  - component: {fileID: 998671410934585623}
   m_Layer: 6
   m_Name: Exit
   m_TagString: Untagged
@@ -491,23 +491,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3152396670130109696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3422638453261298781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f565f08171aca284ca5612d7e555d41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menuOption: {fileID: 8167546987760793412}
-  baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
-  timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 4722676966318089761}
 --- !u!114 &8426547944032986232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +508,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 3152396670130109696}
+        - m_Target: {fileID: 998671410934585623}
           m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
           m_MethodName: OnClicked
           m_Mode: 1
@@ -552,6 +535,22 @@ MonoBehaviour:
   fadeOutSpeed: 2
   fadeInSpeed: 10
   minOpacity: 0.2
+--- !u!114 &998671410934585623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3422638453261298781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306d89a8d4d2b8741909ae1436430088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 998671410934585623}
+  menuOption: {fileID: 8167546987760793412}
+  baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
+  timer: 0.5
 --- !u!1 &4666736361851585411
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,8 +912,7 @@ MonoBehaviour:
   instance: {fileID: 5435013606644981096}
   menuOption: {fileID: 3019288630684901860}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
-  timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 8969060422266368238}
+  timer: 0.5
 --- !u!1 &5214515667844812814
 GameObject:
   m_ObjectHideFlags: 0

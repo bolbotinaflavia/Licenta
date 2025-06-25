@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponName: Sword
-  description: A simple sword
+  description: A sword with a very sharp edge
   inUse: 0
   discovered: 0
   damage: 50

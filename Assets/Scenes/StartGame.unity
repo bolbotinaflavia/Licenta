@@ -180,7 +180,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Artfects
+  m_text: Artefacts
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6331c87d1c5f1e749ac065c5a557da8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startBeamEyeTrackerOnStart: 0
+  startBeamEyeTrackerOnStart: 1
 --- !u!4 &262171143
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ namespace Sliders_scripts
             MenuManager.Instance.currentMenu.SetActive(false);
             SceneManager.LoadScene("StoryStart");
             menuOption.value = 1;
+            //StartCoroutine(Deselect());
         }
         // Start is called before the first frame update
        

@@ -1116,8 +1116,7 @@ MonoBehaviour:
   instance: {fileID: 9002404513248474173}
   menuOption: {fileID: 1096432725123575601}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1289,7 +1288,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1504, y: 31}
+  m_AnchoredPosition: {x: 1365, y: 31}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3349720954718145412
@@ -1358,8 +1357,7 @@ MonoBehaviour:
   instance: {fileID: 2226815314421713739}
   menuOption: {fileID: 3349720954718145412}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input
@@ -1680,7 +1678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -35, y: -758}
+  m_AnchoredPosition: {x: 1, y: -758}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4591015509297129696
@@ -1750,7 +1748,6 @@ MonoBehaviour:
   menuOption: {fileID: 4591015509297129696}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
-  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &2429665127449170060
 MonoBehaviour:
@@ -2215,7 +2212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1495, y: -25}
+  m_AnchoredPosition: {x: -1313, y: -25}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.49999994}
 --- !u!114 &6060915480968806863
@@ -2284,8 +2281,7 @@ MonoBehaviour:
   instance: {fileID: 2934304510415651880}
   menuOption: {fileID: 6060915480968806863}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   playerMovement: {fileID: 1109273007352381878, guid: 3dd4f7bd06e17ce4387f0d1e6da210d4, type: 3}
   input:
     m_Name: Input

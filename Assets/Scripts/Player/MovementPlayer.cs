@@ -1,5 +1,7 @@
 ﻿using System;
 using Movement;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -21,7 +23,6 @@ namespace Player
         public InputActionAsset inputActions;
         public InputActionMap inputActionMap;
         public IControl CurrentControl;
-        public PlayerManager managerPlayer;
 
         private void Awake()
         {
@@ -31,23 +32,18 @@ namespace Player
                 DontDestroyOnLoad(this);
             }
         }
+
         private void Start()
         {
             InputActionMap playerActionMap = inputActions.FindActionMap("Player");
             inputActionMap = playerActionMap;
-            InputAction m1= playerActionMap.FindAction("MouseMove");
-            InputAction m2= playerActionMap.FindAction("MouseClick");
-
-            // Initialize movement strategies
-            CurrentControl = new Mouse(m1,m2);
-            // Set the initial movement strategy
+            InputAction m1 = playerActionMap.FindAction("MouseMove");
+            InputAction m2 = playerActionMap.FindAction("MouseClick");
+            CurrentControl = new Mouse(m1, m2);
             CurrentControl.Enable();
-            //playerManager.SetMovementStrategy(current_control);
-
-            // Example of switching strategies based on input
-            // playerManager.SetMovementStrategy(keyboardMovement);
-            // playerManager.SetMovementStrategy(trackedDeviceMovement);
-        }
+            UnityServices.InitializeAsync();
+            AnalyticsService.Instance.StartDataCollection();
+                    }
 
         public void change_strategy(InputAction strategy)
         {

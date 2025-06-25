@@ -18,9 +18,10 @@ namespace Sliders_scripts
         protected override void OnTimerComplete()
         {
             //i = GetComponent<Control>();
-            if(input!=null)
+            if (input != null)
                 Select_item();
             UpdateUI();
+            StartCoroutine(Deselect());
         }
 
         public void FindControls()

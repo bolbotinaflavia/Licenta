@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Crossbow
   m_EditorClassIdentifier: 
   weaponName: Crossbow
-  description: 
+  description: A classic crossbow from the medieval times
   inUse: 0
   discovered: 0
   damage: 40

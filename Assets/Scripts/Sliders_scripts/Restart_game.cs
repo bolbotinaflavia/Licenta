@@ -13,6 +13,7 @@ namespace Sliders_scripts
                 MenuManager.Instance.BackToPrevious();
             }
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
     }
 }

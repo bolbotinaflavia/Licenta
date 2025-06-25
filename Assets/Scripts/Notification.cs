@@ -7,13 +7,11 @@ namespace DefaultNamespace
     public class Notification:MonoBehaviour
     {
         [SerializeField]private TextMeshProUGUI message;
-
         public TextMeshProUGUI Message
         {
             get => message;
             set => message = value;
         }
-
         public IEnumerator notification_show(string final_text, float seconds)
         {
             message.text = "";
@@ -29,8 +27,6 @@ namespace DefaultNamespace
             yield return new WaitForSeconds(seconds);
             StartCoroutine(notification_delete());
         }
-        
-
         private IEnumerator notification_delete()
         {
             message.text = "";

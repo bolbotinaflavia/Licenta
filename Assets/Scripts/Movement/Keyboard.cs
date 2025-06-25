@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Inventory;
 using Player;
+using StaticObjects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -72,13 +73,9 @@ namespace Movement
                 {
                     if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
                     {
-                        // if (s.name.Equals("Back"))
-                        // {
-                        //     sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = Color.gray;
-                        // }
                         if (s.tag.Equals("Fight"))
                         {
-                            if (!MenuManager.Instance.currentMenu.activeSelf)
+                            if (!MenuManager.Instance.current.activeSelf)
                             {
                                 s.value = 1;
                                 s.fillRect.GetComponent<Image>().color = c;
@@ -120,7 +117,6 @@ namespace Movement
         {
                 Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
                 Vector2 inputPos = new Vector2(0,0);
-            
                 if (PlayerMovement.Instance.CurrentControl.get_click_action().IsPressed())
                 {
                     sliders[currentSliderIndex].GetComponent<MenuCountdown>().OnClicked();
@@ -128,18 +124,12 @@ namespace Movement
                 if (_moveAction.triggered)
                 {
                     inputPos = _moveAction.ReadValue<Vector2>();
-                    Debug.Log(inputPos);
-
-
-                    
-
                     if (Mathf.Approximately(inputPos.y, 1) || Mathf.Approximately(inputPos.x, 1))
                     {
                         if (currentSliderIndex + 1 < sliders.Count)
                         {
                             sliders[currentSliderIndex].value = 1;
-                          
-                                sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
+                            sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
                             currentSliderIndex++;
                             sliders[currentSliderIndex].value = 1;
                             sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = selectedColor;
@@ -149,7 +139,6 @@ namespace Movement
                             if (currentSliderIndex + 1 >= sliders.Count)
                             {
                                 sliders[currentSliderIndex].value = 1;
-                             
                                 sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
                                 currentSliderIndex = 0;
                                 sliders[currentSliderIndex].value = 1;
@@ -157,14 +146,12 @@ namespace Movement
                             }
                         }
                     }
-
                     if (Mathf.Approximately(inputPos.y, -1) || Mathf.Approximately(inputPos.x, -1))
                     {
                         if (currentSliderIndex - 1 >= 0)
                         {
                             sliders[currentSliderIndex].value = 1;
-                           
-                                sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
+                            sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
                             currentSliderIndex--;
                             sliders[currentSliderIndex].value = 1;
                             sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = selectedColor;
@@ -175,7 +162,7 @@ namespace Movement
                             if (currentSliderIndex - 1 < 0)
                             {
                                 sliders[currentSliderIndex].value = 1;
-                                    sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
+                                sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = c;
                                 currentSliderIndex = sliders.Count - 1;
                                 sliders[currentSliderIndex].value = 1;
                                 sliders[currentSliderIndex].fillRect.GetComponent<Image>().color = selectedColor;
@@ -191,83 +178,74 @@ namespace Movement
         }
         public void Move(PlayerManager player)
         {
-            
-           // Debug.Log(inputPos);
-
-           if (GameController.Instance.state == GameState.Menu || SceneManager.GetActiveScene().name == "StartGame")
-           {
-               select_sliders();
-           }
-
-           else
+            if (GameController.Instance.state == GameState.Menu || SceneManager.GetActiveScene().name == "StartGame")
+            {
+                select_sliders();
+            }
+            else
+            {
+                Vector2 inputPos = _moveAction.ReadValue<Vector2>();
+                if (Mathf.Approximately(inputPos.y, 1))
                 {
-                    Vector2 inputPos = _moveAction.ReadValue<Vector2>();
-                    if (Mathf.Approximately(inputPos.y, 1))
+                    player.IsMoving = false;
+                    player.menu_slider_open();
+                    player.isHover = false;
+                    MenuManager.Instance.current.SetActive(true);
+                    GameController.Instance.state = GameState.Menu;
+                    load_sliders();
+                }
+                else
+                {
+                    player.menu_slider_close();
+                }
+                if (!PlayerManager.Instance.IsMoving) return;
+                Vector3 worldMouse =
+                         Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
+                Vector3 mouseNext = new Vector3(player.player.transform.position.x + (inputPos.x * 10f),
+                    player.player.transform.position.y, worldMouse.z);
+                if (player.IsMoving)
+                {
+                    if (MenuManager.Instance.current.activeSelf == false && inputPos.x != 0)
                     {
-                        player.IsMoving = false;
-                        player.menu_slider_open();
-                        player.isHover = false;
-                        player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
-                        //enter_slider(player.menu_open);
-                    }
-                    else
-                    {
-                        player.menu_slider_close();
-                    }
 
-                    Vector3 worldMouse =
-                        Camera.main.ScreenToWorldPoint(new Vector3(inputPos.x, inputPos.y, Camera.main.nearClipPlane));
-                    Vector3 mouseNext = new Vector3(player.player.transform.position.x + (inputPos.x * 10),
-                        player.player.transform.position.y, worldMouse.z);
-
-                    // Implement mouse-based movement logic
-                    if (player.IsMoving)
-                    {
-                        if (MenuManager.Instance.currentMenu.activeSelf == false && inputPos.x != 0)
-                        {
-                            
-                            player.SetFacingDirection(inputPos.x);
-                            RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
-                            if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem)
-
-                            {
-                                player.IsMoving = false;
-                            }
-                            else
-                            {
-                                if (player.player.transform.position.x < 398)
-                                {
-                                    //IsMoving = false;
-                                    player.player.transform.position = Vector3.MoveTowards(
-                                        player.player.transform.position,
-                                        new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
-                                }
-                                if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
-                                {
-                                    player.player.transform.position = Vector3.MoveTowards(
-                                        player.player.transform.position,
-                                        new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * player.speed);
-                                }
-                                else
-                                {
-
-                                    player.IsMoving = true;
-                                    player.player.transform.position = Vector3.MoveTowards(
-                                        player.player.transform.position,
-                                        mouseNext,
-                                        Time.deltaTime * 50f);
-                                }
-                            }
-
-                        }
-
-
-                        else
+                        player.SetFacingDirection(inputPos.x);
+                        RaycastHit2D hit = Physics2D.Raycast(inputPos, Vector2.zero);
+                        if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem)
                         {
                             player.IsMoving = false;
                         }
+                        else
+                        {
+                            if (player.player.transform.position.x < 398)
+                            {
+                                //IsMoving = false;
+                                player.player.transform.position = Vector3.MoveTowards(
+                                         player.player.transform.position,
+                                         new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                            }
+                            if (Door.Instance.Opened == true && player.player.transform.position.x < Door.Instance.transform.position.x + 100f)
+                            {
+                                player.player.transform.position = Vector3.MoveTowards(
+                                         player.player.transform.position,
+                                         new Vector2(Door.Instance.transform.position.x + 150f, player.player.transform.position.y), Time.deltaTime * 75f);
+                            }
+                            else
+                            {
+
+                                player.IsMoving = true;
+                                player.player.transform.position = Vector3.MoveTowards(
+                                         player.player.transform.position,
+                                         mouseNext,
+                                         Time.deltaTime * 75f);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        player.IsMoving = false;
                     }
                 }
+           }
 
         }
     }

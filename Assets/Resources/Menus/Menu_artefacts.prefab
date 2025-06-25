@@ -370,7 +370,6 @@ MonoBehaviour:
   menuOption: {fileID: 3876254869332133847}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
-  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &6655290268715601435
 MonoBehaviour:
@@ -531,7 +530,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1462, y: 709}
+  m_AnchoredPosition: {x: -1309, y: 709}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1009269295806884674
@@ -629,8 +628,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 1009269295806884674}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
-  timer: 5
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   artefact: {fileID: 11400000, guid: 3325208ee18db204e8b6522072384db7, type: 2}
   artefactName: WarriorBook
   description: {fileID: 7864364918937594708}
@@ -1334,7 +1332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1481, y: 732}
+  m_AnchoredPosition: {x: 1285, y: 732}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &14652316380097605
@@ -1432,8 +1430,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 14652316380097605}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
-  timer: 5
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   artefact: {fileID: 11400000, guid: db43831e1f000cf4d9937b32e7471884, type: 2}
   artefactName: Talisman
   description: {fileID: 7864364918937594708}
@@ -2063,7 +2060,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1459, y: -724}
+  m_AnchoredPosition: {x: 1284, y: -724}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4996834054341858573
@@ -2161,8 +2158,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 4996834054341858573}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
-  timer: 5
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   artefact: {fileID: 11400000, guid: 7d01508ecdc10414e929f8dfeb77df99, type: 2}
   artefactName: Key
   description: {fileID: 7864364918937594708}
@@ -2445,7 +2441,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1503, y: -756}
+  m_AnchoredPosition: {x: -1350, y: -756}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7122174187791067221
@@ -2543,8 +2539,7 @@ MonoBehaviour:
   instance: {fileID: 6136340308170011013}
   menuOption: {fileID: 7122174187791067221}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
-  timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   artefact: {fileID: 11400000, guid: 275eb9400689af040a404aa976771038, type: 2}
   artefactName: SpellBook
   description: {fileID: 7864364918937594708}

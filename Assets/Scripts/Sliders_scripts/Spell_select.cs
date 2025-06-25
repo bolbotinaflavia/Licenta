@@ -24,8 +24,10 @@ namespace Sliders_scripts
             {
                 if (GameController.Instance.state == GameState.Battle)
                 {
-                    MenuManager.Instance.battlePreviousMenu();
-                    battleAction();
+                    StartCoroutine(BattleSystem.Instance.State == BattleState.PlayerAction
+                        ? BattleSystem.Instance.PlayerActionMove(spellName)
+                        : BattleSystem.Instance.Notification.notification_show("It's not your turn!", 2f));
+                    StartCoroutine(battle_menu());
                 }
                 else
                 {
@@ -33,29 +35,21 @@ namespace Sliders_scripts
                     UpdateUI();
                     StartCoroutine(close_description());
                 }
-            
+
             }
             else
             {
                 Debug.Log("Spell is not available yet");
             }
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
-        private void battleAction()
+        private IEnumerator battle_menu()
         {
-            if (BattleSystem.Instance.State == BattleState.PlayerAction)
-            {
-                
-                StartCoroutine( BattleSystem.Instance.PlayerActionMove($"{s.SpellBase.SpellName}"));
-                menuOption.value = 1;
-            }
-            else
-            {
-                StartCoroutine(BattleSystem.Instance.Notification.notification_show("It's not your turn!",2f));
-            }
+            MenuManager.Instance.battlePreviousMenu();
+            yield return null;
         }
-
         private void open_description()
         {
             canvasDescription.GameObject().SetActive(true);

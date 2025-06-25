@@ -18,6 +18,7 @@ namespace Sliders_scripts
             if (actiune == 3)
                 Debug.Log("Spell");
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
        
 

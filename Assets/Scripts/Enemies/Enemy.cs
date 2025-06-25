@@ -1,7 +1,4 @@
-﻿
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +7,11 @@ namespace Enemies
     public class Enemy:MonoBehaviour
     {
         [SerializeField] private EnemieBase enemieBase;
-        public EnemieBase EnemieBase => enemieBase;
+        public EnemieBase EnemieBase
+        {
+            get { return enemieBase; }
+            set { enemieBase = value; }
+        }
         [SerializeField] private GameObject enemy;
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject insideObject;

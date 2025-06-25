@@ -1,15 +1,12 @@
 using System;
 using System.Collections;
-using System.Linq;
 using Battle;
-using DefaultNamespace.HUD;
+#if !UNITY_WEBGL
 using Eyeware.BeamEyeTracker.Unity;
+#endif
 using Player;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -18,100 +15,97 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
     [FormerlySerializedAs("menu_option")] public UnityEngine.UI.Slider menuOption;
     public Color baseColor;
     public float timer = 5f;
-    private Coroutine _unfillCoroutine;
+    private Coroutine _unfill;
     private Action slider_clicked;
+#if !UNITY_WEBGL
     public ImmersiveHUDPanelBehaviour immersiveHUDPanelBehaviour;
+    #endif
 
     private void Awake()
     {
         if(instance == null)
             instance = this;
+#if !UNITY_WEBGL
         immersiveHUDPanelBehaviour = GetComponent<ImmersiveHUDPanelBehaviour>();
+        #endif
     }
 
     public void OnClicked()
     {
-        menuOption.value = 1;
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("MouseMove")&&Player.PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
-           // PlayerMovement.Instance.CurrentControl.get_click_action().performed += ctx => OnTimerComplete();
-           OnTimerComplete();
-           PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
-            Debug.Log("Clicked by mouse and all");
-        }
-
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") &&
-            this.name.Equals("OpenMenu")&&GameController.Instance.state==GameState.FreeRoam)
-        {
             OnTimerComplete();
-            PlayerMovement.Instance.CurrentControl.load_sliders();
+            PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") &&
-            PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
+        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
-            Debug.Log("Clicked by enter and all");
             OnTimerComplete();
             PlayerMovement.Instance.CurrentControl.load_sliders();
             PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
-
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
-        {
-            Debug.Log("Looked at by eye track and all");
-            OnTimerComplete();
-            PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
-            
-        }
-    
-        PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
+        StartCoroutine(Deselect());
     }
+    public IEnumerator Deselect()
+    {
+        yield return null;
+        if (EventSystem.current.currentSelectedGameObject != null)
+        {
+            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
+     //          {
+     //              OnTimerComplete();
+     //              PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
+     //          }
+     //          PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
     public void OnPointerEnter(PointerEventData eventData)
     {
         menuOption.value = 1;
-        StartTimer();
+        start_timer();
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
         //Debug.Log("Pointer Exited");
-        EndTimer();
+        end_timer();
     }
     // ReSharper disable Unity.PerformanceAnalysis
-    public void StartTimer()
+    public void start_timer()
     {
         menuOption.value = 1;
-        // Debug.Log("Timer started");
-        _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+        _unfill ??= StartCoroutine(unfill());
     }
-    public void EndTimer()
+    public void end_timer()
     {
-        // Debug.Log("Timer ended");
-        if (_unfillCoroutine != null)
+        if (_unfill != null)
         {
-            StopCoroutine(_unfillCoroutine);
-            _unfillCoroutine = null;
+            StopCoroutine(_unfill);
+            _unfill = null;
         }
 
         menuOption.value = 1;
     }
-    public IEnumerator UnFillSlider()
+    public IEnumerator unfill()
     {
-        float decRate = 0.3f / timer;
+        float dec = 0.3f / timer;
         
         while (menuOption.value > 0)
         {
-            menuOption.value -= decRate * Time.deltaTime;
+            menuOption.value -= dec * Time.deltaTime;
 
             yield return null;
         }
 
         menuOption.value = 0;
-        _unfillCoroutine = null;
+        _unfill = null;
         OnTimerComplete();
     }
 
     private void Update()
     {
+#if !UNITY_WEBGL
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
         {
             if (BattleSystem.Instance != null && GameController.Instance != null)
@@ -120,7 +114,7 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                 {
                     if (BattleSystem.Instance.State == BattleState.PlayerAction)
                     {
-                        if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                        if (MenuManager.Instance.current.activeSelf.Equals(true))
                         {
                             if (this.gameObject.CompareTag("Fight").Equals(false))
                             {
@@ -128,14 +122,14 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                                 {
                                     // Debug.Log("Timer started");
 
-                                    _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                                    _unfill ??= StartCoroutine(unfill());
                                 }
                                 else
                                 {
-                                    if (_unfillCoroutine != null)
+                                    if (_unfill!= null)
                                     {
-                                        StopCoroutine(_unfillCoroutine);
-                                        _unfillCoroutine = null;
+                                        StopCoroutine(_unfill);
+                                        _unfill= null;
                                         menuOption.value = 1;
                                     }
                                 }
@@ -147,14 +141,14 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                             {
                                 // Debug.Log("Timer started");
 
-                                _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                                _unfill??= StartCoroutine(unfill());
                             }
                             else
                             {
-                                if (_unfillCoroutine != null)
+                                if (_unfill != null)
                                 {
-                                    StopCoroutine(_unfillCoroutine);
-                                    _unfillCoroutine = null;
+                                    StopCoroutine(_unfill);
+                                    _unfill = null;
                                     menuOption.value = 1;
                                 }
                             }
@@ -163,21 +157,21 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                 }
                 else
                 {
-                    if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                    if (MenuManager.Instance.current.activeSelf.Equals(true))
                     {
                         if (this.gameObject.CompareTag("HP").Equals(false))
                         {
                             if (immersiveHUDPanelBehaviour.IsSelected)
                             {
                                 // Debug.Log("Timer started");
-                                _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                                _unfill??= StartCoroutine(unfill());
                             }
                             else
                             {
-                                if (_unfillCoroutine != null)
+                                if (_unfill!= null)
                                 {
-                                    StopCoroutine(_unfillCoroutine);
-                                    _unfillCoroutine = null;
+                                    StopCoroutine(_unfill);
+                                    _unfill= null;
                                     menuOption.value = 1;
                                 }
                             }
@@ -188,15 +182,15 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                         if (immersiveHUDPanelBehaviour.IsSelected)
                         {
                             // Debug.Log("Timer started");
-                            _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                            _unfill ??= StartCoroutine(unfill());
                         }
                         else
                         {
-                            if (_unfillCoroutine != null)
+                            if (_unfill!= null)
                             {
-                                PlayerManager.Instance.isMoving = true;
-                                StopCoroutine(_unfillCoroutine);
-                                _unfillCoroutine = null;
+                                PlayerManager.Instance.IsMoving = true;
+                                StopCoroutine(_unfill);
+                                _unfill= null;
                                 menuOption.value = 1;
                             }
                         } 
@@ -205,21 +199,21 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
             }
             else
             {
-                if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                if (MenuManager.Instance.current.activeSelf.Equals(true))
                 {
                     if (this.gameObject.CompareTag("HP").Equals(false))
                     {
                         if (immersiveHUDPanelBehaviour.IsSelected)
                         {
                             // Debug.Log("Timer started");
-                            _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                            _unfill??= StartCoroutine(unfill());
                         }
                         else
                         {
-                            if (_unfillCoroutine != null)
+                            if (_unfill != null)
                             {
-                                StopCoroutine(_unfillCoroutine);
-                                _unfillCoroutine = null;
+                                StopCoroutine(_unfill);
+                                _unfill= null;
                                 menuOption.value = 1;
                             }
                         }
@@ -230,20 +224,21 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                     if (immersiveHUDPanelBehaviour.IsSelected)
                     {
                         Debug.Log("Timer started");
-                        _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                        _unfill??= StartCoroutine(unfill());
                     }
                     else
                     {
-                        if (_unfillCoroutine != null)
+                        if (_unfill != null)
                         {
-                            StopCoroutine(_unfillCoroutine);
-                            _unfillCoroutine = null;
+                            StopCoroutine(_unfill);
+                            _unfill = null;
                             menuOption.value = 1;
                         }
                     }
                 }
             }
         }
+        #endif
     }
 
     protected abstract void OnTimerComplete();

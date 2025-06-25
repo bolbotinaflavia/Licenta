@@ -9,8 +9,8 @@ public class MenuManager : MonoBehaviour
     public static MenuManager Instance;
     [FormerlySerializedAs("game_started")] public bool gameStarted;
 
-    [FormerlySerializedAs("current_menu")] public GameObject currentMenu;
-    private Stack<GameObject> _menuHistory = new Stack<GameObject>(); // Store menu names
+    [FormerlySerializedAs("currentMenu")] [FormerlySerializedAs("current_menu")] public GameObject current;
+    private Stack<GameObject> _menuStack = new Stack<GameObject>(); // Store menu names
 
     private void Awake()
     {
@@ -28,29 +28,16 @@ public class MenuManager : MonoBehaviour
 
         LoadMenu(!gameStarted ? "Menu_start" : "Menu_basic"); // Load initial menu
     }
-
-    /*public void LoadGame()
-    {
-        game_started = true;
-        //LoadMenu("Menu_basic");
-        if (current_menu != null)
-            current_menu.SetActive(false);
-        else
-            Debug.Log("mAIN MENU couldn't load");
-        SceneManager.LoadScene("Gameplay");
-    }*/
-
     public void LoadMenu(string menuName)
     {
-        if (currentMenu != null)
+        if (current != null)
         {
-            _menuHistory.Push(currentMenu); // Store previous menu name
+            _menuStack.Push(current); // Store previous menu name
             foreach (var s in GameObject.FindObjectsOfType<Slider>())
             {
                 if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
                     s.value = 1;
             }
-
             if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
             {
                 if (GameController.Instance != null)
@@ -63,28 +50,25 @@ public class MenuManager : MonoBehaviour
                     PlayerMovement.Instance.CurrentControl.load_sliders();
                 }
             }
-               
-            currentMenu.SetActive(false);
+            current.SetActive(false);
         }
-
-        InstantiateMenu(menuName);
-        
+        InstantiateNewMenu(menuName);
     }
 
     public void battlePreviousMenu()
     {
-        if (!currentMenu.gameObject.name.Equals("Menu_basic(Clone)"))
+        if (!current.gameObject.name.Equals("Menu_basic(Clone)"))
         {
-            Destroy(currentMenu);
-            GameObject previousMenu = _menuHistory.Pop();
+            Destroy(current);
+            GameObject previousMenu = _menuStack.Pop();
             if (previousMenu.gameObject.name.Equals("Menu_basic(Clone)"))
             {
-                currentMenu = previousMenu;
+                current = previousMenu;
             }
             else
             {
                 previousMenu.SetActive(true);
-                currentMenu = previousMenu;
+                current = previousMenu;
                 foreach (var s in GameObject.FindObjectsOfType<Slider>())
                 {
                     if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
@@ -94,14 +78,14 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void BackToPrevious()
+    public void LoadPrevious()
     {
-        if (_menuHistory.Count > 0)
+        if (_menuStack.Count > 0)
         {
-            Destroy(currentMenu);
-            GameObject previousMenu = _menuHistory.Pop();
+            Destroy(current);
+            GameObject previousMenu = _menuStack.Pop();
             previousMenu.SetActive(true);
-            currentMenu = previousMenu;
+            current = previousMenu;
             foreach (var s in GameObject.FindObjectsOfType<Slider>())
             {
                 if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
@@ -114,16 +98,13 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    private void InstantiateMenu(string menuName)
+    private void InstantiateNewMenu(string menuName)
     {
-        Debug.Log($"Attempting to load menu: {menuName}");
-
         GameObject menuPrefab = Resources.Load<GameObject>($"Menus/{menuName}");
         if (menuPrefab != null)
         {
-            currentMenu = Instantiate(menuPrefab, transform);
-            currentMenu.SetActive(true);
-            Debug.Log($"Successfully instantiated '{menuName}'.");
+            current = Instantiate(menuPrefab, transform);
+            current.SetActive(true);
         }
         else
         {

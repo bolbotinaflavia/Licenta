@@ -7,7 +7,7 @@ namespace Sliders_scripts
 {
     public class VolumeMenu : MenuCountdown
     {
-        private Volume _v;
+        private VolumeManager _v;
         public static VolumeMenu Instance;
         [FormerlySerializedAs("inc_dec")] public int incDec;
         public Text counterText;
@@ -15,27 +15,28 @@ namespace Sliders_scripts
         {
             if (incDec > 0)
             {
-                Volume.Instance.Increase();
+                VolumeManager.Instance.Increase();
                 UpdateUI();
                 menuOption.value = 1;
-                if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
-                    StartTimer();
+                if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove") && !PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
+                    start_timer();
             }
             else
             {
-                Volume.Instance.Decrease();
+                VolumeManager.Instance.Decrease();
                 UpdateUI();
                 menuOption.value = 1;
-                if(PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove")&&!PlayerMovement.Instance.CurrentControl.get_click_action().triggered) 
-                    StartTimer();
+                if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove") && !PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
+                    start_timer();
             }
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
         private void Awake()
         {
             Instance = this;
-            _v= Volume.FindObjectOfType<Volume>();
+            _v= VolumeManager.FindObjectOfType<VolumeManager>();
             counterText.text = (_v.globalVolume.weight * 100).ToString(CultureInfo.InvariantCulture);
             UpdateUI();
         }

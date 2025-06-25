@@ -10,6 +10,7 @@ namespace Sliders_scripts
             menuOption.value = 1;
             MenuManager.Instance.LoadMenu(nextMenu);
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
         // Start is called before the first frame update

@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   sprite1: {fileID: -3196805323513726792, guid: cde50e0ab30eb2e4da8547f078f5118c, type: 3}
   type: 1
-  animator: {fileID: 5873689311351173736, guid: cde50e0ab30eb2e4da8547f078f5118c, type: 3}
+  animator: {fileID: 9100000, guid: d582423b51e811d4183154d4b097b257, type: 2}
   w1: 0
   w2: 1
   hpMax: 80

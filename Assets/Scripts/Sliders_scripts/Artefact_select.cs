@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Artefacts;
 using Inventory;
 using TMPro;
 using Unity.VisualScripting;
@@ -20,19 +21,18 @@ namespace Sliders_scripts
             get => artefactName;
             set => artefactName = value;
         }
-        
         protected override void OnTimerComplete()
         {
             open_description();
             UpdateUI();
             StartCoroutine(close_description());
+            StartCoroutine(Deselect());
         }
         private void open_description()
         {
             canvasDescription.GameObject().SetActive(true);
             description.GameObject().SetActive(true);
         }
-
         private IEnumerator close_description()
         {
             yield return new WaitForSeconds(3f);

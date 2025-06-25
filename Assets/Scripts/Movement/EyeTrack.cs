@@ -1,30 +1,31 @@
-﻿using Eyeware.BeamEyeTracker;
+﻿#if !UNITY_WEBGL
+using Eyeware.BeamEyeTracker;
 using Eyeware.BeamEyeTracker.Unity;
-using Inventory;
+#endif
 using Player;
-using Tobii.Research.Unity;
-using Unity.VisualScripting;
+using StaticObjects;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 
 namespace Movement
 {
-    public class EyeTrack:IControl
+    public class EyeTrack : IControl
     {
-       
-        public EyeTrack Instance;
         private readonly InputAction _move;
+#if !UNITY_WEBGL
         private API api;
+        public API Api
+        {
+            get => api;
+        }
         private BeamEyeTrackerInputDevice _eyeTrackerInputDevice;
-        public GazeTrail Trail;
+#endif
 
         public Pointer p;
-       // public string name;
-       
+        // public string name;
+
         public EyeTrack(InputAction moveAction)
         {
             this._move = moveAction;
@@ -32,12 +33,10 @@ namespace Movement
 
         public void Enable()
         {
-           
-            
-                api = new API("licenta", new ViewportGeometry());
-                if(api != null)
-                { 
-                //Camera.main.gameObject.GetComponent<CameraControlBehaviour>().cameraControlIsPaused = false;
+#if !UNITY_WEBGL
+            api = new API("licenta", new ViewportGeometry());
+            if (api != null)
+            {
                 api.StartRecenterSimGameCamera();
                 api.AttemptStartingTheBeamEyeTracker();
                 Debug.Log(api.GetVersion().Major);
@@ -45,20 +44,17 @@ namespace Movement
                 if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.NotReceivingTrackingData)
                 {
                     Debug.Log("not receiving data");
-                   //  InputActionMap playerActionMap = PlayerMovement.Instance.inputActions.FindActionMap("Player");
-                   // var input = new InputAction();
-                   //  input= playerActionMap.FindAction("MouseMove");
-                   //  PlayerMovement.Instance.change_strategy(input);
                 }
                 else
                 {
                     _move.Enable();
                 }
-                }
+            }
             else
             {
                 Debug.Log("API is null");
             }
+#endif
         }
 
         public void Disable()
@@ -78,7 +74,7 @@ namespace Movement
 
         public void enter_slider(Slider s)
         {
-            Debug.Log("You looked at this slider: "+s.gameObject.name);
+            Debug.Log("You looked at this slider: " + s.gameObject.name);
         }
 
         public void exit_slider(Slider s)
@@ -113,6 +109,7 @@ namespace Movement
         public void Move(PlayerManager player)
         {
             if (!PlayerManager.Instance.IsMoving) return;
+#if !UNITY_WEBGL
             if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.ReceivingTrackingData)
             {
                 Point inputpos = api.GetLatestTrackingStateSet().UserState.UnifiedScreenGaze.PointOfRegard;
@@ -122,15 +119,15 @@ namespace Movement
                         Camera.main.nearClipPlane));
                 Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
                 // Implement mouse-based movement logic
-                if (MenuManager.Instance.currentMenu.activeSelf == false)
+                if (MenuManager.Instance.current.activeSelf == false)
                 {
                     PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
                     PlayerManager.Instance.menuOpen.gameObject.SetActive(true);
                     float distance = mouseNext.x - player.player.transform.position.x;
                     player.SetFacingDirection(distance);
-                    RaycastHit2D hit = Physics2D.Raycast(new Vector2(inputpos.X,inputpos.Y), Vector2.zero);
-                    if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
-                
+                    RaycastHit2D hit = Physics2D.Raycast(new Vector2(inputpos.X, inputpos.Y), Vector2.zero);
+                    if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem ||
+                        player.beginBattle)
                     {
                         player.IsMoving = false;
                     }
@@ -138,7 +135,7 @@ namespace Movement
                     {
                         player.IsMoving = true;
                     }
-                
+
                     if (player.IsMoving)
                     {
                         if (player.player.transform.position.x < 398)
@@ -148,28 +145,30 @@ namespace Movement
                                 player.player.transform.position,
                                 new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
                         }
-                        if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
+
+                        if (Door.Instance.Opened == true && player.player.transform.position.x <
+                            Door.Instance.transform.position.x + 100f)
                         {
                             player.player.transform.position = Vector3.MoveTowards(
                                 player.player.transform.position,
-                                new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * player.speed);
+                                new Vector2(Door.Instance.transform.position.x + 150f,
+                                    player.player.transform.position.y), Time.deltaTime * player.speed);
                         }
                         else
                         {
-
                             player.IsMoving = true;
                             player.transform.position =
                                 Vector3.MoveTowards(player.player.transform.position, mouseNext,
                                     Time.deltaTime * 50f);
                         }
                     }
-
                 }
                 else
                 {
                     player.IsMoving = false;
                 }
             }
+        #endif
         }
     }
 }

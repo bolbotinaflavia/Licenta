@@ -1,6 +1,7 @@
 ﻿using System;
 using Inventory;
 using Player;
+using StaticObjects;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
@@ -13,7 +14,12 @@ namespace Movement
     public class Mouse : IControl
 
     {
-        private readonly InputAction _mousePositionAction;
+        private  InputAction _mousePositionAction;
+        public InputAction MousePositionAction
+        {
+            get => _mousePositionAction;
+            set => _mousePositionAction = value;
+        }
         private readonly InputAction _mouseClickAction;
 
         //public string name;
@@ -89,7 +95,7 @@ namespace Movement
             Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
 
             // Implement mouse-based movement logic
-            if (MenuManager.Instance.currentMenu.activeSelf == false)
+            if (MenuManager.Instance.current.activeSelf == false)
             {
 
                 float distance = mouseNext.x - player.player.transform.position.x;
@@ -98,7 +104,6 @@ namespace Movement
                 if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
                 
                 {
-                    //player.IsMoving = false;
                     player.menu_slider_open();
                     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
                 }

@@ -7,8 +7,8 @@ namespace Sliders_scripts
         protected override void OnTimerComplete()
         {
             menuOption.value = 1;
-            MenuManager.Instance.currentMenu.SetActive(MenuManager.Instance.currentMenu.activeSelf != true);
-            if (MenuManager.Instance.currentMenu.activeSelf)
+            MenuManager.Instance.current.SetActive(MenuManager.Instance.current.activeSelf != true);
+            if (MenuManager.Instance.current.activeSelf)
             {
                 GameController.Instance.state = GameState.Menu;
                 if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
@@ -21,7 +21,7 @@ namespace Sliders_scripts
             {
                 GameController.Instance.state = GameState.FreeRoam;
             }
-           
+             StartCoroutine(Deselect());
         }
 
         // Start is called before the first frame update

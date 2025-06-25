@@ -778,8 +778,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 3560460492872245136}
   baseColor: {r: 0.22352941, g: 0.48235294, b: 0.26666668, a: 1}
-  timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 8656827712528929825}
+  timer: 0.5
   nextMenu: Menu_basic
 --- !u!114 &7167835369777770262
 MonoBehaviour:
@@ -847,9 +846,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5788321555362200364}
   - component: {fileID: 8063808342680750055}
-  - component: {fileID: 4608103419878583500}
   - component: {fileID: 6472179235277160297}
   - component: {fileID: 403858782316554498}
+  - component: {fileID: 2412329338568861934}
   m_Layer: 6
   m_Name: Exit
   m_TagString: Untagged
@@ -876,7 +875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1391, y: -101}
+  m_AnchoredPosition: {x: 1297, y: -101}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8063808342680750055
@@ -930,23 +929,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4608103419878583500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5208931795137536172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f565f08171aca284ca5612d7e555d41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  instance: {fileID: 0}
-  menuOption: {fileID: 8063808342680750055}
-  baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
-  timer: 1
-  immersiveHUDPanelBehaviour: {fileID: 403858782316554498}
 --- !u!114 &6472179235277160297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -964,7 +946,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 4608103419878583500}
+        - m_Target: {fileID: 2412329338568861934}
           m_TargetAssemblyTypeName: MenuCountdown, Assembly-CSharp
           m_MethodName: OnClicked
           m_Mode: 1
@@ -991,6 +973,22 @@ MonoBehaviour:
   fadeOutSpeed: 2
   fadeInSpeed: 10
   minOpacity: 0.2
+--- !u!114 &2412329338568861934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5208931795137536172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306d89a8d4d2b8741909ae1436430088, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 2412329338568861934}
+  menuOption: {fileID: 8063808342680750055}
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
+  timer: 0.5
 --- !u!1 &6272714591082115295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1425,7 +1423,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1461, y: -84}
+  m_AnchoredPosition: {x: -1289, y: -84}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8915212256034393326
@@ -1494,8 +1492,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 8915212256034393326}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 2642823195643668640}
+  timer: 0.5
   nextMenu: Menu_settings
 --- !u!114 &3887741132210811957
 MonoBehaviour:

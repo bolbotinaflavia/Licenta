@@ -7,6 +7,7 @@ public class QuitGame : MenuCountdown
         Debug.Log("quitting....");
         Application.Quit();
         menuOption.value = 1;
+          StartCoroutine(Deselect());
     }
 
     // Start is called before the first frame update

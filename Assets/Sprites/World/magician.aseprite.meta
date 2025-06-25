@@ -126,7 +126,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
+      x: 132
       y: 4
       width: 18
       height: 59
@@ -138,7 +138,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 4}
+    uvTransform: {x: 132, y: 4}
   - name: magician_Frame_1
     originalName: 
     pivot: {x: 0.6111111, y: 0}
@@ -146,8 +146,8 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 71
+      x: 158
+      y: 4
       width: 18
       height: 59
     spriteID: b63758a448816bd4a81810f86bfbbe27
@@ -158,17 +158,17 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 71}
+    uvTransform: {x: 158, y: 4}
   - name: magician_Frame_2
     originalName: 
-    pivot: {x: 0.6111111, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 138
-      width: 18
+      x: 70
+      y: 4
+      width: 54
       height: 59
     spriteID: c71461df83019c94887336d4367109b4
     spriteBone: []
@@ -178,18 +178,18 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 138}
+    uvTransform: {x: 70, y: 4}
   - name: magician_Frame_3
     originalName: 
-    pivot: {x: 0.6111111, y: -0.01724138}
+    pivot: {x: 0.5344828, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 30
-      y: 138
-      width: 18
-      height: 58
+      x: 4
+      y: 4
+      width: 58
+      height: 60
     spriteID: 0e26d8db489897f44b1d865f4a8f1590
     spriteBone: []
     spriteOutline: []
@@ -198,7 +198,7 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 30, y: 138}
+    uvTransform: {x: 4, y: 4}
   - name: magician_Frame_4
     originalName: 
     pivot: {x: 0.6111111, y: 0}
@@ -206,7 +206,7 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 30
+      x: 184
       y: 4
       width: 18
       height: 59
@@ -218,16 +218,16 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 30, y: 4}
+    uvTransform: {x: 184, y: 4}
   - name: magician_Frame_5
     originalName: 
-    pivot: {x: 0.6111111, y: 0}
+    pivot: {x: 0.6666667, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 30
-      y: 71
+      x: 210
+      y: 4
       width: 18
       height: 59
     spriteID: 1427e38acae7ac349a263869c4c1ae31
@@ -238,7 +238,267 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 30, y: 71}
+    uvTransform: {x: 210, y: 4}
+  - name: magician_Frame_6
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 72
+      width: 18
+      height: 59
+    spriteID: 9fa3f74c8f76f3443aca324aa4cc5cb8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 72}
+  - name: magician_Frame_7
+    originalName: 
+    pivot: {x: 0.5555556, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 139
+      width: 18
+      height: 59
+    spriteID: cd28a3c62f574ef44bf66084072b6588
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 139}
+  - name: magician_Frame_8
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 72
+      width: 18
+      height: 59
+    spriteID: ef23e9198a965874a91c6fecaafc4f90
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 72}
+  - name: magician_Frame_9
+    originalName: 
+    pivot: {x: 0.6666667, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 30
+      y: 139
+      width: 18
+      height: 59
+    spriteID: 6750595ab29cd2b42a4d944d984b3233
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 30, y: 139}
+  - name: magician_Frame_10
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 72
+      width: 18
+      height: 59
+    spriteID: 1c4d2aee4bf8a3647823f1b40a26ad01
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 72}
+  - name: magician_Frame_11
+    originalName: 
+    pivot: {x: 0.5555556, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 56
+      y: 139
+      width: 18
+      height: 59
+    spriteID: be528e5061bdd5b448ae62b2c61f8f28
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 56, y: 139}
+  - name: magician_Frame_12
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 72
+      width: 18
+      height: 59
+    spriteID: a1259213e192b074c8ed7ca87380fbc3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 72}
+  - name: magician_Frame_13
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 82
+      y: 139
+      width: 18
+      height: 59
+    spriteID: 90793f8a503351748b180e132cb762b0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 82, y: 139}
+  - name: magician_Frame_14
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 72
+      width: 18
+      height: 59
+    spriteID: 1a02d6ab6ddf3a84ea049b6d4d7f310f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 72}
+  - name: magician_Frame_15
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 108
+      y: 139
+      width: 18
+      height: 59
+    spriteID: f9c54e159e1e88a4184f7e83af212b81
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 108, y: 139}
+  - name: magician_Frame_16
+    originalName: 
+    pivot: {x: 0.6111111, y: -0.01724138}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 72
+      width: 18
+      height: 58
+    spriteID: 6e264da851fd9e54ca6b4266e9432a3f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 160, y: 72}
+  - name: magician_Frame_17
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 134
+      y: 72
+      width: 18
+      height: 59
+    spriteID: 5e49393e7112dd54f8547f5788d2c08b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 134, y: 72}
+  - name: magician_Frame_18
+    originalName: 
+    pivot: {x: 0.6111111, y: 0}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 134
+      y: 139
+      width: 18
+      height: 59
+    spriteID: 7909dd99a86d7fa4d91c7bcd5a897747
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 134, y: 139}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -267,18 +527,18 @@ ScriptedImporter:
     - name: magician_Frame_2
       frameIndex: 2
       cellRect:
-        x: 21
+        x: 5
         y: 0
-        width: 18
+        width: 54
         height: 59
       spriteId: c71461df83019c94887336d4367109b4
     - name: magician_Frame_3
       frameIndex: 3
       cellRect:
-        x: 21
-        y: 1
-        width: 18
-        height: 58
+        x: 1
+        y: 0
+        width: 58
+        height: 60
       spriteId: 0e26d8db489897f44b1d865f4a8f1590
     - name: magician_Frame_4
       frameIndex: 4
@@ -291,11 +551,115 @@ ScriptedImporter:
     - name: magician_Frame_5
       frameIndex: 5
       cellRect:
-        x: 21
+        x: 20
         y: 0
         width: 18
         height: 59
       spriteId: 1427e38acae7ac349a263869c4c1ae31
+    - name: magician_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 9fa3f74c8f76f3443aca324aa4cc5cb8
+    - name: magician_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 22
+        y: 0
+        width: 18
+        height: 59
+      spriteId: cd28a3c62f574ef44bf66084072b6588
+    - name: magician_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: ef23e9198a965874a91c6fecaafc4f90
+    - name: magician_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 20
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 6750595ab29cd2b42a4d944d984b3233
+    - name: magician_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 1c4d2aee4bf8a3647823f1b40a26ad01
+    - name: magician_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 22
+        y: 0
+        width: 18
+        height: 59
+      spriteId: be528e5061bdd5b448ae62b2c61f8f28
+    - name: magician_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: a1259213e192b074c8ed7ca87380fbc3
+    - name: magician_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 90793f8a503351748b180e132cb762b0
+    - name: magician_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 1a02d6ab6ddf3a84ea049b6d4d7f310f
+    - name: magician_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: f9c54e159e1e88a4184f7e83af212b81
+    - name: magician_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 21
+        y: 1
+        width: 18
+        height: 58
+      spriteId: 6e264da851fd9e54ca6b4266e9432a3f
+    - name: magician_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 5e49393e7112dd54f8547f5788d2c08b
+    - name: magician_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 21
+        y: 0
+        width: 18
+        height: 59
+      spriteId: 7909dd99a86d7fa4d91c7bcd5a897747
     linkedCells: []
     parentIndex: -1
   platformSettings: []

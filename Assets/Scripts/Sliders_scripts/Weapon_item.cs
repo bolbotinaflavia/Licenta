@@ -25,15 +25,16 @@ namespace Sliders_scripts
         {
             if (weapon != null)
             {
-                    SelectWeapon();
-                    UpdateUI();
-                    open_description();
-                    UpdateUI();
-                    StartCoroutine(close_description());
+                SelectWeapon();
+                UpdateUI();
+                open_description();
+                UpdateUI();
+                StartCoroutine(close_description());
 
             }
 
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
         private void open_description()
@@ -110,6 +111,7 @@ namespace Sliders_scripts
                 if (weapon != null)
                 {
                     img.sprite = weapon.Image;
+                    description.text = weapon.Description;
                     if (weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
                     {
                         fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);

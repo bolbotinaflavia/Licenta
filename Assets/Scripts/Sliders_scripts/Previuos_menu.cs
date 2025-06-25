@@ -17,14 +17,15 @@ namespace Sliders_scripts
                 }
                 else
                 {
-                    MenuManager.Instance.BackToPrevious();
+                    MenuManager.Instance.LoadPrevious();
                 }
             }
             else
             {
-                MenuManager.Instance.BackToPrevious();
+                MenuManager.Instance.LoadPrevious();
             }
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
         // Start is called before the first frame update

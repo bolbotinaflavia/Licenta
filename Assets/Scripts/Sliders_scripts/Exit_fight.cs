@@ -8,6 +8,7 @@ namespace Sliders_scripts
         {
             SceneManager.LoadScene("Gameplay");
             menuOption.value = 1;
+            StartCoroutine(Deselect());
         }
 
         // Start is called before the first frame update

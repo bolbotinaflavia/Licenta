@@ -12,8 +12,8 @@ namespace Sliders_scripts
 {
     public class WeaponsMenu : MenuCountdown
     {
-        public string weaponName;
-        private WeaponB _weapon;
+        [SerializeField] private WeaponB weapon;
+        [SerializeField]private string weaponName;
         public Image img;
 
         public Image fade;
@@ -23,23 +23,18 @@ namespace Sliders_scripts
 
         protected override void OnTimerComplete()
         {
-            if (_weapon != null)
+            if (weapon != null)
             {
-                if (_weapon.InUse)
-                {
-                    open_description();
-                    UpdateUI();
-                    StartCoroutine(close_description());
-                }
-                else
-                {
-                    SelectWeapon();
-                    UpdateUI();
-                }
+                SelectWeapon();
+                UpdateUI();
+                open_description();
+                UpdateUI();
+                StartCoroutine(close_description());
 
             }
 
             menuOption.value = 1;
+              StartCoroutine(Deselect());
         }
 
         private void open_description()
@@ -58,9 +53,12 @@ namespace Sliders_scripts
 
     public void FindWeaponsInInventory()
         {
-            _weapon = InventoryManager.Instance.Weapons.Find(w => w.WeaponName == weaponName);
-            if(description != null&&_weapon!=null)
-                description.text = _weapon.Description;
+            if (InventoryManager.Instance != null)
+            {
+                weapon = InventoryManager.Instance.Weapons.Find(w => w.WeaponName == weaponName);
+                if (description != null && weapon != null)
+                    description.text = weapon.Description;
+            }
         }
 
 
@@ -83,7 +81,7 @@ namespace Sliders_scripts
 
         public void SelectWeapon()
         {
-            if (_weapon.WeaponName != InventoryManager.Instance.CurrentWeapon.WeaponName)
+            if (weapon.WeaponName != InventoryManager.Instance.CurrentWeapon.WeaponName)
             {
                 Color c = new Color(0.9568627f, 0.7058824f, 0.1058824f);
 
@@ -101,7 +99,7 @@ namespace Sliders_scripts
                     //menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
                 
                 
-                InventoryManager.Instance.SelectWeapon(_weapon);
+                InventoryManager.Instance.SelectWeapon(weapon);
                
             }
             else
@@ -110,10 +108,11 @@ namespace Sliders_scripts
         public void UpdateUI()
         {
            
-                if (_weapon != null)
+                if (weapon != null)
                 {
-                    img.sprite = _weapon.Image;
-                    if (_weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
+                    img.sprite = weapon.Image;
+                    description.text = weapon.Description;
+                    if (weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
                     {
                         fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
                        // menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
@@ -129,30 +128,6 @@ namespace Sliders_scripts
                     menuOption.fillRect.GetComponent<Image>().color =
                         menuOption.GetComponent<MenuCountdown>().baseColor;
                 }
-        }
-
-        public void Update()
-        {
-            
-                if (_weapon != null)
-                {
-                    img.sprite = _weapon.Image;
-                    if (_weapon.WeaponName == InventoryManager.Instance.CurrentWeapon.WeaponName)
-                    {
-
-                        fade.color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
-                        //menuOption.fillRect.GetComponent<Image>().color = new Color(0.2234294f, 0.4823529f, 0.2666667f);
-                    }
-                     else
-                     {
-                         //menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                     }
-                
-                // else
-                // {
-                //     menuOption.fillRect.GetComponent<Image>().color = new Color(0.9568627f, 0.7058824f, 0.1058824f);
-                // }
-            }
         }
     }
 }

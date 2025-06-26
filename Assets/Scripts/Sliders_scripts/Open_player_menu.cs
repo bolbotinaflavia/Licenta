@@ -21,7 +21,7 @@ namespace Sliders_scripts
             {
                 GameController.Instance.state = GameState.FreeRoam;
             }
-           
+             StartCoroutine(Deselect());
         }
 
         // Start is called before the first frame update

@@ -1,14 +1,12 @@
 using System;
 using System.Collections;
 using Battle;
-using Eyeware.BeamEyeTracker;
+#if !UNITY_WEBGL
 using Eyeware.BeamEyeTracker.Unity;
-using Movement;
+#endif
 using Player;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -18,50 +16,50 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
     public Color baseColor;
     public float timer = 5f;
     private Coroutine _unfillCoroutine;
+    private Action slider_clicked;
+#if !UNITY_WEBGL
     public ImmersiveHUDPanelBehaviour immersiveHUDPanelBehaviour;
+    #endif
 
     private void Awake()
     {
         if(instance == null)
             instance = this;
+#if !UNITY_WEBGL
         immersiveHUDPanelBehaviour = GetComponent<ImmersiveHUDPanelBehaviour>();
+        #endif
     }
 
     public void OnClicked()
     {
-        menuOption.value = 1;
-
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("MouseMove") &&
-            PlayerMovement.Instance.CurrentControl.get_click_action().IsPressed())
+        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("MouseMove")&&Player.PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
-            Debug.Log("Clicked by mouse and all");
             OnTimerComplete();
             PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
-
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") &&
-            this.name.Equals("OpenMenu")&&GameController.Instance.state==GameState.FreeRoam)
+        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
-            OnTimerComplete();
-            PlayerMovement.Instance.CurrentControl.load_sliders();
-        }
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") &&
-            PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
-        {
-            Debug.Log("Clicked by enter and all");
             OnTimerComplete();
             PlayerMovement.Instance.CurrentControl.load_sliders();
             PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
-
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
+        StartCoroutine(Deselect());
+    }
+    public IEnumerator Deselect()
+    {
+        yield return null;
+        if (EventSystem.current.currentSelectedGameObject != null)
         {
-            Debug.Log("Looked at by eye track and all");
-            OnTimerComplete();
-            PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
-            
+            Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
+     // if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
+     //          {
+     //              OnTimerComplete();
+     //              PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
+     //          }
+     //          PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
     public void OnPointerEnter(PointerEventData eventData)
     {
         menuOption.value = 1;
@@ -109,16 +107,125 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void Update()
     {
-
+#if !UNITY_WEBGL
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
         {
-            if (BattleSystem.Instance != null)
+            if (BattleSystem.Instance != null && GameController.Instance != null)
             {
-                if (BattleSystem.Instance.State == BattleState.PlayerMove)
+                if (GameController.Instance.state.Equals(GameState.Battle))
                 {
-                    if (immersiveHUDPanelBehaviour.IsSelected == true)
+                    if (BattleSystem.Instance.State == BattleState.PlayerAction)
                     {
-                        // Debug.Log("Timer started");
+                        if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                        {
+                            if (this.gameObject.CompareTag("Fight").Equals(false))
+                            {
+                                if (immersiveHUDPanelBehaviour.IsSelected)
+                                {
+                                    // Debug.Log("Timer started");
+
+                                    _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                                }
+                                else
+                                {
+                                    if (_unfillCoroutine != null)
+                                    {
+                                        StopCoroutine(_unfillCoroutine);
+                                        _unfillCoroutine = null;
+                                        menuOption.value = 1;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (immersiveHUDPanelBehaviour.IsSelected)
+                            {
+                                // Debug.Log("Timer started");
+
+                                _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                            }
+                            else
+                            {
+                                if (_unfillCoroutine != null)
+                                {
+                                    StopCoroutine(_unfillCoroutine);
+                                    _unfillCoroutine = null;
+                                    menuOption.value = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                    {
+                        if (this.gameObject.CompareTag("HP").Equals(false))
+                        {
+                            if (immersiveHUDPanelBehaviour.IsSelected)
+                            {
+                                // Debug.Log("Timer started");
+                                _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                            }
+                            else
+                            {
+                                if (_unfillCoroutine != null)
+                                {
+                                    StopCoroutine(_unfillCoroutine);
+                                    _unfillCoroutine = null;
+                                    menuOption.value = 1;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (immersiveHUDPanelBehaviour.IsSelected)
+                        {
+                            // Debug.Log("Timer started");
+                            _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                        }
+                        else
+                        {
+                            if (_unfillCoroutine != null)
+                            {
+                                PlayerManager.Instance.IsMoving = true;
+                                StopCoroutine(_unfillCoroutine);
+                                _unfillCoroutine = null;
+                                menuOption.value = 1;
+                            }
+                        } 
+                    }
+                }
+            }
+            else
+            {
+                if (MenuManager.Instance.currentMenu.activeSelf.Equals(true))
+                {
+                    if (this.gameObject.CompareTag("HP").Equals(false))
+                    {
+                        if (immersiveHUDPanelBehaviour.IsSelected)
+                        {
+                            // Debug.Log("Timer started");
+                            _unfillCoroutine ??= StartCoroutine(UnFillSlider());
+                        }
+                        else
+                        {
+                            if (_unfillCoroutine != null)
+                            {
+                                StopCoroutine(_unfillCoroutine);
+                                _unfillCoroutine = null;
+                                menuOption.value = 1;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (immersiveHUDPanelBehaviour.IsSelected)
+                    {
+                        Debug.Log("Timer started");
                         _unfillCoroutine ??= StartCoroutine(UnFillSlider());
                     }
                     else
@@ -132,24 +239,8 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                     }
                 }
             }
-            else
-            {
-                if (immersiveHUDPanelBehaviour.IsSelected == true)
-                {
-                    // Debug.Log("Timer started");
-                    _unfillCoroutine ??= StartCoroutine(UnFillSlider());
-                }
-                else
-                {
-                    if (_unfillCoroutine != null)
-                    {
-                        StopCoroutine(_unfillCoroutine);
-                        _unfillCoroutine = null;
-                        menuOption.value = 1;
-                    }
-                }
-            }
         }
+        #endif
     }
 
     protected abstract void OnTimerComplete();

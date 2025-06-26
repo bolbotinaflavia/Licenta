@@ -1,3 +1,4 @@
+using Food;
 using Inventory;
 using Items;
 using Player;
@@ -16,21 +17,24 @@ namespace Sliders_scripts
         public Text t;
         protected override void OnTimerComplete()
         {
-       
-           
-                if (_f != null)
+
+
+            if (_f != null)
+            {
+                InventoryManager.Instance.Consume(_f);
+                if (PlayerManager.Instance.hp + _f.Hp < 100f)
                 {
-                    InventoryManager.Instance.Consume(_f);
-                    if (PlayerManager.Instance.hp + _f.Hp < 100f)
-                    {
-                        PlayerManager.Instance.hp += _f.Hp;
-                    }
-                    else
-                    {
-                        Debug.Log("HP is already full->100");
-                    }
+                    PlayerManager.Instance.hp += _f.Hp;
+                    UpdateUI();
                 }
-                menuOption.value = 1;
+                else
+                {
+                    PlayerManager.Instance.hp = 100;
+                    Debug.Log("HP is already full->100");
+                }
+            }
+            menuOption.value = 1;
+                  StartCoroutine(Deselect());
         }
     
 
@@ -46,7 +50,7 @@ namespace Sliders_scripts
         }
 
         // Update is called once per frame
-        private void Update()
+        private void UpdateUI()
         {
             if (_f != null)
             {

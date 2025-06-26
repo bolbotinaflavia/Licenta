@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Artefacts;
+using Battle;
+using DefaultNamespace;
+using Food;
 using Items;
 using Player;
 using Sliders_scripts;
@@ -11,6 +16,7 @@ using Weapons;
 
 namespace Inventory
 {
+    [PlantUmlDiagram]
     public class InventoryManager:MonoBehaviour
     {
         public static InventoryManager Instance;
@@ -31,8 +37,35 @@ namespace Inventory
 
         public void Awake()
         {
-            if(Instance==null) Instance = this;
-            DontDestroyOnLoad(this);
+            if (Instance == null) Instance = this;
+        }
+
+        public void add_object(GameObject obj){
+            if (obj.tag.Equals("Spells"))
+            {
+                learn_spell(obj.GetComponent<Spells.Spell>());
+            }
+            else
+            {
+                if (obj.tag.Equals("Artefacts"))
+                {
+                    add_artefact(obj);
+                }
+                else
+                {
+                    if (obj.tag.Equals("Weapons"))
+                    {
+                        FindWeapon(obj);
+                    }
+                    else
+                    {
+                        if (obj.tag.Equals("Food"))
+                        {
+                            add_food(obj);
+                        }
+                    }
+                }
+            }
         }
         //Weapons stuff
         public WeaponB Attack()
@@ -72,26 +105,49 @@ namespace Inventory
             if (check_weapons(new_weapon.WeaponName)==false)
             {
                 StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new weapon\n Check your bag...",2f));
+                PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 0f;
                 PlayerManager.Instance.NewItem = true;
-                Invoke(nameof(finding_animation),2f);
+                StartCoroutine(finding_animation());
                 weapons.Add(new_weapon);
                 SelectWeapon(new_weapon);
                 PlayerManager.Instance.IsMoving = true;
                 new WaitForSeconds(5f);
                 Destroy(w);
             }
-
+            else
+            {
+                PlayerManager.Instance.IsMoving = true;
+            }
         }
-        
+
         //Spell stuff
         public void learn_spell(Spells.Spell s)
         {
             if (s != null)
-            { 
-                spells.Add(s.GetComponent<Spells.Spell>());
-                spells.Last().level_up();
-                //StartCoroutine(notification_show("Learning a spell...\n"));
+            {
+                if (PlayerManager.Instance.learnSpellSkill)
+                {
+                    if (spells.Contains(s))
+                    {
+                        spells.Find(spell => spell.SpellBase.Equals(s.SpellBase)).level_up();
+                    }
+                    else
+                    {
+                        spells.Add(s.GetComponent<Spells.Spell>());
+                        spells.Last().level_up();
+                    }
+
+                    StartCoroutine(PlayerManager.Instance.Notification.notification_show("Learning a spell...\n", 2f));
+                }
+                else
+                {
+                    StartCoroutine(PlayerManager.Instance.Notification.notification_show("You cannot learn the spell yet...", 2f));
+                    PlayerManager.Instance.NewItem = false;
+                }
             }
+            StartCoroutine(end_new_item());
+            PlayerManager.Instance.IsMoving = true;
+           
         }
         public Spells.Spell getSpell(string name)
         {
@@ -106,10 +162,11 @@ namespace Inventory
         //Food stuff
         public void add_food(GameObject f)
         {
-            var new_food=Resources.Load<FoodBase>($"Food/{f.GetComponent<Food>().Base.FoodName}");
+            var new_food=Resources.Load<FoodBase>($"Food/{f.GetComponent<Food.Food>().Base.FoodName}");
             StartCoroutine(PlayerManager.Instance.Notification.notification_show($"You found a {new_food.FoodName}",2f));
             food.Add(new_food);
             Destroy(f,0.2f);
+            PlayerManager.Instance.NewItem = false;
         }
         public int get_number_of_food_item(string name)
         {
@@ -119,10 +176,17 @@ namespace Inventory
         {
             if (get_number_of_food_item(f.FoodName) <= 0) return;
             PlayerManager.Instance.IsEating = true;
-            HpSlider.Instance.UpdateUI();
             food.Remove(f);
-            PlayerManager.Instance.HpPlayerA.healing_animation();
-            Invoke(nameof(eating_animation),2f);
+            if (GameController.Instance.state == GameState.Battle)
+            {
+                BattleSystem.Instance.HpBarPlayer.UpdateUI();
+            }
+            else
+            {
+                HpSlider.Instance.UpdateUI();
+                PlayerManager.Instance.HpPlayerA.healing_animation();
+            }
+            StartCoroutine(eating_animation());
         }
         
         //artefacts
@@ -133,12 +197,14 @@ namespace Inventory
             if (artefacts.Count+1 > 4)
             {
                 PlayerManager.Instance.Notification.notification_show("You have too many artefacts!",2f);
+                PlayerManager.Instance.IsMoving = true;
             }
             else
             {
                 StartCoroutine(PlayerManager.Instance.Notification.notification_show("You found a new artefact\n Check your bag...",2f));
+                PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 0f;
                 PlayerManager.Instance.NewItem = true;
-                Invoke(nameof(finding_animation),2f);
+               StartCoroutine(finding_animation());
                 artefacts.Add(artefact);
                 if (artefact.ArtefactName.Equals("SpellBook"))
                     PlayerManager.Instance.learnSpellSkill = true;
@@ -157,21 +223,32 @@ namespace Inventory
             return null;
         }
         
+        public IEnumerator end_new_item()
+        {
+            yield return new WaitForSeconds(2f);
+            PlayerManager.Instance.NewItem = false;
+            yield return new WaitForSeconds(1f);
+            PlayerManager.Instance.IsMoving = true;
+        }
         //animations
-        public void finding_animation()
+        public IEnumerator finding_animation()
         {
             Debug.Log("Animation started");
-        
+            yield return new WaitForSeconds(2f);
             PlayerManager.Instance.NewItem = false;
-            //IsMoving = true;
-        
+            PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
+            PlayerManager.Instance.menuOpen.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            PlayerManager.Instance.IsMoving = true;
+
         }
-        private void eating_animation()
+        private IEnumerator eating_animation()
         {
-            new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
             PlayerManager.Instance.IsEating = false;
-            //IsMoving = true;
-        
+            yield return new WaitForSeconds(2f);
+            PlayerManager.Instance.IsMoving = true;
+
         }
       
     }

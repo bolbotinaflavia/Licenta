@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8408353643570055197}
-  - component: {fileID: 3603665981164549233}
   - component: {fileID: 2267378388867871090}
   - component: {fileID: 838687367682796494}
   - component: {fileID: 126344562277284510}
+  - component: {fileID: 8352890759988051545}
   m_Layer: 7
   m_Name: Mushroom
   m_TagString: Objects
@@ -35,23 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3603665981164549233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5085219050719359413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2be7c64c9bc645efb32c11068d8e245c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Mushroom_1
-  number: 0
-  image: {fileID: -1299242858519024429, guid: d9d3064bbfc511e479e9094d1f853f35, type: 3}
-  finded: 0
-  hp: 5
 --- !u!50 &2267378388867871090
 Rigidbody2D:
   serializedVersion: 4
@@ -176,3 +159,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8352890759988051545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085219050719359413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c72d5dfe8b4088bd4027cf4d3b81a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _base: {fileID: 11400000, guid: b45a1dd4682b4cf4c8ab549953a32518, type: 2}
+  _food: {fileID: 5085219050719359413}
+  _amount: 0
+  Found: 0
+  Rb: {fileID: 2267378388867871090}

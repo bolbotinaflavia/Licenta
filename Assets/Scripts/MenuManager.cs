@@ -50,7 +50,6 @@ public class MenuManager : MonoBehaviour
                 if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
                     s.value = 1;
             }
-
             if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove"))
             {
                 if (GameController.Instance != null)
@@ -63,12 +62,9 @@ public class MenuManager : MonoBehaviour
                     PlayerMovement.Instance.CurrentControl.load_sliders();
                 }
             }
-               
             currentMenu.SetActive(false);
         }
-
         InstantiateMenu(menuName);
-        
     }
 
     public void battlePreviousMenu()
@@ -116,14 +112,11 @@ public class MenuManager : MonoBehaviour
 
     private void InstantiateMenu(string menuName)
     {
-        Debug.Log($"Attempting to load menu: {menuName}");
-
         GameObject menuPrefab = Resources.Load<GameObject>($"Menus/{menuName}");
         if (menuPrefab != null)
         {
             currentMenu = Instantiate(menuPrefab, transform);
             currentMenu.SetActive(true);
-            Debug.Log($"Successfully instantiated '{menuName}'.");
         }
         else
         {

@@ -1,4 +1,5 @@
-﻿using Enemies;
+﻿using Animations;
+using Enemies;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -78,7 +79,7 @@ namespace Battle
         public float Hp
         {
             get => hp;
-            private set => hp = value;
+            set => hp = value;
         }
 
         // public BattleUnit(EnemieBase enemieBase, int hp)
@@ -100,35 +101,33 @@ namespace Battle
             Debug.Log(" Enemy is: " + this.enemyBase.name + " with hp: " + this.hp);
         }
 
-        public void Attack(Moves move, PlayerManager player)
+        public bool Attack(Moves move, PlayerManager player)
         {
-            Debug.Log("the move is: " + move.MoveName);
             float modifiers = Random.Range(0f, 1f);
             float d;
             d = (enemyBase.Attack * 0.6f + move.Power * 0.4f) / 5f * (modifiers + 1);
-            if (modifiers*move.Accuracy/10f > 1)
+            if (modifiers * move.Accuracy / 10f > 1)
             {
                 d = d - player.defense / 10f;
             }
             else
             {
                 d = 0;
+                return false;
             }
-
-            Debug.Log("Player damage is: " + d);
             if (d > 0)
             {
                 player.hp -= d;
-                Debug.Log("player health is: "+player.hp);
             }
+            return true;
         }
 
-        public void AttackedBySpell(Spells.Spell spell, PlayerManager player)
+        public bool AttackedBySpell(Spells.Spell spell, PlayerManager player)
         {
             float modifiers = Random.Range(0f, 1f);
             float d;
             float bonus = get_spell_bonus(spell, player);
-            d = (spell.SpellBase.Power*0.4f +  player.attackSpeed*0.6f) / 4f*(1+bonus*2+modifiers);
+            d = (spell.SpellBase.Power * 0.4f + player.attackSpeed * 0.6f) / 4f * (1 + bonus * 2 + modifiers);
             if (modifiers * spell.SpellBase.Accuracy / 10f > 1)
             {
                 d = d - enemyBase.Defense / 10f;
@@ -136,23 +135,26 @@ namespace Battle
             else
             {
                 d = 0;
+                return false;
             }
             this.hp = this.hp - d;
-            Debug.Log("Enemy damage is after spell : " + d);
-
+            return true;
         }
-
-        public void Attacked(WeaponB w, PlayerManager player)
+        public bool Attacked(WeaponB w, PlayerManager player)
         {
-            Debug.Log("Attacked enemy");
             float modifiers = Random.Range(0f, 1f);
             float attackWeapon = w.Damage;
             float d;
             float bonus = get_bonus(player,w);
             d = (player.attackSpeed * 0.6f + attackWeapon * 0.4f) / 4f * (1 + modifiers + bonus);
             d = d - this.enemyBase.Defense / 10f;
+            if(d<=0)
+            {
+                d = 0;
+                return false;
+            }
             this.hp = this.hp - d;
-            Debug.Log("Enemy damage is: " + d);
+            return true;
         }
 
         public Moves getRandomMove()
@@ -160,7 +162,6 @@ namespace Battle
             int r = Random.Range(0, enemyBase.Moves.Count);
             return enemyBase.Moves[r].Move;
         }
-
         public float get_spell_bonus(Spells.Spell spell, PlayerManager player)
         {
             float bonus = 0f;
@@ -168,10 +169,13 @@ namespace Battle
             {
                 bonus += 1;
             }
-
             if (player.Inventory.getArtefact("Talisman"))
             {
                 bonus += 1;
+            }
+            if (spell.get_magic_level() > 1)
+            {
+                bonus+=spell.get_magic_level();
             }
             return bonus;
         }
@@ -182,7 +186,6 @@ namespace Battle
             {
                 bonus += 1;
             }
-
             if (player.Inventory.getArtefact("WarriorBook"))
             {
                 bonus += 1;

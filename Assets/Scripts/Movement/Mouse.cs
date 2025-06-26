@@ -1,5 +1,7 @@
 ﻿using System;
+using Inventory;
 using Player;
+using StaticObjects;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 using UnityEngine;
@@ -12,7 +14,12 @@ namespace Movement
     public class Mouse : IControl
 
     {
-        private readonly InputAction _mousePositionAction;
+        private  InputAction _mousePositionAction;
+        public InputAction MousePositionAction
+        {
+            get => _mousePositionAction;
+            set => _mousePositionAction = value;
+        }
         private readonly InputAction _mouseClickAction;
 
         //public string name;
@@ -97,7 +104,6 @@ namespace Movement
                 if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem||player.beginBattle)
                 
                 {
-                    //player.IsMoving = false;
                     player.menu_slider_open();
                     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
                 }
@@ -113,7 +119,14 @@ namespace Movement
                         //IsMoving = false;
                         player.player.transform.position = Vector3.MoveTowards(
                             player.player.transform.position,
-                            new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
+                            new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 75f);
+                    }
+
+                    if (Door.Instance.Opened == true&&player.player.transform.position.x < Door.Instance.transform.position.x+100f)
+                    {
+                            player.player.transform.position = Vector3.MoveTowards(
+                                player.player.transform.position,
+                                new Vector2(Door.Instance.transform.position.x+150f, player.player.transform.position.y), Time.deltaTime * 75f);
                     }
                     else
                     {
@@ -121,7 +134,7 @@ namespace Movement
                         player.IsMoving = true;
                         player.transform.position =
                             Vector3.MoveTowards(player.player.transform.position, mouseNext,
-                                Time.deltaTime * 50f);
+                                Time.deltaTime * 75f);
                     }
                 }
 

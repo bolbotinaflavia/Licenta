@@ -487,8 +487,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -679,8 +679,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1887, y: -51}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -1210, y: -712}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4912207662020407134
 MonoBehaviour:
@@ -748,8 +748,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 4912207662020407134}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   s: {fileID: 0}
   spellName: Brisingr
   text: {fileID: 6103108789845102998}
@@ -891,8 +890,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -972,8 +971,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1153, y: 727}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 1283, y: 706}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9035928454664099109
 MonoBehaviour:
@@ -1041,8 +1040,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 9035928454664099109}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   s: {fileID: 0}
   spellName: Jierda
   text: {fileID: 2407771821415596419}
@@ -1406,8 +1404,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1562,7 +1560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2139, y: -1717}
+  m_AnchoredPosition: {x: 1758, y: -1717}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8699382395630801619
@@ -1632,7 +1630,6 @@ MonoBehaviour:
   menuOption: {fileID: 8699382395630801619}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
-  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &3583204929116137656
 MonoBehaviour:
@@ -1717,8 +1714,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1856, y: -36}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 1304, y: -759}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8794321600634994939
 MonoBehaviour:
@@ -1786,8 +1783,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 8794321600634994939}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   s: {fileID: 0}
   spellName: Slytha
   text: {fileID: 8172359570257144464}
@@ -2237,8 +2233,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2677,8 +2673,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1254, y: 658}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -1206, y: 720}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4816786999489695754
 MonoBehaviour:
@@ -2746,8 +2742,7 @@ MonoBehaviour:
   instance: {fileID: 0}
   menuOption: {fileID: 4816786999489695754}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   s: {fileID: 0}
   spellName: Poison
   text: {fileID: 2463133239680963529}

@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -248,7 +248,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2109, y: -1714}
+  m_AnchoredPosition: {x: 1712, y: -1714}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8693671338504382326
@@ -318,7 +318,6 @@ MonoBehaviour:
   menuOption: {fileID: 8693671338504382326}
   baseColor: {r: 0.49019608, g: 0.4392157, b: 0.44313726, a: 1}
   timer: 0.5
-  immersiveHUDPanelBehaviour: {fileID: 0}
   isFight: 0
 --- !u!114 &4812131869914229149
 MonoBehaviour:
@@ -945,8 +944,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1310,8 +1309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24, y: 619}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 26, y: 639}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &606274291085288047
 MonoBehaviour:
@@ -1379,8 +1378,7 @@ MonoBehaviour:
   instance: {fileID: 5259365921487825683}
   menuOption: {fileID: 606274291085288047}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   nextMenu: Menu_artefacts
 --- !u!114 &8207649189358124410
 MonoBehaviour:
@@ -1465,8 +1463,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1853, y: -47}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: -1364, y: -47}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7873348627552590098
 MonoBehaviour:
@@ -1534,8 +1532,7 @@ MonoBehaviour:
   instance: {fileID: 6669591097260057449}
   menuOption: {fileID: 7873348627552590098}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   nextMenu: Menu_items
 --- !u!114 &5850902643805097035
 MonoBehaviour:
@@ -1695,8 +1692,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1774, y: -61}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchoredPosition: {x: 1353, y: -41}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7097864999250772637
 MonoBehaviour:
@@ -1764,8 +1761,7 @@ MonoBehaviour:
   instance: {fileID: 5475964360576293759}
   menuOption: {fileID: 7097864999250772637}
   baseColor: {r: 0.95686275, g: 0.7058824, b: 0.105882354, a: 1}
-  timer: 0.75
-  immersiveHUDPanelBehaviour: {fileID: 0}
+  timer: 0.5
   nextMenu: Menu_weapons
 --- !u!114 &2503476085379593866
 MonoBehaviour:
@@ -1994,8 +1990,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

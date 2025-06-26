@@ -1,29 +1,27 @@
-﻿using Eyeware.BeamEyeTracker;
+﻿#if !UNITY_WEBGL
+using Eyeware.BeamEyeTracker;
 using Eyeware.BeamEyeTracker.Unity;
+#endif
 using Player;
-using Tobii.Research.Unity;
-using Unity.VisualScripting;
+using StaticObjects;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 
 namespace Movement
 {
-    public class EyeTrack:IControl
+    public class EyeTrack : IControl
     {
-       
-        public EyeTrack Instance;
         private readonly InputAction _move;
+#if !UNITY_WEBGL
         private API api;
         private BeamEyeTrackerInputDevice _eyeTrackerInputDevice;
-        public GazeTrail Trail;
+#endif
 
         public Pointer p;
-       // public string name;
-       
+        // public string name;
+
         public EyeTrack(InputAction moveAction)
         {
             this._move = moveAction;
@@ -31,21 +29,28 @@ namespace Movement
 
         public void Enable()
         {
-            _move.Enable();
-            
-                api = new API("licenta", new ViewportGeometry());
-                if(api != null)
-                { 
-                //Camera.main.gameObject.GetComponent<CameraControlBehaviour>().cameraControlIsPaused = false;
+#if !UNITY_WEBGL
+            api = new API("licenta", new ViewportGeometry());
+            if (api != null)
+            {
                 api.StartRecenterSimGameCamera();
                 api.AttemptStartingTheBeamEyeTracker();
                 Debug.Log(api.GetVersion().Major);
                 Debug.Log(api.GetTrackingDataReceptionStatus());
+                if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.NotReceivingTrackingData)
+                {
+                    Debug.Log("not receiving data");
                 }
+                else
+                {
+                    _move.Enable();
+                }
+            }
             else
             {
                 Debug.Log("API is null");
             }
+#endif
         }
 
         public void Disable()
@@ -65,7 +70,7 @@ namespace Movement
 
         public void enter_slider(Slider s)
         {
-            Debug.Log("You looked at this slider: "+s.gameObject.name);
+            Debug.Log("You looked at this slider: " + s.gameObject.name);
         }
 
         public void exit_slider(Slider s)
@@ -99,6 +104,8 @@ namespace Movement
 
         public void Move(PlayerManager player)
         {
+            if (!PlayerManager.Instance.IsMoving) return;
+#if !UNITY_WEBGL
             if (api.GetTrackingDataReceptionStatus() == TrackingDataReceptionStatus.ReceivingTrackingData)
             {
                 Point inputpos = api.GetLatestTrackingStateSet().UserState.UnifiedScreenGaze.PointOfRegard;
@@ -110,21 +117,22 @@ namespace Movement
                 // Implement mouse-based movement logic
                 if (MenuManager.Instance.currentMenu.activeSelf == false)
                 {
-                    player.menuOpen.gameObject.SetActive(true);
+                    PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
+                    PlayerManager.Instance.menuOpen.gameObject.SetActive(true);
                     float distance = mouseNext.x - player.player.transform.position.x;
                     player.SetFacingDirection(distance);
-                    
-                    
-                    // if (player.GetComponent<Collider2D>().bounds
-                    //     .Contains(new Vector3(inputpos.X, inputpos.Y, Camera.main.nearClipPlane)))
-                    // {
-                    //     Debug.Log("the menu should open");
-                    //     player.IsMoving = false;
-                    //     player.isHover = true;
-                    //     player.menu_slider_open();
-                    //     player.menuOpen.GetComponent<MenuCountdown>().OnClicked();
-                    // }
-                    if (player.isMoving != false)
+                    RaycastHit2D hit = Physics2D.Raycast(new Vector2(inputpos.X, inputpos.Y), Vector2.zero);
+                    if ((hit.collider != null && hit.collider.gameObject == player.player) || player.newItem ||
+                        player.beginBattle)
+                    {
+                        player.IsMoving = false;
+                    }
+                    else
+                    {
+                        player.IsMoving = true;
+                    }
+
+                    if (player.IsMoving)
                     {
                         if (player.player.transform.position.x < 398)
                         {
@@ -133,24 +141,30 @@ namespace Movement
                                 player.player.transform.position,
                                 new Vector2(400f, player.player.transform.position.y), Time.deltaTime * 50f);
                         }
+
+                        if (Door.Instance.Opened == true && player.player.transform.position.x <
+                            Door.Instance.transform.position.x + 100f)
+                        {
+                            player.player.transform.position = Vector3.MoveTowards(
+                                player.player.transform.position,
+                                new Vector2(Door.Instance.transform.position.x + 150f,
+                                    player.player.transform.position.y), Time.deltaTime * player.speed);
+                        }
                         else
                         {
-
                             player.IsMoving = true;
                             player.transform.position =
                                 Vector3.MoveTowards(player.player.transform.position, mouseNext,
                                     Time.deltaTime * 50f);
                         }
                     }
-
                 }
                 else
                 {
-                    player.menuOpen.gameObject.SetActive(false);
                     player.IsMoving = false;
                 }
-
             }
+        #endif
         }
     }
 }

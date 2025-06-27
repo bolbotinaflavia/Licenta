@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using Battle;
 #if !UNITY_WEBGL
+#if !UNITY_WEBGL
 using Eyeware.BeamEyeTracker.Unity;
+#endif
 #endif
 using Player;
 using UnityEngine;
@@ -18,7 +20,9 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
     private Coroutine _unfill;
     private Action slider_clicked;
 #if !UNITY_WEBGL
+#if !UNITY_WEBGL
     public ImmersiveHUDPanelBehaviour immersiveHUDPanelBehaviour;
+    #endif
     #endif
 
     private void Awake()
@@ -26,7 +30,9 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
         if(instance == null)
             instance = this;
 #if !UNITY_WEBGL
+#if !UNITY_WEBGL
         immersiveHUDPanelBehaviour = GetComponent<ImmersiveHUDPanelBehaviour>();
+        #endif
         #endif
     }
 
@@ -36,7 +42,10 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
         {
             OnTimerComplete();
             PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
+            OnTimerComplete();
+            PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
+        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
             OnTimerComplete();
@@ -105,6 +114,7 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
 
     private void Update()
     {
+#if !UNITY_WEBGL
 #if !UNITY_WEBGL
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove"))
         {
@@ -238,6 +248,7 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
                 }
             }
         }
+        #endif
         #endif
     }
 

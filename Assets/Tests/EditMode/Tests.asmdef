@@ -4,8 +4,12 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
+<<<<<<< HEAD
         "ArtefactsAdventure",
         "tech.eyeware.beam-eye-tracker.Runtime"
+=======
+        "ArtefactsAdventure"
+>>>>>>> origin/fight_Scene
     ],
     "includePlatforms": [
         "Editor"

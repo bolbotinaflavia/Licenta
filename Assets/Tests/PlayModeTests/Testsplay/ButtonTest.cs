@@ -13,6 +13,7 @@ public class ButtonTest
     [UnityTest]
     public IEnumerator ButtonClickTest()
     {
+<<<<<<< HEAD
         //incarcare scena StartGame
         var asyncOp = SceneManager.LoadSceneAsync("StartGame");
         //se asteapta ca scena sa fie incarcata complet
@@ -26,6 +27,19 @@ public class ButtonTest
 
         btn.OnPointerEnter(new PointerEventData(EventSystem.current));
         yield return new WaitUntil(() => btn.menuOption.value == 0);
+=======
+        // Load the initial scene
+        var asyncOp = SceneManager.LoadSceneAsync("StartGame");
+        yield return new WaitUntil(() => asyncOp.isDone);
+        var menuManager = GameObject.FindObjectOfType<MenuManager>();
+        menuManager.LoadMenu("Menu_start");
+        // Now safely find your objects
+        var button = GameObject.Find("Play").GetComponent<MenuCountdown>();
+        Assert.IsNotNull(button, "MenuCountdown should not be null");
+
+        button.OnPointerEnter(new PointerEventData(EventSystem.current));
+        yield return new WaitUntil(() => button.menuOption.value == 0);
+>>>>>>> origin/fight_Scene
         yield return new WaitForSeconds(0.1f); // Wait for the button to be ready
 
         Assert.AreEqual("StoryStart", SceneManager.GetActiveScene().name, "Should load StoryStart scene after button click");
@@ -42,11 +56,21 @@ public class ButtonTest
 
         yield return null;
 
+<<<<<<< HEAD
         var btn = GameObject.Find("Play")?.GetComponent<MenuCountdown>();
         Assert.IsNotNull(btn, "Play button must exist");
 
         btn.OnClicked();
 
+=======
+        var button = GameObject.Find("Play")?.GetComponent<MenuCountdown>();
+        Assert.IsNotNull(button, "Play button must exist");
+
+        // Simulate button click
+        button.OnClicked();
+
+        // Wait for scene load to trigger
+>>>>>>> origin/fight_Scene
         yield return new WaitForSeconds(0.5f);
 
         Assert.AreEqual("StoryStart", SceneManager.GetActiveScene().name, "Scene should transition after button click");
@@ -63,6 +87,7 @@ public class ButtonTest
 
         yield return null;
 
+<<<<<<< HEAD
         var btn = GameObject.Find("Play")?.GetComponent<MenuCountdown>();
         Assert.IsNotNull(btn, "Play button must exist");
 
@@ -72,6 +97,16 @@ public class ButtonTest
             btn.OnClicked();
             yield return new WaitForSeconds(0.05f);
             i++;
+=======
+        var button = GameObject.Find("Play")?.GetComponent<MenuCountdown>();
+        Assert.IsNotNull(button, "Play button must exist");
+
+        // Rapidly click the button multiple times
+        for (int i = 0; i < 5; i++)
+        {
+            button.OnClicked();
+            yield return new WaitForSeconds(0.05f);
+>>>>>>> origin/fight_Scene
         }
 
         // Wait and check scene transition
@@ -79,6 +114,7 @@ public class ButtonTest
         Assert.AreEqual("StoryStart", SceneManager.GetActiveScene().name, "Scene should load even after multiple rapid clicks");
     }
     [UnityTest]
+<<<<<<< HEAD
     public IEnumerator OnClicked_KeyboardMove_CallsOnTimerComplete_AndLoadsSliders()
     {
         var asyncOp = SceneManager.LoadSceneAsync("StartGame");
@@ -111,5 +147,44 @@ public class ButtonTest
 
         yield return new WaitForSeconds(1f);
     }
+=======
+public IEnumerator OnClicked_KeyboardMove_CallsOnTimerComplete_AndLoadsSliders()
+{
+    var asyncOp = SceneManager.LoadSceneAsync("StartGame");
+    yield return new WaitUntil(() => asyncOp.isDone);
+
+    var menuManager = GameObject.FindObjectOfType<MenuManager>();
+    menuManager.LoadMenu("Menu_start");
+
+    yield return null;
+
+    var button = GameObject.Find("Play")?.GetComponent<MenuCountdown>();
+    Assert.IsNotNull(button, "Play button must exist");
+
+    // Simulate keyboard control mode
+    var playerMovement = PlayerMovement.Instance;
+    InputActionMap playerActionMap = playerMovement.inputActions.FindActionMap("Player");
+    var input = playerActionMap.FindAction("KeyboardMove");
+
+                playerMovement.change_strategy(input);
+
+    // Simulate click action being triggered
+    var clickAction = playerMovement.CurrentControl.get_click_action();
+    clickAction?.Enable();
+    InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(Key.Space)); // or correct binding key
+    InputSystem.Update();
+
+    // Ensure action was triggered
+    Assert.IsTrue(clickAction.triggered);
+
+    // Call method
+    button.OnClicked();
+
+    yield return new WaitForSeconds(0.2f); // let logic process
+
+    // You could verify the effects here
+    // e.g., a flag set in OnTimerComplete, slider state changed, etc.
+}
+>>>>>>> origin/fight_Scene
 
 }

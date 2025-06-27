@@ -32,24 +32,7 @@ namespace Player
         private static readonly int Item = Animator.StringToHash("new_item");
         private static readonly int FacingRight = Animator.StringToHash("isFacingRight");
         private static readonly int BBattle=Animator.StringToHash("begin_battle");
-        private bool isMoving=true;
-        public bool IsMoving { 
-            get => isMoving;
-            set
-            {
-                isMoving = value;
-                if (_animator != null)
-                {
-                    _animator.SetBool(Moving, value);
-                }
-                else
-                {
-                    Debug.LogError("Animator is missing.");
-                }
-            }
-        }
-        
-        
+
         public PlayerMovement playerMovement;
 
         public event Action<Enemy,GameObject> OnEncountered;
@@ -223,7 +206,6 @@ namespace Player
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-           
             Debug.Log("Triggered with: " + other.gameObject.name);
             if (other.gameObject.CompareTag("Start"))
             {

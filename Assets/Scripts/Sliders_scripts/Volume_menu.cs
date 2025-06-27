@@ -19,7 +19,11 @@ namespace Sliders_scripts
                 UpdateUI();
                 menuOption.value = 1;
                 if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove") && !PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
+<<<<<<< HEAD
                     start_timer();
+=======
+                    StartTimer();
+>>>>>>> origin/fight_Scene
             }
             else
             {
@@ -27,7 +31,11 @@ namespace Sliders_scripts
                 UpdateUI();
                 menuOption.value = 1;
                 if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("EyeMove") && !PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
+<<<<<<< HEAD
                     start_timer();
+=======
+                    StartTimer();
+>>>>>>> origin/fight_Scene
             }
             menuOption.value = 1;
               StartCoroutine(Deselect());

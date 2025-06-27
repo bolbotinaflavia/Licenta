@@ -74,5 +74,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 Assets/TobiiPro/*
-WebGL-build
+/WebGL-build/*
 /Build[*]/

@@ -15,17 +15,11 @@ public class InventoryTests
     [Test]
     public void InventoryFirstTest()
     {
-<<<<<<< HEAD
         //setare scena de testare
         var asyncOp = EditorSceneManager.OpenScene("Assets/Scenes/Gameplay.unity");
         var player = GameObject.FindObjectOfType<PlayerManager>();
         var inventory = GameObject.FindObjectOfType<InventoryManager>();
 
-=======
-        var asyncOp = EditorSceneManager.OpenScene("Assets/Scenes/Gameplay.unity");
-        var player = GameObject.FindObjectOfType<PlayerManager>();
-        var inventory = GameObject.FindObjectOfType<InventoryManager>();
->>>>>>> origin/fight_Scene
         //verificare inventar este gol la inceput
         Assert.IsEmpty(inventory.Weapons, "Weapons should be empty at the start");
         Assert.IsEmpty(inventory.Food, "Food should be empty at the start");

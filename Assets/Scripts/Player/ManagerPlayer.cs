@@ -32,7 +32,22 @@ namespace Player
         private static readonly int Item = Animator.StringToHash("new_item");
         private static readonly int FacingRight = Animator.StringToHash("isFacingRight");
         private static readonly int BBattle=Animator.StringToHash("begin_battle");
-
+ private bool isMoving=true;
+        public bool IsMoving { 
+            get => isMoving;
+            set
+            {
+                isMoving = value;
+                if (_animator != null)
+                {
+                    _animator.SetBool(Moving, value);
+                }
+                else
+                {
+                    Debug.LogError("Animator is missing! Make sure the Animator component is attached to the Player.");
+                }
+            }
+        }
         public PlayerMovement playerMovement;
 
         public event Action<Enemy,GameObject> OnEncountered;

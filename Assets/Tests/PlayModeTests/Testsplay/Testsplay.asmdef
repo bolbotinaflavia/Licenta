@@ -9,12 +9,8 @@
         "Cinemachine.Runtime.Tests",
         "Unity.VisualScripting.Core",
         "Cinemachine",
-<<<<<<< HEAD
         "Unity.InputSystem.TestFramework",
         "tech.eyeware.beam-eye-tracker.Runtime"
-=======
-        "Unity.InputSystem.TestFramework"
->>>>>>> origin/fight_Scene
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

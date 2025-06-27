@@ -551,6 +551,7 @@ MonoBehaviour:
   menuOption: {fileID: 8167546987760793412}
   baseColor: {r: 0.6627451, g: 0.23137255, b: 0.23137255, a: 1}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
 --- !u!1 &4666736361851585411
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,6 +914,7 @@ MonoBehaviour:
   menuOption: {fileID: 3019288630684901860}
   baseColor: {r: 0, g: 0, b: 0, a: 0}
   timer: 0.5
+  immersiveHUDPanelBehaviour: {fileID: 0}
 --- !u!1 &5214515667844812814
 GameObject:
   m_ObjectHideFlags: 0

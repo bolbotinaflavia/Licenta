@@ -141,10 +141,6 @@ public class BattleTest
         yield return new WaitUntil(() => asyncOp.isDone);
         var asyncOp2 = SceneManager.LoadSceneAsync("Gameplay");
         yield return new WaitUntil(() => asyncOp2.isDone);
-<<<<<<< HEAD
-=======
-         // Așteaptă un frame pentru ca Start() să ruleze
->>>>>>> origin/fight_Scene
         yield return null;
 
         var player = GameObject.FindObjectOfType<PlayerManager>();
@@ -156,26 +152,14 @@ public class BattleTest
         var enemy = GameObject.Find("Skeleton_first");
         Assert.IsNotNull(enemy, "Enemy should not be null after loading Gameplay scene");
 
-<<<<<<< HEAD
         yield return player.start_battle(enemy);
 
-=======
-        // Apelează start_battle ca o coroutine completă
-        yield return player.start_battle(enemy);
-
-        // Așteaptă ca GameState să se schimbe
->>>>>>> origin/fight_Scene
         yield return new WaitUntil(() => gameManager.state == GameState.Battle);
         var battleSystem = GameObject.Find("BattleSystem").GetComponent<BattleSystem>();
         Assert.IsNotNull(battleSystem, "BattleSystem should not be null during battle");
         yield return new WaitUntil(() => battleSystem.State == BattleState.PlayerAction);
         battleSystem.PlayerActionMove("UnknownMove");
-<<<<<<< HEAD
         yield return new WaitForSeconds(4f); 
         // Assert.IsTrue(battleSystem.State == BattleState.EnemyMove, "Battle state should be EnemyMove after using an unknown move");
-=======
-        yield return new WaitForSeconds(4f); // Așteaptă un timp pentru a permite tranziția
-           // Assert.IsTrue(battleSystem.State == BattleState.EnemyMove, "Battle state should be EnemyMove after using an unknown move");
->>>>>>> origin/fight_Scene
     }
 }

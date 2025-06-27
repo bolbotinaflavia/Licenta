@@ -77,7 +77,25 @@ public class MenuManager : MonoBehaviour
             }
         }
     }
-
+ public void BackToPrevious()
+    {
+        if (_menuStack.Count > 0)
+        {
+            Destroy(current);
+            GameObject previousMenu = _menuStack.Pop();
+            previousMenu.SetActive(true);
+            current = previousMenu;
+            foreach (var s in GameObject.FindObjectsOfType<Slider>())
+            {
+                if (!s.name.Equals("OpenMenu")&&!s.name.Equals("HP") && !s.tag.Equals("HP"))
+                    s.value = 1;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No previous menu to return to.");
+        }
+    }
     public void LoadPrevious()
     {
         if (_menuStack.Count > 0)

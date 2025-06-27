@@ -14,11 +14,8 @@ namespace Sliders_scripts
             {
                 SceneManager.LoadScene("StartGame");
                 Destroy(PlayerManager.Instance.gameObject);
-<<<<<<< HEAD
                 MenuManager.Instance.LoadPrevious();
-=======
                 MenuManager.Instance.BackToPrevious();
->>>>>>> origin/fight_Scene
                 Destroy(VolumeManager.Instance.gameObject);
             }
             menuOption.value = 1;

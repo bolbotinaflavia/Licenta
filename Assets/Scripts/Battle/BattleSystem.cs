@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using Animations;
-using Animations;
 using DefaultNamespace;
 using Enemies;
 using HPBar;
@@ -14,9 +13,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-using Unity.Services.Analytics;
-using Unity.Services.Core;
-using System.Collections.Generic;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using System.Collections.Generic;
@@ -47,11 +43,9 @@ namespace Battle
         public Notification Notification => _notification;
         public BattleAnimationManager AnimationManager => animationManager;
         public Dictionary<string, int> Move;
-        public Dictionary<string, int> Move;
         public string LoadEnemyName
         {
             get => loadEnemyName;
-            set => loadEnemyName = value;
             set => loadEnemyName = value;
         }
 
@@ -71,15 +65,6 @@ namespace Battle
         {
             get => enemyUnit;
             set => enemyUnit = value;
-        }
-        public HpSlider HpBarPlayer
-        {
-            get => hpBarPlayer;
-        }
-        public HpBar HpBar
-        {
-            get => hpBar;
-            set => hpBar = value;
         }
         public HpSlider HpBarPlayer
         {
@@ -140,8 +125,6 @@ namespace Battle
             hpBarPlayer.UpdateUI();
             yield return new WaitForSeconds(1f);
         }
-
-        private IEnumerator spell_battle()
         private IEnumerator spell_battle()
         {
             StartCoroutine(animationManager.startAnimationsPlayerAttack());
@@ -156,33 +139,9 @@ namespace Battle
             Debug.Log(actionName);
             bool success = false;
             // yield return new WaitForSeconds(2f);
-            Debug.Log(actionName);
-            bool success = false;
-            // yield return new WaitForSeconds(2f);
             switch (actionName)
             {
                 case "attack":
-                    {
-                        var attackDamage = player.AttackBattle();
-                        success = enemyUnit.Attacked(attackDamage, player.player);
-                        Move["Attack"]++;
-
-                        //nu merge animatia la hpbar
-
-                        //  Debug.Log("player attack is "+player.attack());
-                        // enemyUnit.Hp = enemyUnit.Hp - player.attack().ConvertTo<int>();
-                        break;
-                    }
-                case "Brisingr":
-                    {
-
-                        var spell = InventoryManager.Instance.getSpell(actionName);
-                        Debug.Log("attack with:" + spell.SpellBase.SpellName);
-                        success = enemyUnit.AttackedBySpell(spell, player.player);
-                        Move["Brisingr"]++;
-                        StartCoroutine(spell_battle());
-                        break;
-                    }
                     {
                         var attackDamage = player.AttackBattle();
                         success = enemyUnit.Attacked(attackDamage, player.player);
@@ -236,39 +195,6 @@ namespace Battle
                         state = BattleState.EnemyMove;
                         yield break;
                     }
-
-                    {
-                        var spell = InventoryManager.Instance.getSpell(actionName);
-                        success = enemyUnit.AttackedBySpell(spell, player.player);
-                        Move["Jierda"]++;
-                        StartCoroutine(spell_battle());
-                        break;
-                    }
-                case "Slytha":
-                    {
-                        var spell = InventoryManager.Instance.getSpell(actionName);
-                        success = enemyUnit.AttackedBySpell(spell, player.player);
-                        Move["Slytha"]++;
-                        StartCoroutine(spell_battle());
-                        break;
-                    }
-                case "Poison":
-                    {
-                        var spell = InventoryManager.Instance.getSpell(actionName);
-                        success = enemyUnit.AttackedBySpell(spell, player.player);
-                        Move["Poison"]++;
-                        StartCoroutine(spell_battle());
-                        break;
-                    }
-                default:
-                    {
-                        Debug.LogError($"Unknown action: {actionName}");
-                        StartCoroutine(_notification.notification_show($"Unknown action", 2f));
-                        yield return new WaitForSeconds(2f);
-                        state = BattleState.EnemyMove;
-                        yield break;
-                    }
-
             }
            
             if (enemyUnit.Hp <= 0)
@@ -318,7 +244,6 @@ namespace Battle
             Debug.Log("enemy move is started");
             Debug.Log("enemy move is started");
             //state = BattleState.EnemyMove;
-            bool success = false;
             bool success = false;
             new WaitForSeconds(3f);
             StartCoroutine(_notification.notification_show("Enemy turn!!",4f));

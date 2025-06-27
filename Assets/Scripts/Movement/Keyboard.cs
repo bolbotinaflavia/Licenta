@@ -10,6 +10,7 @@ using UnityEngine.UIElements;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 using Slider = UnityEngine.UI.Slider;
+using StaticObjects;
 
 
 namespace Movement
@@ -211,7 +212,7 @@ namespace Movement
                     // Implement mouse-based movement logic
                     if (player.IsMoving)
                     {
-                        if (MenuManager.Instance.currentMenu.activeSelf == false && inputPos.x != 0)
+                        if (MenuManager.Instance.current.activeSelf == false && inputPos.x != 0)
                         {
                             
                             player.SetFacingDirection(inputPos.x);

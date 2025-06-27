@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStarted: 0
-  currentMenu: {fileID: 0}
+  current: {fileID: 0}
 --- !u!4 &693638411
 Transform:
   m_ObjectHideFlags: 0

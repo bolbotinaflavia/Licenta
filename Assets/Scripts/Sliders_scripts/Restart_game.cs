@@ -10,7 +10,7 @@ namespace Sliders_scripts
             if (MenuManager.Instance != null)
             {
                 SceneManager.LoadScene("StartGame");
-                MenuManager.Instance.BackToPrevious();
+                MenuManager.Instance.LoadPrevious();
             }
             menuOption.value = 1;
               StartCoroutine(Deselect());

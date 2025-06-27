@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections;
 using Animations;
+using Animations;
 using DefaultNamespace;
 using Enemies;
+using HPBar;
 using HPBar;
 using Inventory;
 using Player;
@@ -12,6 +14,9 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
+using System.Collections.Generic;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using System.Collections.Generic;
@@ -42,9 +47,11 @@ namespace Battle
         public Notification Notification => _notification;
         public BattleAnimationManager AnimationManager => animationManager;
         public Dictionary<string, int> Move;
+        public Dictionary<string, int> Move;
         public string LoadEnemyName
         {
             get => loadEnemyName;
+            set => loadEnemyName = value;
             set => loadEnemyName = value;
         }
 
@@ -74,6 +81,15 @@ namespace Battle
             get => hpBar;
             set => hpBar = value;
         }
+        public HpSlider HpBarPlayer
+        {
+            get => hpBarPlayer;
+        }
+        public HpBar HpBar
+        {
+            get => hpBar;
+            set => hpBar = value;
+        }
         private void Start()
         {
             // enemyUnit=this.GetComponent<BattleUnit>();
@@ -81,10 +97,19 @@ namespace Battle
             // hpBar=this.GetComponent<HPBar>();
             // player = this.GetComponent<PlayerManager>();
             // StartCoroutine(Setup_battle());
+            // StartCoroutine(Setup_battle());
         }
 
         public IEnumerator Setup_battle()
         {
+           Move= new Dictionary<string, int>
+        {
+            { "Attack", 0 },
+            { "Brisingr", 0 },
+            { "Jierda", 0 },
+            { "Slytha", 0 },
+            { "Poison", 0 }
+        };
            Move= new Dictionary<string, int>
         {
             { "Attack", 0 },
@@ -117,6 +142,7 @@ namespace Battle
         }
 
         private IEnumerator spell_battle()
+        private IEnumerator spell_battle()
         {
             StartCoroutine(animationManager.startAnimationsPlayerAttack());
             new WaitForSeconds(5f);
@@ -130,9 +156,33 @@ namespace Battle
             Debug.Log(actionName);
             bool success = false;
             // yield return new WaitForSeconds(2f);
+            Debug.Log(actionName);
+            bool success = false;
+            // yield return new WaitForSeconds(2f);
             switch (actionName)
             {
                 case "attack":
+                    {
+                        var attackDamage = player.AttackBattle();
+                        success = enemyUnit.Attacked(attackDamage, player.player);
+                        Move["Attack"]++;
+
+                        //nu merge animatia la hpbar
+
+                        //  Debug.Log("player attack is "+player.attack());
+                        // enemyUnit.Hp = enemyUnit.Hp - player.attack().ConvertTo<int>();
+                        break;
+                    }
+                case "Brisingr":
+                    {
+
+                        var spell = InventoryManager.Instance.getSpell(actionName);
+                        Debug.Log("attack with:" + spell.SpellBase.SpellName);
+                        success = enemyUnit.AttackedBySpell(spell, player.player);
+                        Move["Brisingr"]++;
+                        StartCoroutine(spell_battle());
+                        break;
+                    }
                     {
                         var attackDamage = player.AttackBattle();
                         success = enemyUnit.Attacked(attackDamage, player.player);
@@ -187,6 +237,38 @@ namespace Battle
                         yield break;
                     }
 
+                    {
+                        var spell = InventoryManager.Instance.getSpell(actionName);
+                        success = enemyUnit.AttackedBySpell(spell, player.player);
+                        Move["Jierda"]++;
+                        StartCoroutine(spell_battle());
+                        break;
+                    }
+                case "Slytha":
+                    {
+                        var spell = InventoryManager.Instance.getSpell(actionName);
+                        success = enemyUnit.AttackedBySpell(spell, player.player);
+                        Move["Slytha"]++;
+                        StartCoroutine(spell_battle());
+                        break;
+                    }
+                case "Poison":
+                    {
+                        var spell = InventoryManager.Instance.getSpell(actionName);
+                        success = enemyUnit.AttackedBySpell(spell, player.player);
+                        Move["Poison"]++;
+                        StartCoroutine(spell_battle());
+                        break;
+                    }
+                default:
+                    {
+                        Debug.LogError($"Unknown action: {actionName}");
+                        StartCoroutine(_notification.notification_show($"Unknown action", 2f));
+                        yield return new WaitForSeconds(2f);
+                        state = BattleState.EnemyMove;
+                        yield break;
+                    }
+
             }
            
             if (enemyUnit.Hp <= 0)
@@ -209,9 +291,23 @@ namespace Battle
                     yield return StartCoroutine(animationManager.startAnimationsPlayerAttack());
                 }
                 Debug.Log("changing state");
+               
+                if (success == false)
+                {
+                    new WaitForSeconds(2f);
+                    StartCoroutine(_notification.notification_show($"{actionName} failed", 2f));
+                }
+                else
+                {
+                    yield return StartCoroutine(animationManager.startAnimationsPlayerAttack());
+                }
+                Debug.Log("changing state");
                 state = BattleState.EnemyMove;
                 Debug.Log(state);
+                Debug.Log(state);
             }
+            
+            
             
             
             yield return new WaitForSeconds(6f);
@@ -220,12 +316,15 @@ namespace Battle
         private IEnumerator EnemyMove()
         {
             Debug.Log("enemy move is started");
+            Debug.Log("enemy move is started");
             //state = BattleState.EnemyMove;
+            bool success = false;
             bool success = false;
             new WaitForSeconds(3f);
             StartCoroutine(_notification.notification_show("Enemy turn!!",4f));
             yield return new WaitForSeconds(2f);
             var move = enemyUnit.getRandomMove(); 
+            success=enemyUnit.Attack(move,player.player);
             success=enemyUnit.Attack(move,player.player);
            
             // player.HP-=player.HP-(enemyUnit.attack()+(int)(player.defense*0.1));
@@ -253,9 +352,25 @@ namespace Battle
                     yield return StartCoroutine(animationManager.startAnimationsEnemyAttack());
                 }
                 yield return new WaitForSeconds(2f);
+                 new WaitForSeconds(5f);
+                StartCoroutine(_notification.notification_show($"Enemy used {move.MoveName}",2f));
+                if (success == false)
+                {
+                    //new WaitForSeconds(2f);
+                    yield return new WaitForSeconds(3f);
+                    StartCoroutine(_notification.notification_show($"{move.MoveName} failed", 2f));
+
+                }
+                else
+                {
+                    yield return StartCoroutine(animationManager.startAnimationsEnemyAttack());
+                }
+                yield return new WaitForSeconds(2f);
                 StartCoroutine(PlayerActions());
             }
         }
+
+
 
 
         public void HandleUpdate()
@@ -277,6 +392,7 @@ namespace Battle
             if (state == BattleState.EnemyMove)
             {
                 Debug.Log("enemy move is starting");
+                Debug.Log("enemy move is starting");
                 StopAllCoroutines();
                 StartCoroutine(EnemyMove());
                 state = BattleState.Busy;
@@ -286,8 +402,23 @@ namespace Battle
             {
 
             }
+            if (state == BattleState.Busy)
+            {
+
+            }
             if (state == BattleState.EnemyDead)
             {
+                if (enemyUnit.Hp <= 0)
+                    StartCoroutine(enemyDefeted());
+                else
+                    state = BattleState.Busy;
+            }
+            if(state==BattleState.PlayerDead)
+            {
+                if (player.Hp <= 0)
+                    StartCoroutine(playerDefeted());
+                else
+                    state = BattleState.Busy;
                 if (enemyUnit.Hp <= 0)
                     StartCoroutine(enemyDefeted());
                 else
@@ -332,6 +463,15 @@ namespace Battle
                 if( m.Value > 0)
                   AnalyticsService.Instance.RecordEvent(moveEvent);
             }
+            UnityServices.InitializeAsync();
+            foreach (var m in Move)
+            {
+                MoveUsedEvent moveEvent = new MoveUsedEvent();
+                moveEvent.moveName = m.Key;
+                moveEvent.number = m.Value;
+                if( m.Value > 0)
+                  AnalyticsService.Instance.RecordEvent(moveEvent);
+            }
             //maybe ceva animatie
             yield return new WaitForSeconds(2f);
             exit_battle(true);
@@ -343,7 +483,7 @@ namespace Battle
             StartCoroutine(_notification.notification_show($"Player Defeated",4f));
             exit_battle(false);
             Destroy(PlayerManager.Instance.gameObject);
-            MenuManager.Instance.BackToPrevious();
+            MenuManager.Instance.LoadPrevious();
             Destroy(VolumeManager.Instance.gameObject);
             MenuManager.Instance.LoadMenu("GameOver");
             SceneManager.LoadScene("GameOver");
@@ -352,6 +492,7 @@ namespace Battle
         }
         public void exit_battle(bool winner)
         {
+           
            
             GameController.Instance.StopBattle(winner);
             state = BattleState.Busy;

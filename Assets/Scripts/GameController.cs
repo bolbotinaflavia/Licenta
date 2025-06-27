@@ -108,7 +108,7 @@ public class GameController:MonoBehaviour
         
         playerCamera.gameObject.SetActive(true);
         playerCamera.gameObject.GetComponent<CinemachineVirtualCamera>().enabled = true;
-        MenuManager.Instance.currentMenu.gameObject.SetActive(false);
+        MenuManager.Instance.current.gameObject.SetActive(false);
         HpSlider.Instance.UpdateUI();
     }
     

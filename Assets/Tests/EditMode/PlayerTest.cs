@@ -31,7 +31,11 @@ public class PlayerTest
         var player = GameObject.FindObjectOfType<PlayerManager>();
         Assert.IsNull(player, "PlayerManager should be null at the start");
         var asyncOp = EditorSceneManager.OpenScene("Assets/Scenes/Gameplay.unity");
+<<<<<<< HEAD
+        yield return null;
+=======
         yield return null; // Wait a frame for the scene to load
+>>>>>>> origin/fight_Scene
         player = GameObject.FindObjectOfType<PlayerManager>();
         Assert.IsNotNull(player, "PlayerManager should be initialized after loading Gameplay scene");
         yield return null;

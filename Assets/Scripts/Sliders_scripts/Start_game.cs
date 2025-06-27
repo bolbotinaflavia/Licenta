@@ -15,7 +15,7 @@ namespace Sliders_scripts
             menuOption.value = 1;
             MenuManager.Instance.LoadMenu(nextMenu);
             MenuManager.Instance.gameStarted = true;
-            MenuManager.Instance.currentMenu.SetActive(false);
+            MenuManager.Instance.current.SetActive(false);
             SceneManager.LoadScene("StoryStart");
             menuOption.value = 1;
             //StartCoroutine(Deselect());

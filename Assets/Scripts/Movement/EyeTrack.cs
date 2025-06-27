@@ -16,6 +16,10 @@ namespace Movement
         private readonly InputAction _move;
 #if !UNITY_WEBGL
         private API api;
+        public API Api
+        {
+            get => api;
+        }
         private BeamEyeTrackerInputDevice _eyeTrackerInputDevice;
 #endif
 
@@ -115,7 +119,7 @@ namespace Movement
                         Camera.main.nearClipPlane));
                 Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
                 // Implement mouse-based movement logic
-                if (MenuManager.Instance.currentMenu.activeSelf == false)
+                if (MenuManager.Instance.current.activeSelf == false)
                 {
                     PlayerManager.Instance.menuOpen.GetComponent<CanvasGroup>().alpha = 1f;
                     PlayerManager.Instance.menuOpen.gameObject.SetActive(true);

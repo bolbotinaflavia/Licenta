@@ -95,7 +95,7 @@ namespace Movement
             Vector3 mouseNext = new Vector3(worldMouse.x, player.player.transform.position.y, worldMouse.z);
 
             // Implement mouse-based movement logic
-            if (MenuManager.Instance.currentMenu.activeSelf == false)
+            if (MenuManager.Instance.current.activeSelf == false)
             {
 
                 float distance = mouseNext.x - player.player.transform.position.x;

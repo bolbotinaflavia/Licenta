@@ -9,7 +9,7 @@ namespace Sliders_scripts
             //PlayerPrefs.SetFloat("Volume", Volume.Instance.s.volume);
             PlayerPrefs.Save();
             menuOption.value = 1;
-            MenuManager.Instance.BackToPrevious();
+            MenuManager.Instance.LoadPrevious();
             menuOption.value = 1;
               StartCoroutine(Deselect());
         }

@@ -42,10 +42,7 @@ public abstract class MenuCountdown : MonoBehaviour, IPointerEnterHandler, IPoin
         {
             OnTimerComplete();
             PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
-            OnTimerComplete();
-            PlayerMovement.Instance.CurrentControl.get_click_action().Reset();
         }
-        if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         if (PlayerMovement.Instance.CurrentControl.get_action().name.Equals("KeyboardMove") && PlayerMovement.Instance.CurrentControl.get_click_action().triggered)
         {
             OnTimerComplete();

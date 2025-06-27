@@ -95,14 +95,6 @@ namespace Battle
             { "Slytha", 0 },
             { "Poison", 0 }
         };
-           Move= new Dictionary<string, int>
-        {
-            { "Attack", 0 },
-            { "Brisingr", 0 },
-            { "Jierda", 0 },
-            { "Slytha", 0 },
-            { "Poison", 0 }
-        };
             player.Setup();
            // enemyUnit = gameObject.AddComponent<BattleUnit>();
        
@@ -217,19 +209,7 @@ namespace Battle
                     yield return StartCoroutine(animationManager.startAnimationsPlayerAttack());
                 }
                 Debug.Log("changing state");
-               
-                if (success == false)
-                {
-                    new WaitForSeconds(2f);
-                    StartCoroutine(_notification.notification_show($"{actionName} failed", 2f));
-                }
-                else
-                {
-                    yield return StartCoroutine(animationManager.startAnimationsPlayerAttack());
-                }
-                Debug.Log("changing state");
                 state = BattleState.EnemyMove;
-                Debug.Log(state);
                 Debug.Log(state);
             }
             
@@ -242,14 +222,12 @@ namespace Battle
         private IEnumerator EnemyMove()
         {
             Debug.Log("enemy move is started");
-            Debug.Log("enemy move is started");
             //state = BattleState.EnemyMove;
             bool success = false;
             new WaitForSeconds(3f);
             StartCoroutine(_notification.notification_show("Enemy turn!!",4f));
             yield return new WaitForSeconds(2f);
             var move = enemyUnit.getRandomMove(); 
-            success=enemyUnit.Attack(move,player.player);
             success=enemyUnit.Attack(move,player.player);
            
             // player.HP-=player.HP-(enemyUnit.attack()+(int)(player.defense*0.1));
@@ -278,19 +256,6 @@ namespace Battle
                 }
                 yield return new WaitForSeconds(2f);
                  new WaitForSeconds(5f);
-                StartCoroutine(_notification.notification_show($"Enemy used {move.MoveName}",2f));
-                if (success == false)
-                {
-                    //new WaitForSeconds(2f);
-                    yield return new WaitForSeconds(3f);
-                    StartCoroutine(_notification.notification_show($"{move.MoveName} failed", 2f));
-
-                }
-                else
-                {
-                    yield return StartCoroutine(animationManager.startAnimationsEnemyAttack());
-                }
-                yield return new WaitForSeconds(2f);
                 StartCoroutine(PlayerActions());
             }
         }
@@ -316,7 +281,6 @@ namespace Battle
 
             if (state == BattleState.EnemyMove)
             {
-                Debug.Log("enemy move is starting");
                 Debug.Log("enemy move is starting");
                 StopAllCoroutines();
                 StartCoroutine(EnemyMove());

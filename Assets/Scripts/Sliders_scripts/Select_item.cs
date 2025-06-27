@@ -25,13 +25,14 @@ namespace Sliders_scripts
                 if (PlayerManager.Instance.hp + _f.Hp < 100f)
                 {
                     PlayerManager.Instance.hp += _f.Hp;
-                    UpdateUI();
+
                 }
                 else
                 {
                     PlayerManager.Instance.hp = 100;
                     Debug.Log("HP is already full->100");
                 }
+                UpdateUI();
             }
             menuOption.value = 1;
                   StartCoroutine(Deselect());
